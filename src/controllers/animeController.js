@@ -1,0 +1,104 @@
+const animeService = require('../services/animeService');
+
+async function list(req, res, next) {
+  try {
+    const result = await animeService.list(req.user.id, req.query);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getOne(req, res, next) {
+  try {
+    const result = await animeService.getOne(req.user.id, req.params.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function create(req, res, next) {
+  try {
+    const result = await animeService.create(req.user.id, req.body);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function update(req, res, next) {
+  try {
+    const result = await animeService.update(req.user.id, req.params.id, req.body);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function remove(req, res, next) {
+  try {
+    await animeService.remove(req.user.id, req.params.id);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function addEpisode(req, res, next) {
+  try {
+    const result = await animeService.addEpisode(req.user.id, req.params.id, req.body);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function updateEpisode(req, res, next) {
+  try {
+    const result = await animeService.updateEpisode(req.user.id, req.params.id, req.params.episodeId, req.body);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function removeEpisode(req, res, next) {
+  try {
+    await animeService.removeEpisode(req.user.id, req.params.id, req.params.episodeId);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function attachAuthor(req, res, next) {
+  try {
+    const result = await animeService.attachAuthor(req.user.id, req.params.id, req.params.authorId, req.body);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function detachAuthor(req, res, next) {
+  try {
+    await animeService.detachAuthor(req.user.id, req.params.id, req.params.authorId);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = {
+  list,
+  getOne,
+  create,
+  update,
+  remove,
+  addEpisode,
+  updateEpisode,
+  removeEpisode,
+  attachAuthor,
+  detachAuthor,
+};

@@ -1,0 +1,96 @@
+# Anime Watchlist Backend
+
+Express + PostgreSQL backend using Prisma ORM.
+
+## Architecture
+
+The codebase now follows a layered pattern:
+
+- `src/models`: domain validation + response shaping
+- `src/repositories`: Prisma data-access queries
+- `src/services`: business logic and orchestration
+- `src/controllers`: HTTP-only request/response handlers
+- `src/routes`: route definitions
+
+## Setup
+
+1. Copy environment file:
+   ```bash
+   cp .env.example .env
+   ```
+2. Set `DATABASE_URL` in `.env` to your PostgreSQL credentials.
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Run Prisma migration:
+   ```bash
+   npm run prisma:migrate -- --name init
+   ```
+5. Generate Prisma client:
+   ```bash
+   npm run prisma:generate
+   ```
+6. Start server:
+   ```bash
+   npm run dev
+   ```
+
+## Seeding
+
+Run the seed script:
+
+```bash
+npm run prisma:seed
+```
+
+or with Prisma:
+
+```bash
+npx prisma db seed
+```
+
+Seeder modules are organized under `prisma/seeders`:
+- `authSeeder.js`
+- `roleSeeder.js`
+- `cleanupSeeder.js`
+- `authorSeeder.js`
+- `animeSeeder.js`
+
+Default seeded role assignment:
+- `demo1@anime.local` → `admin`
+- `demo2@anime.local` → `member`
+
+## Data Model
+
+- `AnimeEntry`: title, description, `coverImageUrl` (Cloudflare R2 URL), status, notes
+- `AnimeRating`: separate table for ratings (`anime_ratings`) linked to anime entry + user
+- `AnimeEpisode`: linked episodes for each anime entry
+- `AnimeAuthor`: author metadata
+- `AnimeEntryAuthor`: join table between anime entries and authors
+- `Role`: RBAC role table (`roles`)
+- `Permission`: RBAC permission table (`permissions`)
+- `RolePermission`: role-permission join table (`roles_permissions`)
+- `UserRole`: user-role join table (`user_roles`)
+
+If `R2_PUBLIC_BASE_URL` is set, `coverImageUrl` must start with that prefix.
+
+## Main API
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `GET /api/watchlist`
+- `POST /api/watchlist`
+- `GET /api/watchlist/:id`
+- `PUT /api/watchlist/:id`
+- `DELETE /api/watchlist/:id`
+- `POST /api/watchlist/:id/episodes`
+- `PUT /api/watchlist/:id/episodes/:episodeId`
+- `DELETE /api/watchlist/:id/episodes/:episodeId`
+- `POST /api/watchlist/:id/authors/:authorId`
+- `DELETE /api/watchlist/:id/authors/:authorId`
+- `GET /api/authors`
+- `POST /api/authors`
+- `PUT /api/authors/:id`
+- `DELETE /api/authors/:id`
