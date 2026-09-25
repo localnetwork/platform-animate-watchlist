@@ -22,7 +22,10 @@ function extensionForMimeType(mimeType) {
 }
 
 function publicUrlFor(key) {
-  const base = process.env.CF_PUBLIC_ACCESS_URL || '';
+  const base = process.env.R2_PUBLIC_BASE_URL || process.env.CF_PUBLIC_ACCESS_URL || '';
+  if (!base) {
+    throw createHttpError(500, 'R2 public base URL is not configured');
+  }
   const normalized = base.endsWith('/') ? base : `${base}/`;
   return `${normalized}${key}`;
 }

@@ -160,10 +160,15 @@ exports.Prisma.RolePermissionScalarFieldEnum = {
 
 exports.Prisma.AnimeEntryScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   title: 'title',
   description: 'description',
   coverImageUrl: 'coverImageUrl',
   status: 'status',
+  airedFrom: 'airedFrom',
+  airedTo: 'airedTo',
+  airedStatus: 'airedStatus',
+  viewCount: 'viewCount',
   notes: 'notes',
   userId: 'userId',
   typeId: 'typeId',
@@ -247,6 +252,14 @@ exports.WatchStatus = exports.$Enums.WatchStatus = {
   WATCHING: 'WATCHING',
   COMPLETED: 'COMPLETED',
   DROPPED: 'DROPPED'
+};
+
+exports.AnimeAiredStatus = exports.$Enums.AnimeAiredStatus = {
+  NOT_YET_RELEASED: 'NOT_YET_RELEASED',
+  AIRING: 'AIRING',
+  FINISHED: 'FINISHED',
+  HIATUS: 'HIATUS',
+  CANCELLED: 'CANCELLED'
 };
 
 exports.Prisma.ModelName = {

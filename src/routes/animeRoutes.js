@@ -4,6 +4,9 @@ const { requirePermission } = require('../middleware/rbac');
 const { PERMISSIONS } = require('../models/permissions');
 const {
   list,
+  manageList,
+  topViewed,
+  incrementView,
   getOne,
   create,
   update,
@@ -20,6 +23,8 @@ const {
 
 router.use(auth);
 
+router.get('/manage/animes', requirePermission(PERMISSIONS.ANIME_READ), manageList);
+router.get('/top-viewed', requirePermission(PERMISSIONS.ANIME_READ), topViewed);
 router.get('/', requirePermission(PERMISSIONS.ANIME_READ), list);
 router.get('/:id', requirePermission(PERMISSIONS.ANIME_READ), getOne);
 router.post('/', requirePermission(PERMISSIONS.ANIME_CREATE), create);
@@ -33,5 +38,6 @@ router.delete('/:id/authors/:authorId', requirePermission(PERMISSIONS.ANIME_AUTH
 router.get('/:id/rating', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), getOwnRating);
 router.put('/:id/rating', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), setOwnRating);
 router.delete('/:id/rating', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), removeOwnRating);
+router.post('/:id/view', requirePermission(PERMISSIONS.ANIME_READ), incrementView);
 
 module.exports = router;

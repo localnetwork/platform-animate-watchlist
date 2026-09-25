@@ -15,6 +15,14 @@ enum WatchStatus {
   DROPPED
 }
 
+enum AnimeAiredStatus {
+  NOT_YET_RELEASED
+  AIRING
+  FINISHED
+  HIATUS
+  CANCELLED
+}
+
 model User {
   id           String           @id @default(uuid())
   email        String           @unique
@@ -79,10 +87,15 @@ model RolePermission {
 
 model AnimeEntry {
   id            String           @id @default(uuid())
+  slug          String           @unique
   title         String
   description   String
   coverImageUrl String
   status        WatchStatus      @default(PLANNED)
+  airedFrom     DateTime?
+  airedTo       DateTime?
+  airedStatus   AnimeAiredStatus @default(NOT_YET_RELEASED)
+  viewCount     Int              @default(0)
   notes         String?
   userId        String
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -97,6 +110,8 @@ model AnimeEntry {
 
   @@index([userId])
   @@index([status])
+  @@index([airedStatus])
+  @@index([viewCount])
   @@index([typeId])
   @@map("anime_entries")
 }

@@ -1,5 +1,7 @@
-const bcrypt = require('bcryptjs');
-const { SEED_USERS } = require('./seedData');
+const bcrypt = require("bcryptjs");
+const { SEED_USERS } = require("./seedData");
+
+console.log("Auth Seeder");
 
 async function seedAuth(prisma) {
   const users = [];

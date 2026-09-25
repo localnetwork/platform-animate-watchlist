@@ -69,6 +69,10 @@ Seeded volume:
 - `demo1@anime.local` receives **500 authors** and **500 anime entries** (auto-filled fields)
 - `demo2@anime.local` receives a minimal sample dataset for member-role testing
 
+Seeder behavior:
+- Authors are sourced from AniList staff and created **without duplicates** per user.
+- Anime cover images are downloaded from AniList and uploaded to **Cloudflare R2**.
+
 ## Data Model
 
 - `AnimeEntry`: title, description, `coverImageUrl` (Cloudflare R2 URL), status, notes
@@ -90,10 +94,13 @@ If `R2_PUBLIC_BASE_URL` is set, `coverImageUrl` must start with that prefix.
 - `GET /api/auth/me`
 - `PUT /api/auth/me`
 - `GET /api/watchlist`
+- `GET /api/watchlist/manage/animes` (filters + pagination)
+- `GET /api/watchlist/top-viewed` (top 10 sidebar source)
 - `POST /api/watchlist`
 - `GET /api/watchlist/:id`
 - `PUT /api/watchlist/:id`
 - `DELETE /api/watchlist/:id`
+- `POST /api/watchlist/:id/view` (increments view counter)
 - `GET /api/watchlist/:id/rating`
 - `PUT /api/watchlist/:id/rating`
 - `DELETE /api/watchlist/:id/rating`
@@ -106,3 +113,12 @@ If `R2_PUBLIC_BASE_URL` is set, `coverImageUrl` must start with that prefix.
 - `POST /api/authors`
 - `PUT /api/authors/:id`
 - `DELETE /api/authors/:id`
+
+Manage endpoint query params:
+- `page`, `limit`
+- `search`
+- `status` (`PLANNED|WATCHING|COMPLETED|DROPPED`)
+- `airedStatus` (`NOT_YET_RELEASED|AIRING|FINISHED|HIATUS|CANCELLED`)
+- `typeId`, `genreId`, `authorId`
+- `sortBy` (`updatedAt|createdAt|title|viewCount|airedFrom|airedTo`)
+- `sortDir` (`asc|desc`)

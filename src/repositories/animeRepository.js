@@ -22,6 +22,21 @@ async function listByUser(userId, filter) {
   });
 }
 
+async function listByUserPaginated(userId, where, orderBy, skip, take) {
+  const [rows, total] = await Promise.all([
+    prisma.animeEntry.findMany({
+      where,
+      orderBy,
+      skip,
+      take,
+      include: includeForUserRating(userId),
+    }),
+    prisma.animeEntry.count({ where }),
+  ]);
+
+  return { rows, total };
+}
+
 async function findByIdForUser(id, userId) {
   return prisma.animeEntry.findFirst({
     where: { id, userId },
@@ -83,6 +98,37 @@ async function updateEntryByIdForUser(id, userId, data) {
 
 async function deleteEntryById(id) {
   return prisma.animeEntry.delete({ where: { id } });
+}
+
+async function findBySlugForUser(slug, userId) {
+  return prisma.animeEntry.findFirst({
+    where: { slug, userId },
+    select: { id: true, slug: true },
+  });
+}
+
+async function findBySlug(slug) {
+  return prisma.animeEntry.findFirst({
+    where: { slug },
+    select: { id: true, slug: true },
+  });
+}
+
+async function incrementViewCountById(id) {
+  return prisma.animeEntry.update({
+    where: { id },
+    data: { viewCount: { increment: 1 } },
+    select: { id: true, viewCount: true },
+  });
+}
+
+async function topViewedByUser(userId, limit) {
+  return prisma.animeEntry.findMany({
+    where: { userId },
+    orderBy: [{ viewCount: 'desc' }, { updatedAt: 'desc' }],
+    take: limit,
+    include: includeForUserRating(userId),
+  });
 }
 
 async function findRatingForEntryUser(animeEntryId, userId) {
@@ -199,14 +245,19 @@ async function deleteEntryAuthorLink(animeEntryId, authorId) {
 
 module.exports = {
   listByUser,
+  listByUserPaginated,
   findByIdForUser,
   findEntryRefByIdForUser,
+  findBySlugForUser,
+  findBySlug,
   findOwnedAuthorsByIds,
   findGenresByIds,
   findTypeById,
   createEntryForUser,
   updateEntryByIdForUser,
   deleteEntryById,
+  incrementViewCountById,
+  topViewedByUser,
   findRatingForEntryUser,
   upsertRatingForEntryUser,
   deleteRatingForEntryUser,

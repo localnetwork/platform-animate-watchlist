@@ -92,11 +92,26 @@ export namespace $Enums {
 
 export type WatchStatus = (typeof WatchStatus)[keyof typeof WatchStatus]
 
+
+export const AnimeAiredStatus: {
+  NOT_YET_RELEASED: 'NOT_YET_RELEASED',
+  AIRING: 'AIRING',
+  FINISHED: 'FINISHED',
+  HIATUS: 'HIATUS',
+  CANCELLED: 'CANCELLED'
+};
+
+export type AnimeAiredStatus = (typeof AnimeAiredStatus)[keyof typeof AnimeAiredStatus]
+
 }
 
 export type WatchStatus = $Enums.WatchStatus
 
 export const WatchStatus: typeof $Enums.WatchStatus
+
+export type AnimeAiredStatus = $Enums.AnimeAiredStatus
+
+export const AnimeAiredStatus: typeof $Enums.AnimeAiredStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -7672,16 +7687,31 @@ export namespace Prisma {
 
   export type AggregateAnimeEntry = {
     _count: AnimeEntryCountAggregateOutputType | null
+    _avg: AnimeEntryAvgAggregateOutputType | null
+    _sum: AnimeEntrySumAggregateOutputType | null
     _min: AnimeEntryMinAggregateOutputType | null
     _max: AnimeEntryMaxAggregateOutputType | null
   }
 
+  export type AnimeEntryAvgAggregateOutputType = {
+    viewCount: number | null
+  }
+
+  export type AnimeEntrySumAggregateOutputType = {
+    viewCount: number | null
+  }
+
   export type AnimeEntryMinAggregateOutputType = {
     id: string | null
+    slug: string | null
     title: string | null
     description: string | null
     coverImageUrl: string | null
     status: $Enums.WatchStatus | null
+    airedFrom: Date | null
+    airedTo: Date | null
+    airedStatus: $Enums.AnimeAiredStatus | null
+    viewCount: number | null
     notes: string | null
     userId: string | null
     typeId: string | null
@@ -7691,10 +7721,15 @@ export namespace Prisma {
 
   export type AnimeEntryMaxAggregateOutputType = {
     id: string | null
+    slug: string | null
     title: string | null
     description: string | null
     coverImageUrl: string | null
     status: $Enums.WatchStatus | null
+    airedFrom: Date | null
+    airedTo: Date | null
+    airedStatus: $Enums.AnimeAiredStatus | null
+    viewCount: number | null
     notes: string | null
     userId: string | null
     typeId: string | null
@@ -7704,10 +7739,15 @@ export namespace Prisma {
 
   export type AnimeEntryCountAggregateOutputType = {
     id: number
+    slug: number
     title: number
     description: number
     coverImageUrl: number
     status: number
+    airedFrom: number
+    airedTo: number
+    airedStatus: number
+    viewCount: number
     notes: number
     userId: number
     typeId: number
@@ -7717,12 +7757,25 @@ export namespace Prisma {
   }
 
 
+  export type AnimeEntryAvgAggregateInputType = {
+    viewCount?: true
+  }
+
+  export type AnimeEntrySumAggregateInputType = {
+    viewCount?: true
+  }
+
   export type AnimeEntryMinAggregateInputType = {
     id?: true
+    slug?: true
     title?: true
     description?: true
     coverImageUrl?: true
     status?: true
+    airedFrom?: true
+    airedTo?: true
+    airedStatus?: true
+    viewCount?: true
     notes?: true
     userId?: true
     typeId?: true
@@ -7732,10 +7785,15 @@ export namespace Prisma {
 
   export type AnimeEntryMaxAggregateInputType = {
     id?: true
+    slug?: true
     title?: true
     description?: true
     coverImageUrl?: true
     status?: true
+    airedFrom?: true
+    airedTo?: true
+    airedStatus?: true
+    viewCount?: true
     notes?: true
     userId?: true
     typeId?: true
@@ -7745,10 +7803,15 @@ export namespace Prisma {
 
   export type AnimeEntryCountAggregateInputType = {
     id?: true
+    slug?: true
     title?: true
     description?: true
     coverImageUrl?: true
     status?: true
+    airedFrom?: true
+    airedTo?: true
+    airedStatus?: true
+    viewCount?: true
     notes?: true
     userId?: true
     typeId?: true
@@ -7795,6 +7858,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: AnimeEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AnimeEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: AnimeEntryMinAggregateInputType
@@ -7825,22 +7900,31 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: AnimeEntryCountAggregateInputType | true
+    _avg?: AnimeEntryAvgAggregateInputType
+    _sum?: AnimeEntrySumAggregateInputType
     _min?: AnimeEntryMinAggregateInputType
     _max?: AnimeEntryMaxAggregateInputType
   }
 
   export type AnimeEntryGroupByOutputType = {
     id: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status: $Enums.WatchStatus
+    airedFrom: Date | null
+    airedTo: Date | null
+    airedStatus: $Enums.AnimeAiredStatus
+    viewCount: number
     notes: string | null
     userId: string
     typeId: string | null
     createdAt: Date
     updatedAt: Date
     _count: AnimeEntryCountAggregateOutputType | null
+    _avg: AnimeEntryAvgAggregateOutputType | null
+    _sum: AnimeEntrySumAggregateOutputType | null
     _min: AnimeEntryMinAggregateOutputType | null
     _max: AnimeEntryMaxAggregateOutputType | null
   }
@@ -7861,10 +7945,15 @@ export namespace Prisma {
 
   export type AnimeEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    slug?: boolean
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
     status?: boolean
+    airedFrom?: boolean
+    airedTo?: boolean
+    airedStatus?: boolean
+    viewCount?: boolean
     notes?: boolean
     userId?: boolean
     typeId?: boolean
@@ -7881,10 +7970,15 @@ export namespace Prisma {
 
   export type AnimeEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    slug?: boolean
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
     status?: boolean
+    airedFrom?: boolean
+    airedTo?: boolean
+    airedStatus?: boolean
+    viewCount?: boolean
     notes?: boolean
     userId?: boolean
     typeId?: boolean
@@ -7896,10 +7990,15 @@ export namespace Prisma {
 
   export type AnimeEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    slug?: boolean
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
     status?: boolean
+    airedFrom?: boolean
+    airedTo?: boolean
+    airedStatus?: boolean
+    viewCount?: boolean
     notes?: boolean
     userId?: boolean
     typeId?: boolean
@@ -7911,10 +8010,15 @@ export namespace Prisma {
 
   export type AnimeEntrySelectScalar = {
     id?: boolean
+    slug?: boolean
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
     status?: boolean
+    airedFrom?: boolean
+    airedTo?: boolean
+    airedStatus?: boolean
+    viewCount?: boolean
     notes?: boolean
     userId?: boolean
     typeId?: boolean
@@ -7922,7 +8026,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AnimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "coverImageUrl" | "status" | "notes" | "userId" | "typeId" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEntry"]>
+  export type AnimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "description" | "coverImageUrl" | "status" | "airedFrom" | "airedTo" | "airedStatus" | "viewCount" | "notes" | "userId" | "typeId" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEntry"]>
   export type AnimeEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     episodes?: boolean | AnimeEntry$episodesArgs<ExtArgs>
@@ -7953,10 +8057,15 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      slug: string
       title: string
       description: string
       coverImageUrl: string
       status: $Enums.WatchStatus
+      airedFrom: Date | null
+      airedTo: Date | null
+      airedStatus: $Enums.AnimeAiredStatus
+      viewCount: number
       notes: string | null
       userId: string
       typeId: string | null
@@ -8392,10 +8501,15 @@ export namespace Prisma {
    */
   interface AnimeEntryFieldRefs {
     readonly id: FieldRef<"AnimeEntry", 'String'>
+    readonly slug: FieldRef<"AnimeEntry", 'String'>
     readonly title: FieldRef<"AnimeEntry", 'String'>
     readonly description: FieldRef<"AnimeEntry", 'String'>
     readonly coverImageUrl: FieldRef<"AnimeEntry", 'String'>
     readonly status: FieldRef<"AnimeEntry", 'WatchStatus'>
+    readonly airedFrom: FieldRef<"AnimeEntry", 'DateTime'>
+    readonly airedTo: FieldRef<"AnimeEntry", 'DateTime'>
+    readonly airedStatus: FieldRef<"AnimeEntry", 'AnimeAiredStatus'>
+    readonly viewCount: FieldRef<"AnimeEntry", 'Int'>
     readonly notes: FieldRef<"AnimeEntry", 'String'>
     readonly userId: FieldRef<"AnimeEntry", 'String'>
     readonly typeId: FieldRef<"AnimeEntry", 'String'>
@@ -16567,10 +16681,15 @@ export namespace Prisma {
 
   export const AnimeEntryScalarFieldEnum: {
     id: 'id',
+    slug: 'slug',
     title: 'title',
     description: 'description',
     coverImageUrl: 'coverImageUrl',
     status: 'status',
+    airedFrom: 'airedFrom',
+    airedTo: 'airedTo',
+    airedStatus: 'airedStatus',
+    viewCount: 'viewCount',
     notes: 'notes',
     userId: 'userId',
     typeId: 'typeId',
@@ -16727,6 +16846,20 @@ export namespace Prisma {
    * Reference to a field of type 'WatchStatus[]'
    */
   export type ListEnumWatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WatchStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'AnimeAiredStatus'
+   */
+  export type EnumAnimeAiredStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnimeAiredStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'AnimeAiredStatus[]'
+   */
+  export type ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnimeAiredStatus[]'>
     
 
 
@@ -17046,10 +17179,15 @@ export namespace Prisma {
     OR?: AnimeEntryWhereInput[]
     NOT?: AnimeEntryWhereInput | AnimeEntryWhereInput[]
     id?: StringFilter<"AnimeEntry"> | string
+    slug?: StringFilter<"AnimeEntry"> | string
     title?: StringFilter<"AnimeEntry"> | string
     description?: StringFilter<"AnimeEntry"> | string
     coverImageUrl?: StringFilter<"AnimeEntry"> | string
     status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
+    airedFrom?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
+    airedTo?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
+    viewCount?: IntFilter<"AnimeEntry"> | number
     notes?: StringNullableFilter<"AnimeEntry"> | string | null
     userId?: StringFilter<"AnimeEntry"> | string
     typeId?: StringNullableFilter<"AnimeEntry"> | string | null
@@ -17065,10 +17203,15 @@ export namespace Prisma {
 
   export type AnimeEntryOrderByWithRelationInput = {
     id?: SortOrder
+    slug?: SortOrder
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
     status?: SortOrder
+    airedFrom?: SortOrderInput | SortOrder
+    airedTo?: SortOrderInput | SortOrder
+    airedStatus?: SortOrder
+    viewCount?: SortOrder
     notes?: SortOrderInput | SortOrder
     userId?: SortOrder
     typeId?: SortOrderInput | SortOrder
@@ -17084,6 +17227,7 @@ export namespace Prisma {
 
   export type AnimeEntryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    slug?: string
     AND?: AnimeEntryWhereInput | AnimeEntryWhereInput[]
     OR?: AnimeEntryWhereInput[]
     NOT?: AnimeEntryWhereInput | AnimeEntryWhereInput[]
@@ -17091,6 +17235,10 @@ export namespace Prisma {
     description?: StringFilter<"AnimeEntry"> | string
     coverImageUrl?: StringFilter<"AnimeEntry"> | string
     status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
+    airedFrom?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
+    airedTo?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
+    viewCount?: IntFilter<"AnimeEntry"> | number
     notes?: StringNullableFilter<"AnimeEntry"> | string | null
     userId?: StringFilter<"AnimeEntry"> | string
     typeId?: StringNullableFilter<"AnimeEntry"> | string | null
@@ -17102,22 +17250,29 @@ export namespace Prisma {
     ratings?: AnimeRatingListRelationFilter
     genreLinks?: AnimeEntryGenreListRelationFilter
     type?: XOR<AnimeTypeNullableScalarRelationFilter, AnimeTypeWhereInput> | null
-  }, "id">
+  }, "id" | "slug">
 
   export type AnimeEntryOrderByWithAggregationInput = {
     id?: SortOrder
+    slug?: SortOrder
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
     status?: SortOrder
+    airedFrom?: SortOrderInput | SortOrder
+    airedTo?: SortOrderInput | SortOrder
+    airedStatus?: SortOrder
+    viewCount?: SortOrder
     notes?: SortOrderInput | SortOrder
     userId?: SortOrder
     typeId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AnimeEntryCountOrderByAggregateInput
+    _avg?: AnimeEntryAvgOrderByAggregateInput
     _max?: AnimeEntryMaxOrderByAggregateInput
     _min?: AnimeEntryMinOrderByAggregateInput
+    _sum?: AnimeEntrySumOrderByAggregateInput
   }
 
   export type AnimeEntryScalarWhereWithAggregatesInput = {
@@ -17125,10 +17280,15 @@ export namespace Prisma {
     OR?: AnimeEntryScalarWhereWithAggregatesInput[]
     NOT?: AnimeEntryScalarWhereWithAggregatesInput | AnimeEntryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AnimeEntry"> | string
+    slug?: StringWithAggregatesFilter<"AnimeEntry"> | string
     title?: StringWithAggregatesFilter<"AnimeEntry"> | string
     description?: StringWithAggregatesFilter<"AnimeEntry"> | string
     coverImageUrl?: StringWithAggregatesFilter<"AnimeEntry"> | string
     status?: EnumWatchStatusWithAggregatesFilter<"AnimeEntry"> | $Enums.WatchStatus
+    airedFrom?: DateTimeNullableWithAggregatesFilter<"AnimeEntry"> | Date | string | null
+    airedTo?: DateTimeNullableWithAggregatesFilter<"AnimeEntry"> | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusWithAggregatesFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
+    viewCount?: IntWithAggregatesFilter<"AnimeEntry"> | number
     notes?: StringNullableWithAggregatesFilter<"AnimeEntry"> | string | null
     userId?: StringWithAggregatesFilter<"AnimeEntry"> | string
     typeId?: StringNullableWithAggregatesFilter<"AnimeEntry"> | string | null
@@ -17832,10 +17992,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17849,10 +18014,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     typeId?: string | null
@@ -17866,10 +18036,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17883,10 +18058,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17900,10 +18080,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateManyInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     typeId?: string | null
@@ -17913,10 +18098,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17924,10 +18114,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18627,6 +18822,35 @@ export namespace Prisma {
     not?: NestedEnumWatchStatusFilter<$PrismaModel> | $Enums.WatchStatus
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumAnimeAiredStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AnimeAiredStatus | EnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAnimeAiredStatusFilter<$PrismaModel> | $Enums.AnimeAiredStatus
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type AnimeEpisodeListRelationFilter = {
     every?: AnimeEpisodeWhereInput
     some?: AnimeEpisodeWhereInput
@@ -18664,10 +18888,15 @@ export namespace Prisma {
 
   export type AnimeEntryCountOrderByAggregateInput = {
     id?: SortOrder
+    slug?: SortOrder
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
     status?: SortOrder
+    airedFrom?: SortOrder
+    airedTo?: SortOrder
+    airedStatus?: SortOrder
+    viewCount?: SortOrder
     notes?: SortOrder
     userId?: SortOrder
     typeId?: SortOrder
@@ -18675,12 +18904,21 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type AnimeEntryAvgOrderByAggregateInput = {
+    viewCount?: SortOrder
+  }
+
   export type AnimeEntryMaxOrderByAggregateInput = {
     id?: SortOrder
+    slug?: SortOrder
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
     status?: SortOrder
+    airedFrom?: SortOrder
+    airedTo?: SortOrder
+    airedStatus?: SortOrder
+    viewCount?: SortOrder
     notes?: SortOrder
     userId?: SortOrder
     typeId?: SortOrder
@@ -18690,15 +18928,24 @@ export namespace Prisma {
 
   export type AnimeEntryMinOrderByAggregateInput = {
     id?: SortOrder
+    slug?: SortOrder
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
     status?: SortOrder
+    airedFrom?: SortOrder
+    airedTo?: SortOrder
+    airedStatus?: SortOrder
+    viewCount?: SortOrder
     notes?: SortOrder
     userId?: SortOrder
     typeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type AnimeEntrySumOrderByAggregateInput = {
+    viewCount?: SortOrder
   }
 
   export type EnumWatchStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -18709,6 +18956,46 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumWatchStatusFilter<$PrismaModel>
     _max?: NestedEnumWatchStatusFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumAnimeAiredStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AnimeAiredStatus | EnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAnimeAiredStatusWithAggregatesFilter<$PrismaModel> | $Enums.AnimeAiredStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAnimeAiredStatusFilter<$PrismaModel>
+    _max?: NestedEnumAnimeAiredStatusFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type GenreCountOrderByAggregateInput = {
@@ -18786,17 +19073,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type AnimeRatingAnimeEntryIdUserIdCompoundUniqueInput = {
     animeEntryId: string
     userId: string
@@ -18837,22 +19113,6 @@ export namespace Prisma {
     value?: SortOrder
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -18862,17 +19122,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type AnimeEpisodeAnimeEntryIdEpisodeNumberCompoundUniqueInput = {
@@ -18940,20 +19189,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type AnimeAuthorUserIdNameCompoundUniqueInput = {
@@ -19453,6 +19688,22 @@ export namespace Prisma {
     set?: $Enums.WatchStatus
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumAnimeAiredStatusFieldUpdateOperationsInput = {
+    set?: $Enums.AnimeAiredStatus
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutAnimeEntriesNestedInput = {
     create?: XOR<UserCreateWithoutAnimeEntriesInput, UserUncheckedCreateWithoutAnimeEntriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutAnimeEntriesInput
@@ -19707,14 +19958,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type AnimeEntryUpdateOneRequiredWithoutRatingsNestedInput = {
     create?: XOR<AnimeEntryCreateWithoutRatingsInput, AnimeEntryUncheckedCreateWithoutRatingsInput>
     connectOrCreate?: AnimeEntryCreateOrConnectWithoutRatingsInput
@@ -19743,10 +19986,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type AnimeEntryUpdateOneRequiredWithoutEpisodesNestedInput = {
@@ -19957,6 +20196,24 @@ export namespace Prisma {
     not?: NestedEnumWatchStatusFilter<$PrismaModel> | $Enums.WatchStatus
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumAnimeAiredStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AnimeAiredStatus | EnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAnimeAiredStatusFilter<$PrismaModel> | $Enums.AnimeAiredStatus
+  }
+
   export type NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
     in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
@@ -19965,6 +20222,30 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumWatchStatusFilter<$PrismaModel>
     _max?: NestedEnumWatchStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAnimeAiredStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AnimeAiredStatus | EnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAnimeAiredStatusWithAggregatesFilter<$PrismaModel> | $Enums.AnimeAiredStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAnimeAiredStatusFilter<$PrismaModel>
+    _max?: NestedEnumAnimeAiredStatusFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -19994,17 +20275,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -20032,26 +20302,17 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type AnimeEntryCreateWithoutUserInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20064,10 +20325,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateWithoutUserInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     typeId?: string | null
     createdAt?: Date | string
@@ -20183,10 +20449,15 @@ export namespace Prisma {
     OR?: AnimeEntryScalarWhereInput[]
     NOT?: AnimeEntryScalarWhereInput | AnimeEntryScalarWhereInput[]
     id?: StringFilter<"AnimeEntry"> | string
+    slug?: StringFilter<"AnimeEntry"> | string
     title?: StringFilter<"AnimeEntry"> | string
     description?: StringFilter<"AnimeEntry"> | string
     coverImageUrl?: StringFilter<"AnimeEntry"> | string
     status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
+    airedFrom?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
+    airedTo?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
+    viewCount?: IntFilter<"AnimeEntry"> | number
     notes?: StringNullableFilter<"AnimeEntry"> | string | null
     userId?: StringFilter<"AnimeEntry"> | string
     typeId?: StringNullableFilter<"AnimeEntry"> | string | null
@@ -20952,10 +21223,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateWithoutTypeInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20968,10 +21244,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateWithoutTypeInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     createdAt?: Date | string
@@ -21010,10 +21291,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateWithoutGenreLinksInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21026,10 +21312,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateWithoutGenreLinksInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     typeId?: string | null
@@ -21077,10 +21368,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateWithoutGenreLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21093,10 +21389,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateWithoutGenreLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21134,10 +21435,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateWithoutRatingsInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21150,10 +21456,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateWithoutRatingsInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     typeId?: string | null
@@ -21211,10 +21522,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateWithoutRatingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21227,10 +21543,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateWithoutRatingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21278,10 +21599,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateWithoutEpisodesInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21294,10 +21620,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateWithoutEpisodesInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     typeId?: string | null
@@ -21326,10 +21657,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateWithoutEpisodesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21342,10 +21678,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateWithoutEpisodesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21460,10 +21801,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateWithoutAuthorLinksInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21476,10 +21822,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedCreateWithoutAuthorLinksInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     typeId?: string | null
@@ -21531,10 +21882,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateWithoutAuthorLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21547,10 +21903,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateWithoutAuthorLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21592,10 +21953,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateManyUserInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     typeId?: string | null
     createdAt?: Date | string
@@ -21625,10 +21991,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21641,10 +22012,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21657,10 +22033,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21934,10 +22315,15 @@ export namespace Prisma {
 
   export type AnimeEntryCreateManyTypeInput = {
     id?: string
+    slug: string
     title: string
     description: string
     coverImageUrl: string
     status?: $Enums.WatchStatus
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
     notes?: string | null
     userId: string
     createdAt?: Date | string
@@ -21946,10 +22332,15 @@ export namespace Prisma {
 
   export type AnimeEntryUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21962,10 +22353,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21978,10 +22374,15 @@ export namespace Prisma {
 
   export type AnimeEntryUncheckedUpdateManyWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

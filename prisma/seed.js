@@ -6,7 +6,7 @@ const { clearDomainForUsers } = require('./seeders/cleanupSeeder');
 const { seedAuthors } = require('./seeders/authorSeeder');
 const { seedGenres } = require('./seeders/genreSeeder');
 const { seedTypes } = require('./seeders/typeSeeder');
-const { seedAnime } = require('./seeders/animeSeeder');
+const { fetchActualAnime, seedAnime } = require('./seeders/animeSeeder');
 
 const prisma = new PrismaClient();
 
@@ -14,10 +14,24 @@ async function main() {
   const users = await seedAuth(prisma);
   await seedRoles(prisma, users);
   await clearDomainForUsers(prisma, users);
+
+  const animeList = await fetchActualAnime(500);
+  if (!animeList.length) {
+    throw new Error('AniList returned no anime. Seed aborted.');
+  }
+
   const genresByName = await seedGenres(prisma);
   const typesByName = await seedTypes(prisma);
-  const authorsByUserEmail = await seedAuthors(prisma, users);
-  await seedAnime(prisma, users, authorsByUserEmail, genresByName, typesByName);
+  const { byUserEmail, adminAuthorsByAniListId } = await seedAuthors(prisma, users, animeList);
+  await seedAnime(
+    prisma,
+    users,
+    byUserEmail,
+    adminAuthorsByAniListId,
+    animeList,
+    genresByName,
+    typesByName,
+  );
 
   console.log('Seed completed successfully.');
 }

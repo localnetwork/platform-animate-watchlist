@@ -9,6 +9,15 @@ async function list(req, res, next) {
   }
 }
 
+async function manageList(req, res, next) {
+  try {
+    const result = await animeService.manageList(req.user.id, req.query);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function getOne(req, res, next) {
   try {
     const result = await animeService.getOne(req.user.id, req.params.id);
@@ -117,8 +126,29 @@ async function removeOwnRating(req, res, next) {
   }
 }
 
+async function incrementView(req, res, next) {
+  try {
+    const result = await animeService.incrementView(req.user.id, req.params.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function topViewed(req, res, next) {
+  try {
+    const result = await animeService.topViewed(req.user.id, req.query.limit);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   list,
+  manageList,
+  topViewed,
+  incrementView,
   getOne,
   create,
   update,

@@ -1,42 +1,99 @@
-const { SEED_COUNTS } = require('./seedData');
-
-function buildAuthorName(index) {
-  return `Author ${String(index + 1).padStart(3, '0')}`;
+function isAuthorRole(roleValue) {
+  const role = (roleValue || '').toLowerCase();
+  return (
+    role.includes('original creator') ||
+    role.includes('original author') ||
+    role.includes('creator') ||
+    role.includes('author') ||
+    role.includes('manga')
+  );
 }
 
-function buildAuthorBio(index) {
-  return `Auto-generated author profile #${index + 1} for seeding large datasets.`;
-}
+function collectAniListAuthors(animeList) {
+  const byAniListId = new Map();
 
-async function seedAuthors(prisma, users) {
-  const userOne = users.find((user) => user.email === 'demo1@anime.local');
-  const userTwo = users.find((user) => user.email === 'demo2@anime.local');
-
-  const userOneAuthors = [];
-  for (let index = 0; index < SEED_COUNTS.AUTHORS; index += 1) {
-    const author = await prisma.animeAuthor.create({
-      data: {
-        userId: userOne.id,
-        name: buildAuthorName(index),
-        bio: buildAuthorBio(index),
-      },
-    });
-    userOneAuthors.push(author);
+  for (const anime of animeList) {
+    for (const edge of anime.staff?.edges || []) {
+      const staff = edge.node;
+      if (!staff?.id || !staff?.name?.full) {
+        continue;
+      }
+      if (!isAuthorRole(edge.role)) {
+        continue;
+      }
+      if (!byAniListId.has(staff.id)) {
+        byAniListId.set(staff.id, {
+          aniListId: staff.id,
+          name: staff.name.full,
+          bio: staff.description || null,
+        });
+      }
+    }
   }
 
-  const userTwoAuthors = [
-    await prisma.animeAuthor.create({
-      data: {
-        userId: userTwo.id,
-        name: 'Member Author 001',
-        bio: 'Member-owned sample author.',
+  return byAniListId;
+}
+
+async function seedAuthors(prisma, users, animeList) {
+  const adminUser = users.find((user) => user.email === 'demo1@anime.local');
+  const memberUser = users.find((user) => user.email === 'demo2@anime.local');
+
+  if (!adminUser) {
+    throw new Error('Admin seed user demo1@anime.local was not found.');
+  }
+  if (!memberUser) {
+    throw new Error('Member seed user demo2@anime.local was not found.');
+  }
+
+  const collected = collectAniListAuthors(animeList);
+  const adminAuthors = [];
+  const adminAuthorsByAniListId = {};
+
+  for (const authorData of collected.values()) {
+    const author = await prisma.animeAuthor.upsert({
+      where: {
+        userId_name: {
+          userId: adminUser.id,
+          name: authorData.name,
+        },
       },
-    }),
-  ];
+      update: {
+        bio: authorData.bio,
+      },
+      create: {
+        userId: adminUser.id,
+        name: authorData.name,
+        bio: authorData.bio,
+      },
+    });
+
+    adminAuthors.push(author);
+    adminAuthorsByAniListId[String(authorData.aniListId)] = author;
+  }
+
+  const memberAuthor = await prisma.animeAuthor.upsert({
+    where: {
+      userId_name: {
+        userId: memberUser.id,
+        name: 'Member Author 001',
+      },
+    },
+    update: {
+      bio: 'Member-owned sample author.',
+    },
+    create: {
+      userId: memberUser.id,
+      name: 'Member Author 001',
+      bio: 'Member-owned sample author.',
+    },
+  });
 
   return {
-    [userOne.email]: userOneAuthors,
-    [userTwo.email]: userTwoAuthors,
+    byUserEmail: {
+      [adminUser.email]: adminAuthors,
+      [memberUser.email]: [memberAuthor],
+    },
+    adminAuthorsByAniListId,
   };
 }
 

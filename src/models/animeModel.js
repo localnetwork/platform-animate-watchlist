@@ -1,6 +1,7 @@
 const { createHttpError } = require('../utils/httpError');
 
 const VALID_STATUSES = ['PLANNED', 'WATCHING', 'COMPLETED', 'DROPPED'];
+const VALID_AIRED_STATUSES = ['NOT_YET_RELEASED', 'AIRING', 'FINISHED', 'HIATUS', 'CANCELLED'];
 const COVER_IMAGE_REGEX = /^https?:\/\/.+/i;
 
 function normalizeStatus(status) {
@@ -15,6 +16,20 @@ function validateStatus(status) {
     throw createHttpError(400, `Invalid status. Use one of: ${VALID_STATUSES.join(', ')}`);
   }
   return normalizedStatus;
+}
+
+function normalizeAiredStatus(airedStatus) {
+  if (!airedStatus) return undefined;
+  const normalized = airedStatus.toUpperCase();
+  return VALID_AIRED_STATUSES.includes(normalized) ? normalized : null;
+}
+
+function validateAiredStatus(airedStatus) {
+  const normalized = normalizeAiredStatus(airedStatus);
+  if (airedStatus && !normalized) {
+    throw createHttpError(400, `Invalid airedStatus. Use one of: ${VALID_AIRED_STATUSES.join(', ')}`);
+  }
+  return normalized;
 }
 
 function validateRating(rating) {
@@ -58,13 +73,32 @@ function validateTypeId(typeId) {
 }
 
 function validateCreateAnimeInput(payload) {
-  const { title, description, coverImageUrl, status, rating, authorIds, genreIds, typeId } = payload;
+  const {
+    title,
+    description,
+    coverImageUrl,
+    status,
+    airedStatus,
+    airedFrom,
+    airedTo,
+    rating,
+    authorIds,
+    genreIds,
+    typeId,
+  } = payload;
 
   if (!title || !description) {
     throw createHttpError(400, 'title and description are required');
   }
   validateCoverImageUrl(coverImageUrl, true);
   validateStatus(status);
+  validateAiredStatus(airedStatus);
+  if (airedFrom !== undefined && airedFrom !== null && Number.isNaN(new Date(airedFrom).getTime())) {
+    throw createHttpError(400, 'airedFrom must be a valid date');
+  }
+  if (airedTo !== undefined && airedTo !== null && Number.isNaN(new Date(airedTo).getTime())) {
+    throw createHttpError(400, 'airedTo must be a valid date');
+  }
   validateRating(rating);
   validateAuthorIds(authorIds, false);
   validateGenreIds(genreIds, false);
@@ -72,8 +106,9 @@ function validateCreateAnimeInput(payload) {
 }
 
 function validateUpdateAnimeInput(payload) {
-  const { coverImageUrl, status, rating, authorIds, genreIds, typeId } = payload;
+  const { coverImageUrl, status, airedStatus, airedFrom, airedTo, rating, authorIds, genreIds, typeId } = payload;
   validateStatus(status);
+  validateAiredStatus(airedStatus);
   validateRating(rating);
 
   if (coverImageUrl !== undefined) {
@@ -84,6 +119,12 @@ function validateUpdateAnimeInput(payload) {
   }
   if (genreIds !== undefined) {
     validateGenreIds(genreIds, false);
+  }
+  if (airedFrom !== undefined && airedFrom !== null && Number.isNaN(new Date(airedFrom).getTime())) {
+    throw createHttpError(400, 'airedFrom must be a valid date');
+  }
+  if (airedTo !== undefined && airedTo !== null && Number.isNaN(new Date(airedTo).getTime())) {
+    throw createHttpError(400, 'airedTo must be a valid date');
   }
   validateTypeId(typeId);
 }
@@ -103,7 +144,12 @@ function toAnimeResponse(entry) {
     title: entry.title,
     description: entry.description,
     coverImageUrl: entry.coverImageUrl,
+    slug: entry.slug,
     status: entry.status,
+    airedFrom: entry.airedFrom,
+    airedTo: entry.airedTo,
+    airedStatus: entry.airedStatus,
+    viewCount: entry.viewCount,
     rating: currentUserRating,
     notes: entry.notes,
     createdAt: entry.createdAt,
@@ -127,8 +173,11 @@ function toAnimeResponse(entry) {
 
 module.exports = {
   VALID_STATUSES,
+  VALID_AIRED_STATUSES,
   normalizeStatus,
+  normalizeAiredStatus,
   validateStatus,
+  validateAiredStatus,
   validateRating,
   validateCreateAnimeInput,
   validateUpdateAnimeInput,
