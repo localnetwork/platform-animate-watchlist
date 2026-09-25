@@ -89,12 +89,48 @@ model AnimeEntry {
   episodes      AnimeEpisode[]
   authorLinks   AnimeEntryAuthor[]
   ratings       AnimeRating[]
+  genreLinks    AnimeEntryGenre[]
+  typeId        String?
+  type          AnimeType?         @relation(fields: [typeId], references: [id])
   createdAt     DateTime           @default(now())
   updatedAt     DateTime           @updatedAt
 
   @@index([userId])
   @@index([status])
+  @@index([typeId])
   @@map("anime_entries")
+}
+
+model Genre {
+  id         String            @id @default(uuid())
+  name       String            @unique
+  animeLinks AnimeEntryGenre[]
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@map("genres")
+}
+
+model AnimeType {
+  id           String       @id @default(uuid())
+  name         String       @unique
+  animeEntries AnimeEntry[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@map("anime_types")
+}
+
+model AnimeEntryGenre {
+  animeEntryId String
+  genreId      String
+  animeEntry   AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  genre        Genre      @relation(fields: [genreId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+
+  @@id([animeEntryId, genreId])
+  @@index([genreId])
+  @@map("anime_entry_genres")
 }
 
 model AnimeRating {

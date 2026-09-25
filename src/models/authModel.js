@@ -18,6 +18,25 @@ function validateLoginInput(payload) {
   }
 }
 
+function validateUpdateProfileInput(payload) {
+  const hasName = Object.prototype.hasOwnProperty.call(payload, 'name');
+  const hasPassword = Object.prototype.hasOwnProperty.call(payload, 'password');
+
+  if (!hasName && !hasPassword) {
+    throw createHttpError(400, 'At least one of name or password is required');
+  }
+
+  if (hasName && payload.name !== null && typeof payload.name !== 'string') {
+    throw createHttpError(400, 'name must be a string or null');
+  }
+
+  if (hasPassword) {
+    if (typeof payload.password !== 'string' || payload.password.length < 6) {
+      throw createHttpError(400, 'Password must be at least 6 characters');
+    }
+  }
+}
+
 function toAuthResponse(user, token) {
   const roles = (user.roleLinks || []).map((link) => link.role.name);
   const permissions = [
@@ -57,6 +76,7 @@ function toUserProfile(user) {
 module.exports = {
   validateRegisterInput,
   validateLoginInput,
+  validateUpdateProfileInput,
   toAuthResponse,
   toUserProfile,
 };

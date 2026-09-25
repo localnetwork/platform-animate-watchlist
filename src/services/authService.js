@@ -2,7 +2,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authRepository = require('../repositories/authRepository');
 const { createHttpError } = require('../utils/httpError');
-const { validateRegisterInput, validateLoginInput, toAuthResponse, toUserProfile } = require('../models/authModel');
+const {
+  validateRegisterInput,
+  validateLoginInput,
+  validateUpdateProfileInput,
+  toAuthResponse,
+  toUserProfile,
+} = require('../models/authModel');
 
 function generateToken(user) {
   return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
@@ -56,8 +62,29 @@ async function me(userId) {
   return toUserProfile(user);
 }
 
+async function updateProfile(userId, payload) {
+  validateUpdateProfileInput(payload);
+  const existing = await authRepository.findUserById(userId);
+  if (!existing) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  const updateData = {};
+  if (Object.prototype.hasOwnProperty.call(payload, 'name')) {
+    updateData.name = payload.name;
+  }
+  if (Object.prototype.hasOwnProperty.call(payload, 'password')) {
+    updateData.password = await bcrypt.hash(payload.password, 10);
+  }
+
+  await authRepository.updateUserById(userId, updateData);
+  const updated = await authRepository.findUserProfileById(userId);
+  return toUserProfile(updated);
+}
+
 module.exports = {
   register,
   login,
   me,
+  updateProfile,
 };

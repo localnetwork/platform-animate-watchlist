@@ -4,6 +4,8 @@ function includeForUserRating(userId) {
   return {
     episodes: { orderBy: { episodeNumber: 'asc' } },
     authorLinks: { include: { author: true } },
+    genreLinks: { include: { genre: true } },
+    type: true,
     ratings: {
       where: { userId },
       select: { value: true },
@@ -45,6 +47,22 @@ async function findOwnedAuthorsByIds(userId, authorIds) {
   });
 }
 
+async function findGenresByIds(genreIds) {
+  if (!genreIds.length) return [];
+  return prisma.genre.findMany({
+    where: { id: { in: genreIds } },
+    select: { id: true },
+  });
+}
+
+async function findTypeById(typeId) {
+  if (!typeId) return null;
+  return prisma.animeType.findUnique({
+    where: { id: typeId },
+    select: { id: true },
+  });
+}
+
 async function createEntryForUser(userId, data) {
   return prisma.animeEntry.create({
     data: {
@@ -65,6 +83,45 @@ async function updateEntryByIdForUser(id, userId, data) {
 
 async function deleteEntryById(id) {
   return prisma.animeEntry.delete({ where: { id } });
+}
+
+async function findRatingForEntryUser(animeEntryId, userId) {
+  return prisma.animeRating.findUnique({
+    where: {
+      animeEntryId_userId: {
+        animeEntryId,
+        userId,
+      },
+    },
+  });
+}
+
+async function upsertRatingForEntryUser(animeEntryId, userId, value) {
+  return prisma.animeRating.upsert({
+    where: {
+      animeEntryId_userId: {
+        animeEntryId,
+        userId,
+      },
+    },
+    update: { value },
+    create: {
+      animeEntryId,
+      userId,
+      value,
+    },
+  });
+}
+
+async function deleteRatingForEntryUser(animeEntryId, userId) {
+  return prisma.animeRating.delete({
+    where: {
+      animeEntryId_userId: {
+        animeEntryId,
+        userId,
+      },
+    },
+  });
 }
 
 async function createEpisode(data) {
@@ -145,9 +202,14 @@ module.exports = {
   findByIdForUser,
   findEntryRefByIdForUser,
   findOwnedAuthorsByIds,
+  findGenresByIds,
+  findTypeById,
   createEntryForUser,
   updateEntryByIdForUser,
   deleteEntryById,
+  findRatingForEntryUser,
+  upsertRatingForEntryUser,
+  deleteRatingForEntryUser,
   createEpisode,
   findEpisodeForEntryUser,
   updateEpisodeById,

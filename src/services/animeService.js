@@ -14,6 +14,20 @@ function ensureOwnedAuthors(authorIds, ownedAuthors) {
   }
 }
 
+function ensureValidGenres(genreIds, existingGenres) {
+  if (genreIds.length && existingGenres.length !== genreIds.length) {
+    throw createHttpError(400, 'One or more genreIds are invalid');
+  }
+}
+
+async function ensureValidType(typeId) {
+  if (!typeId) return;
+  const type = await animeRepository.findTypeById(typeId);
+  if (!type) {
+    throw createHttpError(400, 'typeId is invalid');
+  }
+}
+
 async function list(userId, query) {
   const { status, search } = query;
   const filter = { userId };
@@ -43,11 +57,17 @@ async function getOne(userId, id) {
 
 async function create(userId, payload) {
   validateCreateAnimeInput(payload);
-  const { title, description, coverImageUrl, status, rating, notes } = payload;
+  const { title, description, coverImageUrl, status, rating, notes, typeId } = payload;
   const authorIds = payload.authorIds || [];
+  const genreIds = payload.genreIds || [];
 
-  const ownedAuthors = await animeRepository.findOwnedAuthorsByIds(userId, authorIds);
+  const [ownedAuthors, validGenres] = await Promise.all([
+    animeRepository.findOwnedAuthorsByIds(userId, authorIds),
+    animeRepository.findGenresByIds(genreIds),
+  ]);
   ensureOwnedAuthors(authorIds, ownedAuthors);
+  ensureValidGenres(genreIds, validGenres);
+  await ensureValidType(typeId);
 
   const normalizedStatus = status ? validateStatus(status) : undefined;
   const entry = await animeRepository.createEntryForUser(userId, {
@@ -56,6 +76,7 @@ async function create(userId, payload) {
     coverImageUrl,
     status: normalizedStatus || undefined,
     notes,
+    typeId: typeId || undefined,
     ...(rating !== undefined && rating !== null
       ? {
           ratings: {
@@ -69,6 +90,11 @@ async function create(userId, payload) {
     authorLinks: {
       create: ownedAuthors.map((author) => ({
         authorId: author.id,
+      })),
+    },
+    genreLinks: {
+      create: validGenres.map((genre) => ({
+        genreId: genre.id,
       })),
     },
   });
@@ -90,6 +116,16 @@ async function update(userId, id, payload) {
     ensureOwnedAuthors(payload.authorIds, ownedAuthors);
   }
 
+  let validGenres = [];
+  if (payload.genreIds !== undefined && payload.genreIds.length) {
+    validGenres = await animeRepository.findGenresByIds(payload.genreIds);
+    ensureValidGenres(payload.genreIds, validGenres);
+  }
+
+  if (payload.typeId !== undefined) {
+    await ensureValidType(payload.typeId);
+  }
+
   const normalizedStatus = payload.status ? validateStatus(payload.status) : undefined;
   const entry = await animeRepository.updateEntryByIdForUser(existing.id, userId, {
     title: payload.title ?? undefined,
@@ -97,6 +133,7 @@ async function update(userId, id, payload) {
     coverImageUrl: payload.coverImageUrl ?? undefined,
     status: normalizedStatus || undefined,
     notes: payload.notes ?? undefined,
+    ...(payload.typeId !== undefined ? { typeId: payload.typeId || null } : {}),
     ...(payload.rating !== undefined
       ? payload.rating === null
         ? {
@@ -130,6 +167,16 @@ async function update(userId, id, payload) {
             deleteMany: {},
             create: ownedAuthors.map((author) => ({
               authorId: author.id,
+            })),
+          },
+        }
+      : {}),
+    ...(payload.genreIds !== undefined
+      ? {
+          genreLinks: {
+            deleteMany: {},
+            create: validGenres.map((genre) => ({
+              genreId: genre.id,
             })),
           },
         }
@@ -225,6 +272,54 @@ async function detachAuthor(userId, animeEntryId, authorId) {
   await animeRepository.deleteEntryAuthorLink(existing.animeEntryId, existing.authorId);
 }
 
+async function getOwnRating(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
+  if (!entry) {
+    throw createHttpError(404, 'Watchlist entry not found');
+  }
+
+  const rating = await animeRepository.findRatingForEntryUser(entry.id, userId);
+  return {
+    animeEntryId: entry.id,
+    rating: rating ? rating.value : null,
+  };
+}
+
+async function setOwnRating(userId, animeEntryId, payload) {
+  const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
+  if (!entry) {
+    throw createHttpError(404, 'Watchlist entry not found');
+  }
+
+  validateRating(payload.rating);
+  if (payload.rating === undefined || payload.rating === null) {
+    throw createHttpError(400, 'rating is required');
+  }
+
+  const rating = await animeRepository.upsertRatingForEntryUser(entry.id, userId, payload.rating);
+  return {
+    id: rating.id,
+    animeEntryId: rating.animeEntryId,
+    rating: rating.value,
+    createdAt: rating.createdAt,
+    updatedAt: rating.updatedAt,
+  };
+}
+
+async function removeOwnRating(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
+  if (!entry) {
+    throw createHttpError(404, 'Watchlist entry not found');
+  }
+
+  const existing = await animeRepository.findRatingForEntryUser(entry.id, userId);
+  if (!existing) {
+    throw createHttpError(404, 'Rating not found');
+  }
+
+  await animeRepository.deleteRatingForEntryUser(entry.id, userId);
+}
+
 module.exports = {
   list,
   getOne,
@@ -236,4 +331,7 @@ module.exports = {
   removeEpisode,
   attachAuthor,
   detachAuthor,
+  getOwnRating,
+  setOwnRating,
+  removeOwnRating,
 };

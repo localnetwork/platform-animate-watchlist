@@ -12,6 +12,10 @@ The codebase now follows a layered pattern:
 - `src/controllers`: HTTP-only request/response handlers
 - `src/routes`: route definitions
 
+## API Testing (Postman)
+
+See `docs/POSTMAN.md` for Postman setup and workflow.
+
 ## Setup
 
 1. Copy environment file:
@@ -61,6 +65,10 @@ Default seeded role assignment:
 - `demo1@anime.local` → `admin`
 - `demo2@anime.local` → `member`
 
+Seeded volume:
+- `demo1@anime.local` receives **500 authors** and **500 anime entries** (auto-filled fields)
+- `demo2@anime.local` receives a minimal sample dataset for member-role testing
+
 ## Data Model
 
 - `AnimeEntry`: title, description, `coverImageUrl` (Cloudflare R2 URL), status, notes
@@ -80,11 +88,15 @@ If `R2_PUBLIC_BASE_URL` is set, `coverImageUrl` must start with that prefix.
 - `POST /api/auth/register`
 - `POST /api/auth/login`
 - `GET /api/auth/me`
+- `PUT /api/auth/me`
 - `GET /api/watchlist`
 - `POST /api/watchlist`
 - `GET /api/watchlist/:id`
 - `PUT /api/watchlist/:id`
 - `DELETE /api/watchlist/:id`
+- `GET /api/watchlist/:id/rating`
+- `PUT /api/watchlist/:id/rating`
+- `DELETE /api/watchlist/:id/rating`
 - `POST /api/watchlist/:id/episodes`
 - `PUT /api/watchlist/:id/episodes/:episodeId`
 - `DELETE /api/watchlist/:id/episodes/:episodeId`

@@ -13,6 +13,9 @@ const {
   removeEpisode,
   attachAuthor,
   detachAuthor,
+  getOwnRating,
+  setOwnRating,
+  removeOwnRating,
 } = require('../controllers/animeController');
 
 router.use(auth);
@@ -27,5 +30,8 @@ router.put('/:id/episodes/:episodeId', requirePermission(PERMISSIONS.ANIME_EPISO
 router.delete('/:id/episodes/:episodeId', requirePermission(PERMISSIONS.ANIME_EPISODE_MANAGE), removeEpisode);
 router.post('/:id/authors/:authorId', requirePermission(PERMISSIONS.ANIME_AUTHOR_LINK_MANAGE), attachAuthor);
 router.delete('/:id/authors/:authorId', requirePermission(PERMISSIONS.ANIME_AUTHOR_LINK_MANAGE), detachAuthor);
+router.get('/:id/rating', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), getOwnRating);
+router.put('/:id/rating', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), setOwnRating);
+router.delete('/:id/rating', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), removeOwnRating);
 
 module.exports = router;

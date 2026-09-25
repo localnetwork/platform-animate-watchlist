@@ -44,6 +44,21 @@ export type RolePermission = $Result.DefaultSelection<Prisma.$RolePermissionPayl
  */
 export type AnimeEntry = $Result.DefaultSelection<Prisma.$AnimeEntryPayload>
 /**
+ * Model Genre
+ * 
+ */
+export type Genre = $Result.DefaultSelection<Prisma.$GenrePayload>
+/**
+ * Model AnimeType
+ * 
+ */
+export type AnimeType = $Result.DefaultSelection<Prisma.$AnimeTypePayload>
+/**
+ * Model AnimeEntryGenre
+ * 
+ */
+export type AnimeEntryGenre = $Result.DefaultSelection<Prisma.$AnimeEntryGenrePayload>
+/**
  * Model AnimeRating
  * 
  */
@@ -260,6 +275,36 @@ export class PrismaClient<
     * ```
     */
   get animeEntry(): Prisma.AnimeEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.genre`: Exposes CRUD operations for the **Genre** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Genres
+    * const genres = await prisma.genre.findMany()
+    * ```
+    */
+  get genre(): Prisma.GenreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.animeType`: Exposes CRUD operations for the **AnimeType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AnimeTypes
+    * const animeTypes = await prisma.animeType.findMany()
+    * ```
+    */
+  get animeType(): Prisma.AnimeTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.animeEntryGenre`: Exposes CRUD operations for the **AnimeEntryGenre** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AnimeEntryGenres
+    * const animeEntryGenres = await prisma.animeEntryGenre.findMany()
+    * ```
+    */
+  get animeEntryGenre(): Prisma.AnimeEntryGenreDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.animeRating`: Exposes CRUD operations for the **AnimeRating** model.
@@ -747,6 +792,9 @@ export namespace Prisma {
     UserRole: 'UserRole',
     RolePermission: 'RolePermission',
     AnimeEntry: 'AnimeEntry',
+    Genre: 'Genre',
+    AnimeType: 'AnimeType',
+    AnimeEntryGenre: 'AnimeEntryGenre',
     AnimeRating: 'AnimeRating',
     AnimeEpisode: 'AnimeEpisode',
     AnimeAuthor: 'AnimeAuthor',
@@ -769,7 +817,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "animeEntry" | "animeRating" | "animeEpisode" | "animeAuthor" | "animeEntryAuthor"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "animeEntry" | "genre" | "animeType" | "animeEntryGenre" | "animeRating" | "animeEpisode" | "animeAuthor" | "animeEntryAuthor"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1217,6 +1265,228 @@ export namespace Prisma {
           }
         }
       }
+      Genre: {
+        payload: Prisma.$GenrePayload<ExtArgs>
+        fields: Prisma.GenreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GenreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GenreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          findFirst: {
+            args: Prisma.GenreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GenreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          findMany: {
+            args: Prisma.GenreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>[]
+          }
+          create: {
+            args: Prisma.GenreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          createMany: {
+            args: Prisma.GenreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GenreCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>[]
+          }
+          delete: {
+            args: Prisma.GenreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          update: {
+            args: Prisma.GenreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          deleteMany: {
+            args: Prisma.GenreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GenreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GenreUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>[]
+          }
+          upsert: {
+            args: Prisma.GenreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          aggregate: {
+            args: Prisma.GenreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGenre>
+          }
+          groupBy: {
+            args: Prisma.GenreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GenreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GenreCountArgs<ExtArgs>
+            result: $Utils.Optional<GenreCountAggregateOutputType> | number
+          }
+        }
+      }
+      AnimeType: {
+        payload: Prisma.$AnimeTypePayload<ExtArgs>
+        fields: Prisma.AnimeTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnimeTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnimeTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>
+          }
+          findFirst: {
+            args: Prisma.AnimeTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnimeTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>
+          }
+          findMany: {
+            args: Prisma.AnimeTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>[]
+          }
+          create: {
+            args: Prisma.AnimeTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>
+          }
+          createMany: {
+            args: Prisma.AnimeTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnimeTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>[]
+          }
+          delete: {
+            args: Prisma.AnimeTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>
+          }
+          update: {
+            args: Prisma.AnimeTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.AnimeTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnimeTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AnimeTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.AnimeTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeTypePayload>
+          }
+          aggregate: {
+            args: Prisma.AnimeTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnimeType>
+          }
+          groupBy: {
+            args: Prisma.AnimeTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnimeTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnimeTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<AnimeTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      AnimeEntryGenre: {
+        payload: Prisma.$AnimeEntryGenrePayload<ExtArgs>
+        fields: Prisma.AnimeEntryGenreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnimeEntryGenreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnimeEntryGenreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>
+          }
+          findFirst: {
+            args: Prisma.AnimeEntryGenreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnimeEntryGenreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>
+          }
+          findMany: {
+            args: Prisma.AnimeEntryGenreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>[]
+          }
+          create: {
+            args: Prisma.AnimeEntryGenreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>
+          }
+          createMany: {
+            args: Prisma.AnimeEntryGenreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnimeEntryGenreCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>[]
+          }
+          delete: {
+            args: Prisma.AnimeEntryGenreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>
+          }
+          update: {
+            args: Prisma.AnimeEntryGenreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>
+          }
+          deleteMany: {
+            args: Prisma.AnimeEntryGenreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnimeEntryGenreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AnimeEntryGenreUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>[]
+          }
+          upsert: {
+            args: Prisma.AnimeEntryGenreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeEntryGenrePayload>
+          }
+          aggregate: {
+            args: Prisma.AnimeEntryGenreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnimeEntryGenre>
+          }
+          groupBy: {
+            args: Prisma.AnimeEntryGenreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnimeEntryGenreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnimeEntryGenreCountArgs<ExtArgs>
+            result: $Utils.Optional<AnimeEntryGenreCountAggregateOutputType> | number
+          }
+        }
+      }
       AnimeRating: {
         payload: Prisma.$AnimeRatingPayload<ExtArgs>
         fields: Prisma.AnimeRatingFieldRefs
@@ -1615,6 +1885,9 @@ export namespace Prisma {
     userRole?: UserRoleOmit
     rolePermission?: RolePermissionOmit
     animeEntry?: AnimeEntryOmit
+    genre?: GenreOmit
+    animeType?: AnimeTypeOmit
+    animeEntryGenre?: AnimeEntryGenreOmit
     animeRating?: AnimeRatingOmit
     animeEpisode?: AnimeEpisodeOmit
     animeAuthor?: AnimeAuthorOmit
@@ -1831,12 +2104,14 @@ export namespace Prisma {
     episodes: number
     authorLinks: number
     ratings: number
+    genreLinks: number
   }
 
   export type AnimeEntryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     episodes?: boolean | AnimeEntryCountOutputTypeCountEpisodesArgs
     authorLinks?: boolean | AnimeEntryCountOutputTypeCountAuthorLinksArgs
     ratings?: boolean | AnimeEntryCountOutputTypeCountRatingsArgs
+    genreLinks?: boolean | AnimeEntryCountOutputTypeCountGenreLinksArgs
   }
 
   // Custom InputTypes
@@ -1869,6 +2144,75 @@ export namespace Prisma {
    */
   export type AnimeEntryCountOutputTypeCountRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AnimeRatingWhereInput
+  }
+
+  /**
+   * AnimeEntryCountOutputType without action
+   */
+  export type AnimeEntryCountOutputTypeCountGenreLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeEntryGenreWhereInput
+  }
+
+
+  /**
+   * Count Type GenreCountOutputType
+   */
+
+  export type GenreCountOutputType = {
+    animeLinks: number
+  }
+
+  export type GenreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeLinks?: boolean | GenreCountOutputTypeCountAnimeLinksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GenreCountOutputType
+     */
+    select?: GenreCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeCountAnimeLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeEntryGenreWhereInput
+  }
+
+
+  /**
+   * Count Type AnimeTypeCountOutputType
+   */
+
+  export type AnimeTypeCountOutputType = {
+    animeEntries: number
+  }
+
+  export type AnimeTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeEntries?: boolean | AnimeTypeCountOutputTypeCountAnimeEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AnimeTypeCountOutputType without action
+   */
+  export type AnimeTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeTypeCountOutputType
+     */
+    select?: AnimeTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AnimeTypeCountOutputType without action
+   */
+  export type AnimeTypeCountOutputTypeCountAnimeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeEntryWhereInput
   }
 
 
@@ -7340,6 +7684,7 @@ export namespace Prisma {
     status: $Enums.WatchStatus | null
     notes: string | null
     userId: string | null
+    typeId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7352,6 +7697,7 @@ export namespace Prisma {
     status: $Enums.WatchStatus | null
     notes: string | null
     userId: string | null
+    typeId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7364,6 +7710,7 @@ export namespace Prisma {
     status: number
     notes: number
     userId: number
+    typeId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7378,6 +7725,7 @@ export namespace Prisma {
     status?: true
     notes?: true
     userId?: true
+    typeId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7390,6 +7738,7 @@ export namespace Prisma {
     status?: true
     notes?: true
     userId?: true
+    typeId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7402,6 +7751,7 @@ export namespace Prisma {
     status?: true
     notes?: true
     userId?: true
+    typeId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7487,6 +7837,7 @@ export namespace Prisma {
     status: $Enums.WatchStatus
     notes: string | null
     userId: string
+    typeId: string | null
     createdAt: Date
     updatedAt: Date
     _count: AnimeEntryCountAggregateOutputType | null
@@ -7516,12 +7867,15 @@ export namespace Prisma {
     status?: boolean
     notes?: boolean
     userId?: boolean
+    typeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     episodes?: boolean | AnimeEntry$episodesArgs<ExtArgs>
     authorLinks?: boolean | AnimeEntry$authorLinksArgs<ExtArgs>
     ratings?: boolean | AnimeEntry$ratingsArgs<ExtArgs>
+    genreLinks?: boolean | AnimeEntry$genreLinksArgs<ExtArgs>
+    type?: boolean | AnimeEntry$typeArgs<ExtArgs>
     _count?: boolean | AnimeEntryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["animeEntry"]>
 
@@ -7533,9 +7887,11 @@ export namespace Prisma {
     status?: boolean
     notes?: boolean
     userId?: boolean
+    typeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    type?: boolean | AnimeEntry$typeArgs<ExtArgs>
   }, ExtArgs["result"]["animeEntry"]>
 
   export type AnimeEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7546,9 +7902,11 @@ export namespace Prisma {
     status?: boolean
     notes?: boolean
     userId?: boolean
+    typeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    type?: boolean | AnimeEntry$typeArgs<ExtArgs>
   }, ExtArgs["result"]["animeEntry"]>
 
   export type AnimeEntrySelectScalar = {
@@ -7559,23 +7917,28 @@ export namespace Prisma {
     status?: boolean
     notes?: boolean
     userId?: boolean
+    typeId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AnimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "coverImageUrl" | "status" | "notes" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEntry"]>
+  export type AnimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "coverImageUrl" | "status" | "notes" | "userId" | "typeId" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEntry"]>
   export type AnimeEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     episodes?: boolean | AnimeEntry$episodesArgs<ExtArgs>
     authorLinks?: boolean | AnimeEntry$authorLinksArgs<ExtArgs>
     ratings?: boolean | AnimeEntry$ratingsArgs<ExtArgs>
+    genreLinks?: boolean | AnimeEntry$genreLinksArgs<ExtArgs>
+    type?: boolean | AnimeEntry$typeArgs<ExtArgs>
     _count?: boolean | AnimeEntryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AnimeEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    type?: boolean | AnimeEntry$typeArgs<ExtArgs>
   }
   export type AnimeEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    type?: boolean | AnimeEntry$typeArgs<ExtArgs>
   }
 
   export type $AnimeEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7585,6 +7948,8 @@ export namespace Prisma {
       episodes: Prisma.$AnimeEpisodePayload<ExtArgs>[]
       authorLinks: Prisma.$AnimeEntryAuthorPayload<ExtArgs>[]
       ratings: Prisma.$AnimeRatingPayload<ExtArgs>[]
+      genreLinks: Prisma.$AnimeEntryGenrePayload<ExtArgs>[]
+      type: Prisma.$AnimeTypePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7594,6 +7959,7 @@ export namespace Prisma {
       status: $Enums.WatchStatus
       notes: string | null
       userId: string
+      typeId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["animeEntry"]>
@@ -7994,6 +8360,8 @@ export namespace Prisma {
     episodes<T extends AnimeEntry$episodesArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$episodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEpisodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     authorLinks<T extends AnimeEntry$authorLinksArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$authorLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryAuthorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ratings<T extends AnimeEntry$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    genreLinks<T extends AnimeEntry$genreLinksArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$genreLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    type<T extends AnimeEntry$typeArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$typeArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8030,6 +8398,7 @@ export namespace Prisma {
     readonly status: FieldRef<"AnimeEntry", 'WatchStatus'>
     readonly notes: FieldRef<"AnimeEntry", 'String'>
     readonly userId: FieldRef<"AnimeEntry", 'String'>
+    readonly typeId: FieldRef<"AnimeEntry", 'String'>
     readonly createdAt: FieldRef<"AnimeEntry", 'DateTime'>
     readonly updatedAt: FieldRef<"AnimeEntry", 'DateTime'>
   }
@@ -8500,6 +8869,49 @@ export namespace Prisma {
   }
 
   /**
+   * AnimeEntry.genreLinks
+   */
+  export type AnimeEntry$genreLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    where?: AnimeEntryGenreWhereInput
+    orderBy?: AnimeEntryGenreOrderByWithRelationInput | AnimeEntryGenreOrderByWithRelationInput[]
+    cursor?: AnimeEntryGenreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimeEntryGenreScalarFieldEnum | AnimeEntryGenreScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeEntry.type
+   */
+  export type AnimeEntry$typeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    where?: AnimeTypeWhereInput
+  }
+
+  /**
    * AnimeEntry without action
    */
   export type AnimeEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8515,6 +8927,3160 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AnimeEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Genre
+   */
+
+  export type AggregateGenre = {
+    _count: GenreCountAggregateOutputType | null
+    _min: GenreMinAggregateOutputType | null
+    _max: GenreMaxAggregateOutputType | null
+  }
+
+  export type GenreMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GenreMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GenreCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GenreMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GenreMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GenreCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GenreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Genre to aggregate.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Genres
+    **/
+    _count?: true | GenreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GenreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GenreMaxAggregateInputType
+  }
+
+  export type GetGenreAggregateType<T extends GenreAggregateArgs> = {
+        [P in keyof T & keyof AggregateGenre]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGenre[P]>
+      : GetScalarType<T[P], AggregateGenre[P]>
+  }
+
+
+
+
+  export type GenreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GenreWhereInput
+    orderBy?: GenreOrderByWithAggregationInput | GenreOrderByWithAggregationInput[]
+    by: GenreScalarFieldEnum[] | GenreScalarFieldEnum
+    having?: GenreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GenreCountAggregateInputType | true
+    _min?: GenreMinAggregateInputType
+    _max?: GenreMaxAggregateInputType
+  }
+
+  export type GenreGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: GenreCountAggregateOutputType | null
+    _min: GenreMinAggregateOutputType | null
+    _max: GenreMaxAggregateOutputType | null
+  }
+
+  type GetGenreGroupByPayload<T extends GenreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GenreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GenreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GenreGroupByOutputType[P]>
+            : GetScalarType<T[P], GenreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GenreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    animeLinks?: boolean | Genre$animeLinksArgs<ExtArgs>
+    _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["genre"]>
+
+  export type GenreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["genre"]>
+
+  export type GenreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["genre"]>
+
+  export type GenreSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GenreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["genre"]>
+  export type GenreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeLinks?: boolean | Genre$animeLinksArgs<ExtArgs>
+    _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GenreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GenreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $GenrePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Genre"
+    objects: {
+      animeLinks: Prisma.$AnimeEntryGenrePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["genre"]>
+    composites: {}
+  }
+
+  type GenreGetPayload<S extends boolean | null | undefined | GenreDefaultArgs> = $Result.GetResult<Prisma.$GenrePayload, S>
+
+  type GenreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GenreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GenreCountAggregateInputType | true
+    }
+
+  export interface GenreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Genre'], meta: { name: 'Genre' } }
+    /**
+     * Find zero or one Genre that matches the filter.
+     * @param {GenreFindUniqueArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GenreFindUniqueArgs>(args: SelectSubset<T, GenreFindUniqueArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Genre that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GenreFindUniqueOrThrowArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GenreFindUniqueOrThrowArgs>(args: SelectSubset<T, GenreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Genre that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreFindFirstArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GenreFindFirstArgs>(args?: SelectSubset<T, GenreFindFirstArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Genre that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreFindFirstOrThrowArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GenreFindFirstOrThrowArgs>(args?: SelectSubset<T, GenreFindFirstOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Genres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Genres
+     * const genres = await prisma.genre.findMany()
+     * 
+     * // Get first 10 Genres
+     * const genres = await prisma.genre.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const genreWithIdOnly = await prisma.genre.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GenreFindManyArgs>(args?: SelectSubset<T, GenreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Genre.
+     * @param {GenreCreateArgs} args - Arguments to create a Genre.
+     * @example
+     * // Create one Genre
+     * const Genre = await prisma.genre.create({
+     *   data: {
+     *     // ... data to create a Genre
+     *   }
+     * })
+     * 
+     */
+    create<T extends GenreCreateArgs>(args: SelectSubset<T, GenreCreateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Genres.
+     * @param {GenreCreateManyArgs} args - Arguments to create many Genres.
+     * @example
+     * // Create many Genres
+     * const genre = await prisma.genre.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GenreCreateManyArgs>(args?: SelectSubset<T, GenreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Genres and returns the data saved in the database.
+     * @param {GenreCreateManyAndReturnArgs} args - Arguments to create many Genres.
+     * @example
+     * // Create many Genres
+     * const genre = await prisma.genre.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Genres and only return the `id`
+     * const genreWithIdOnly = await prisma.genre.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GenreCreateManyAndReturnArgs>(args?: SelectSubset<T, GenreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Genre.
+     * @param {GenreDeleteArgs} args - Arguments to delete one Genre.
+     * @example
+     * // Delete one Genre
+     * const Genre = await prisma.genre.delete({
+     *   where: {
+     *     // ... filter to delete one Genre
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GenreDeleteArgs>(args: SelectSubset<T, GenreDeleteArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Genre.
+     * @param {GenreUpdateArgs} args - Arguments to update one Genre.
+     * @example
+     * // Update one Genre
+     * const genre = await prisma.genre.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GenreUpdateArgs>(args: SelectSubset<T, GenreUpdateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Genres.
+     * @param {GenreDeleteManyArgs} args - Arguments to filter Genres to delete.
+     * @example
+     * // Delete a few Genres
+     * const { count } = await prisma.genre.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GenreDeleteManyArgs>(args?: SelectSubset<T, GenreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Genres
+     * const genre = await prisma.genre.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GenreUpdateManyArgs>(args: SelectSubset<T, GenreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Genres and returns the data updated in the database.
+     * @param {GenreUpdateManyAndReturnArgs} args - Arguments to update many Genres.
+     * @example
+     * // Update many Genres
+     * const genre = await prisma.genre.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Genres and only return the `id`
+     * const genreWithIdOnly = await prisma.genre.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GenreUpdateManyAndReturnArgs>(args: SelectSubset<T, GenreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Genre.
+     * @param {GenreUpsertArgs} args - Arguments to update or create a Genre.
+     * @example
+     * // Update or create a Genre
+     * const genre = await prisma.genre.upsert({
+     *   create: {
+     *     // ... data to create a Genre
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Genre we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GenreUpsertArgs>(args: SelectSubset<T, GenreUpsertArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreCountArgs} args - Arguments to filter Genres to count.
+     * @example
+     * // Count the number of Genres
+     * const count = await prisma.genre.count({
+     *   where: {
+     *     // ... the filter for the Genres we want to count
+     *   }
+     * })
+    **/
+    count<T extends GenreCountArgs>(
+      args?: Subset<T, GenreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GenreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Genre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GenreAggregateArgs>(args: Subset<T, GenreAggregateArgs>): Prisma.PrismaPromise<GetGenreAggregateType<T>>
+
+    /**
+     * Group by Genre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GenreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GenreGroupByArgs['orderBy'] }
+        : { orderBy?: GenreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GenreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGenreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Genre model
+   */
+  readonly fields: GenreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Genre.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    animeLinks<T extends Genre$animeLinksArgs<ExtArgs> = {}>(args?: Subset<T, Genre$animeLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Genre model
+   */
+  interface GenreFieldRefs {
+    readonly id: FieldRef<"Genre", 'String'>
+    readonly name: FieldRef<"Genre", 'String'>
+    readonly createdAt: FieldRef<"Genre", 'DateTime'>
+    readonly updatedAt: FieldRef<"Genre", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Genre findUnique
+   */
+  export type GenreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre findUniqueOrThrow
+   */
+  export type GenreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre findFirst
+   */
+  export type GenreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Genres.
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Genres.
+     */
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre findFirstOrThrow
+   */
+  export type GenreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Genres.
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Genres.
+     */
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre findMany
+   */
+  export type GenreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Genres.
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre create
+   */
+  export type GenreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Genre.
+     */
+    data: XOR<GenreCreateInput, GenreUncheckedCreateInput>
+  }
+
+  /**
+   * Genre createMany
+   */
+  export type GenreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Genres.
+     */
+    data: GenreCreateManyInput | GenreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Genre createManyAndReturn
+   */
+  export type GenreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * The data used to create many Genres.
+     */
+    data: GenreCreateManyInput | GenreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Genre update
+   */
+  export type GenreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Genre.
+     */
+    data: XOR<GenreUpdateInput, GenreUncheckedUpdateInput>
+    /**
+     * Choose, which Genre to update.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre updateMany
+   */
+  export type GenreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Genres.
+     */
+    data: XOR<GenreUpdateManyMutationInput, GenreUncheckedUpdateManyInput>
+    /**
+     * Filter which Genres to update
+     */
+    where?: GenreWhereInput
+    /**
+     * Limit how many Genres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Genre updateManyAndReturn
+   */
+  export type GenreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * The data used to update Genres.
+     */
+    data: XOR<GenreUpdateManyMutationInput, GenreUncheckedUpdateManyInput>
+    /**
+     * Filter which Genres to update
+     */
+    where?: GenreWhereInput
+    /**
+     * Limit how many Genres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Genre upsert
+   */
+  export type GenreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Genre to update in case it exists.
+     */
+    where: GenreWhereUniqueInput
+    /**
+     * In case the Genre found by the `where` argument doesn't exist, create a new Genre with this data.
+     */
+    create: XOR<GenreCreateInput, GenreUncheckedCreateInput>
+    /**
+     * In case the Genre was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GenreUpdateInput, GenreUncheckedUpdateInput>
+  }
+
+  /**
+   * Genre delete
+   */
+  export type GenreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter which Genre to delete.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre deleteMany
+   */
+  export type GenreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Genres to delete
+     */
+    where?: GenreWhereInput
+    /**
+     * Limit how many Genres to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Genre.animeLinks
+   */
+  export type Genre$animeLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    where?: AnimeEntryGenreWhereInput
+    orderBy?: AnimeEntryGenreOrderByWithRelationInput | AnimeEntryGenreOrderByWithRelationInput[]
+    cursor?: AnimeEntryGenreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimeEntryGenreScalarFieldEnum | AnimeEntryGenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre without action
+   */
+  export type GenreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AnimeType
+   */
+
+  export type AggregateAnimeType = {
+    _count: AnimeTypeCountAggregateOutputType | null
+    _min: AnimeTypeMinAggregateOutputType | null
+    _max: AnimeTypeMaxAggregateOutputType | null
+  }
+
+  export type AnimeTypeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AnimeTypeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AnimeTypeCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AnimeTypeMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AnimeTypeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AnimeTypeCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AnimeTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnimeType to aggregate.
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeTypes to fetch.
+     */
+    orderBy?: AnimeTypeOrderByWithRelationInput | AnimeTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnimeTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AnimeTypes
+    **/
+    _count?: true | AnimeTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnimeTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnimeTypeMaxAggregateInputType
+  }
+
+  export type GetAnimeTypeAggregateType<T extends AnimeTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnimeType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnimeType[P]>
+      : GetScalarType<T[P], AggregateAnimeType[P]>
+  }
+
+
+
+
+  export type AnimeTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeTypeWhereInput
+    orderBy?: AnimeTypeOrderByWithAggregationInput | AnimeTypeOrderByWithAggregationInput[]
+    by: AnimeTypeScalarFieldEnum[] | AnimeTypeScalarFieldEnum
+    having?: AnimeTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnimeTypeCountAggregateInputType | true
+    _min?: AnimeTypeMinAggregateInputType
+    _max?: AnimeTypeMaxAggregateInputType
+  }
+
+  export type AnimeTypeGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AnimeTypeCountAggregateOutputType | null
+    _min: AnimeTypeMinAggregateOutputType | null
+    _max: AnimeTypeMaxAggregateOutputType | null
+  }
+
+  type GetAnimeTypeGroupByPayload<T extends AnimeTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnimeTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnimeTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnimeTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], AnimeTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnimeTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    animeEntries?: boolean | AnimeType$animeEntriesArgs<ExtArgs>
+    _count?: boolean | AnimeTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeType"]>
+
+  export type AnimeTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["animeType"]>
+
+  export type AnimeTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["animeType"]>
+
+  export type AnimeTypeSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AnimeTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["animeType"]>
+  export type AnimeTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeEntries?: boolean | AnimeType$animeEntriesArgs<ExtArgs>
+    _count?: boolean | AnimeTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AnimeTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AnimeTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AnimeTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AnimeType"
+    objects: {
+      animeEntries: Prisma.$AnimeEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["animeType"]>
+    composites: {}
+  }
+
+  type AnimeTypeGetPayload<S extends boolean | null | undefined | AnimeTypeDefaultArgs> = $Result.GetResult<Prisma.$AnimeTypePayload, S>
+
+  type AnimeTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AnimeTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AnimeTypeCountAggregateInputType | true
+    }
+
+  export interface AnimeTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AnimeType'], meta: { name: 'AnimeType' } }
+    /**
+     * Find zero or one AnimeType that matches the filter.
+     * @param {AnimeTypeFindUniqueArgs} args - Arguments to find a AnimeType
+     * @example
+     * // Get one AnimeType
+     * const animeType = await prisma.animeType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnimeTypeFindUniqueArgs>(args: SelectSubset<T, AnimeTypeFindUniqueArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AnimeType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AnimeTypeFindUniqueOrThrowArgs} args - Arguments to find a AnimeType
+     * @example
+     * // Get one AnimeType
+     * const animeType = await prisma.animeType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnimeTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, AnimeTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnimeType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeFindFirstArgs} args - Arguments to find a AnimeType
+     * @example
+     * // Get one AnimeType
+     * const animeType = await prisma.animeType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnimeTypeFindFirstArgs>(args?: SelectSubset<T, AnimeTypeFindFirstArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnimeType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeFindFirstOrThrowArgs} args - Arguments to find a AnimeType
+     * @example
+     * // Get one AnimeType
+     * const animeType = await prisma.animeType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnimeTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, AnimeTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AnimeTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AnimeTypes
+     * const animeTypes = await prisma.animeType.findMany()
+     * 
+     * // Get first 10 AnimeTypes
+     * const animeTypes = await prisma.animeType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const animeTypeWithIdOnly = await prisma.animeType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AnimeTypeFindManyArgs>(args?: SelectSubset<T, AnimeTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AnimeType.
+     * @param {AnimeTypeCreateArgs} args - Arguments to create a AnimeType.
+     * @example
+     * // Create one AnimeType
+     * const AnimeType = await prisma.animeType.create({
+     *   data: {
+     *     // ... data to create a AnimeType
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnimeTypeCreateArgs>(args: SelectSubset<T, AnimeTypeCreateArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AnimeTypes.
+     * @param {AnimeTypeCreateManyArgs} args - Arguments to create many AnimeTypes.
+     * @example
+     * // Create many AnimeTypes
+     * const animeType = await prisma.animeType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnimeTypeCreateManyArgs>(args?: SelectSubset<T, AnimeTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AnimeTypes and returns the data saved in the database.
+     * @param {AnimeTypeCreateManyAndReturnArgs} args - Arguments to create many AnimeTypes.
+     * @example
+     * // Create many AnimeTypes
+     * const animeType = await prisma.animeType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AnimeTypes and only return the `id`
+     * const animeTypeWithIdOnly = await prisma.animeType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnimeTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, AnimeTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AnimeType.
+     * @param {AnimeTypeDeleteArgs} args - Arguments to delete one AnimeType.
+     * @example
+     * // Delete one AnimeType
+     * const AnimeType = await prisma.animeType.delete({
+     *   where: {
+     *     // ... filter to delete one AnimeType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnimeTypeDeleteArgs>(args: SelectSubset<T, AnimeTypeDeleteArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AnimeType.
+     * @param {AnimeTypeUpdateArgs} args - Arguments to update one AnimeType.
+     * @example
+     * // Update one AnimeType
+     * const animeType = await prisma.animeType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnimeTypeUpdateArgs>(args: SelectSubset<T, AnimeTypeUpdateArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AnimeTypes.
+     * @param {AnimeTypeDeleteManyArgs} args - Arguments to filter AnimeTypes to delete.
+     * @example
+     * // Delete a few AnimeTypes
+     * const { count } = await prisma.animeType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnimeTypeDeleteManyArgs>(args?: SelectSubset<T, AnimeTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnimeTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AnimeTypes
+     * const animeType = await prisma.animeType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnimeTypeUpdateManyArgs>(args: SelectSubset<T, AnimeTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnimeTypes and returns the data updated in the database.
+     * @param {AnimeTypeUpdateManyAndReturnArgs} args - Arguments to update many AnimeTypes.
+     * @example
+     * // Update many AnimeTypes
+     * const animeType = await prisma.animeType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AnimeTypes and only return the `id`
+     * const animeTypeWithIdOnly = await prisma.animeType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AnimeTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, AnimeTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AnimeType.
+     * @param {AnimeTypeUpsertArgs} args - Arguments to update or create a AnimeType.
+     * @example
+     * // Update or create a AnimeType
+     * const animeType = await prisma.animeType.upsert({
+     *   create: {
+     *     // ... data to create a AnimeType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AnimeType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnimeTypeUpsertArgs>(args: SelectSubset<T, AnimeTypeUpsertArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AnimeTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeCountArgs} args - Arguments to filter AnimeTypes to count.
+     * @example
+     * // Count the number of AnimeTypes
+     * const count = await prisma.animeType.count({
+     *   where: {
+     *     // ... the filter for the AnimeTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnimeTypeCountArgs>(
+      args?: Subset<T, AnimeTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnimeTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AnimeType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnimeTypeAggregateArgs>(args: Subset<T, AnimeTypeAggregateArgs>): Prisma.PrismaPromise<GetAnimeTypeAggregateType<T>>
+
+    /**
+     * Group by AnimeType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnimeTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnimeTypeGroupByArgs['orderBy'] }
+        : { orderBy?: AnimeTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnimeTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnimeTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AnimeType model
+   */
+  readonly fields: AnimeTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AnimeType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnimeTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    animeEntries<T extends AnimeType$animeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, AnimeType$animeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AnimeType model
+   */
+  interface AnimeTypeFieldRefs {
+    readonly id: FieldRef<"AnimeType", 'String'>
+    readonly name: FieldRef<"AnimeType", 'String'>
+    readonly createdAt: FieldRef<"AnimeType", 'DateTime'>
+    readonly updatedAt: FieldRef<"AnimeType", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AnimeType findUnique
+   */
+  export type AnimeTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeType to fetch.
+     */
+    where: AnimeTypeWhereUniqueInput
+  }
+
+  /**
+   * AnimeType findUniqueOrThrow
+   */
+  export type AnimeTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeType to fetch.
+     */
+    where: AnimeTypeWhereUniqueInput
+  }
+
+  /**
+   * AnimeType findFirst
+   */
+  export type AnimeTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeType to fetch.
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeTypes to fetch.
+     */
+    orderBy?: AnimeTypeOrderByWithRelationInput | AnimeTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnimeTypes.
+     */
+    cursor?: AnimeTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnimeTypes.
+     */
+    distinct?: AnimeTypeScalarFieldEnum | AnimeTypeScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeType findFirstOrThrow
+   */
+  export type AnimeTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeType to fetch.
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeTypes to fetch.
+     */
+    orderBy?: AnimeTypeOrderByWithRelationInput | AnimeTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnimeTypes.
+     */
+    cursor?: AnimeTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnimeTypes.
+     */
+    distinct?: AnimeTypeScalarFieldEnum | AnimeTypeScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeType findMany
+   */
+  export type AnimeTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeTypes to fetch.
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeTypes to fetch.
+     */
+    orderBy?: AnimeTypeOrderByWithRelationInput | AnimeTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AnimeTypes.
+     */
+    cursor?: AnimeTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeTypes.
+     */
+    skip?: number
+    distinct?: AnimeTypeScalarFieldEnum | AnimeTypeScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeType create
+   */
+  export type AnimeTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AnimeType.
+     */
+    data: XOR<AnimeTypeCreateInput, AnimeTypeUncheckedCreateInput>
+  }
+
+  /**
+   * AnimeType createMany
+   */
+  export type AnimeTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AnimeTypes.
+     */
+    data: AnimeTypeCreateManyInput | AnimeTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnimeType createManyAndReturn
+   */
+  export type AnimeTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many AnimeTypes.
+     */
+    data: AnimeTypeCreateManyInput | AnimeTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnimeType update
+   */
+  export type AnimeTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AnimeType.
+     */
+    data: XOR<AnimeTypeUpdateInput, AnimeTypeUncheckedUpdateInput>
+    /**
+     * Choose, which AnimeType to update.
+     */
+    where: AnimeTypeWhereUniqueInput
+  }
+
+  /**
+   * AnimeType updateMany
+   */
+  export type AnimeTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AnimeTypes.
+     */
+    data: XOR<AnimeTypeUpdateManyMutationInput, AnimeTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which AnimeTypes to update
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * Limit how many AnimeTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeType updateManyAndReturn
+   */
+  export type AnimeTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update AnimeTypes.
+     */
+    data: XOR<AnimeTypeUpdateManyMutationInput, AnimeTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which AnimeTypes to update
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * Limit how many AnimeTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeType upsert
+   */
+  export type AnimeTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AnimeType to update in case it exists.
+     */
+    where: AnimeTypeWhereUniqueInput
+    /**
+     * In case the AnimeType found by the `where` argument doesn't exist, create a new AnimeType with this data.
+     */
+    create: XOR<AnimeTypeCreateInput, AnimeTypeUncheckedCreateInput>
+    /**
+     * In case the AnimeType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnimeTypeUpdateInput, AnimeTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * AnimeType delete
+   */
+  export type AnimeTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+    /**
+     * Filter which AnimeType to delete.
+     */
+    where: AnimeTypeWhereUniqueInput
+  }
+
+  /**
+   * AnimeType deleteMany
+   */
+  export type AnimeTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnimeTypes to delete
+     */
+    where?: AnimeTypeWhereInput
+    /**
+     * Limit how many AnimeTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeType.animeEntries
+   */
+  export type AnimeType$animeEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntry
+     */
+    select?: AnimeEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntry
+     */
+    omit?: AnimeEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryInclude<ExtArgs> | null
+    where?: AnimeEntryWhereInput
+    orderBy?: AnimeEntryOrderByWithRelationInput | AnimeEntryOrderByWithRelationInput[]
+    cursor?: AnimeEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimeEntryScalarFieldEnum | AnimeEntryScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeType without action
+   */
+  export type AnimeTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeType
+     */
+    select?: AnimeTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeType
+     */
+    omit?: AnimeTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeTypeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AnimeEntryGenre
+   */
+
+  export type AggregateAnimeEntryGenre = {
+    _count: AnimeEntryGenreCountAggregateOutputType | null
+    _min: AnimeEntryGenreMinAggregateOutputType | null
+    _max: AnimeEntryGenreMaxAggregateOutputType | null
+  }
+
+  export type AnimeEntryGenreMinAggregateOutputType = {
+    animeEntryId: string | null
+    genreId: string | null
+    createdAt: Date | null
+  }
+
+  export type AnimeEntryGenreMaxAggregateOutputType = {
+    animeEntryId: string | null
+    genreId: string | null
+    createdAt: Date | null
+  }
+
+  export type AnimeEntryGenreCountAggregateOutputType = {
+    animeEntryId: number
+    genreId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AnimeEntryGenreMinAggregateInputType = {
+    animeEntryId?: true
+    genreId?: true
+    createdAt?: true
+  }
+
+  export type AnimeEntryGenreMaxAggregateInputType = {
+    animeEntryId?: true
+    genreId?: true
+    createdAt?: true
+  }
+
+  export type AnimeEntryGenreCountAggregateInputType = {
+    animeEntryId?: true
+    genreId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AnimeEntryGenreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnimeEntryGenre to aggregate.
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeEntryGenres to fetch.
+     */
+    orderBy?: AnimeEntryGenreOrderByWithRelationInput | AnimeEntryGenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnimeEntryGenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeEntryGenres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeEntryGenres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AnimeEntryGenres
+    **/
+    _count?: true | AnimeEntryGenreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnimeEntryGenreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnimeEntryGenreMaxAggregateInputType
+  }
+
+  export type GetAnimeEntryGenreAggregateType<T extends AnimeEntryGenreAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnimeEntryGenre]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnimeEntryGenre[P]>
+      : GetScalarType<T[P], AggregateAnimeEntryGenre[P]>
+  }
+
+
+
+
+  export type AnimeEntryGenreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeEntryGenreWhereInput
+    orderBy?: AnimeEntryGenreOrderByWithAggregationInput | AnimeEntryGenreOrderByWithAggregationInput[]
+    by: AnimeEntryGenreScalarFieldEnum[] | AnimeEntryGenreScalarFieldEnum
+    having?: AnimeEntryGenreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnimeEntryGenreCountAggregateInputType | true
+    _min?: AnimeEntryGenreMinAggregateInputType
+    _max?: AnimeEntryGenreMaxAggregateInputType
+  }
+
+  export type AnimeEntryGenreGroupByOutputType = {
+    animeEntryId: string
+    genreId: string
+    createdAt: Date
+    _count: AnimeEntryGenreCountAggregateOutputType | null
+    _min: AnimeEntryGenreMinAggregateOutputType | null
+    _max: AnimeEntryGenreMaxAggregateOutputType | null
+  }
+
+  type GetAnimeEntryGenreGroupByPayload<T extends AnimeEntryGenreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnimeEntryGenreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnimeEntryGenreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnimeEntryGenreGroupByOutputType[P]>
+            : GetScalarType<T[P], AnimeEntryGenreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnimeEntryGenreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    animeEntryId?: boolean
+    genreId?: boolean
+    createdAt?: boolean
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeEntryGenre"]>
+
+  export type AnimeEntryGenreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    animeEntryId?: boolean
+    genreId?: boolean
+    createdAt?: boolean
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeEntryGenre"]>
+
+  export type AnimeEntryGenreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    animeEntryId?: boolean
+    genreId?: boolean
+    createdAt?: boolean
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeEntryGenre"]>
+
+  export type AnimeEntryGenreSelectScalar = {
+    animeEntryId?: boolean
+    genreId?: boolean
+    createdAt?: boolean
+  }
+
+  export type AnimeEntryGenreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"animeEntryId" | "genreId" | "createdAt", ExtArgs["result"]["animeEntryGenre"]>
+  export type AnimeEntryGenreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+  export type AnimeEntryGenreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+  export type AnimeEntryGenreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+
+  export type $AnimeEntryGenrePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AnimeEntryGenre"
+    objects: {
+      animeEntry: Prisma.$AnimeEntryPayload<ExtArgs>
+      genre: Prisma.$GenrePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      animeEntryId: string
+      genreId: string
+      createdAt: Date
+    }, ExtArgs["result"]["animeEntryGenre"]>
+    composites: {}
+  }
+
+  type AnimeEntryGenreGetPayload<S extends boolean | null | undefined | AnimeEntryGenreDefaultArgs> = $Result.GetResult<Prisma.$AnimeEntryGenrePayload, S>
+
+  type AnimeEntryGenreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AnimeEntryGenreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AnimeEntryGenreCountAggregateInputType | true
+    }
+
+  export interface AnimeEntryGenreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AnimeEntryGenre'], meta: { name: 'AnimeEntryGenre' } }
+    /**
+     * Find zero or one AnimeEntryGenre that matches the filter.
+     * @param {AnimeEntryGenreFindUniqueArgs} args - Arguments to find a AnimeEntryGenre
+     * @example
+     * // Get one AnimeEntryGenre
+     * const animeEntryGenre = await prisma.animeEntryGenre.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnimeEntryGenreFindUniqueArgs>(args: SelectSubset<T, AnimeEntryGenreFindUniqueArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AnimeEntryGenre that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AnimeEntryGenreFindUniqueOrThrowArgs} args - Arguments to find a AnimeEntryGenre
+     * @example
+     * // Get one AnimeEntryGenre
+     * const animeEntryGenre = await prisma.animeEntryGenre.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnimeEntryGenreFindUniqueOrThrowArgs>(args: SelectSubset<T, AnimeEntryGenreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnimeEntryGenre that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreFindFirstArgs} args - Arguments to find a AnimeEntryGenre
+     * @example
+     * // Get one AnimeEntryGenre
+     * const animeEntryGenre = await prisma.animeEntryGenre.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnimeEntryGenreFindFirstArgs>(args?: SelectSubset<T, AnimeEntryGenreFindFirstArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnimeEntryGenre that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreFindFirstOrThrowArgs} args - Arguments to find a AnimeEntryGenre
+     * @example
+     * // Get one AnimeEntryGenre
+     * const animeEntryGenre = await prisma.animeEntryGenre.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnimeEntryGenreFindFirstOrThrowArgs>(args?: SelectSubset<T, AnimeEntryGenreFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AnimeEntryGenres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AnimeEntryGenres
+     * const animeEntryGenres = await prisma.animeEntryGenre.findMany()
+     * 
+     * // Get first 10 AnimeEntryGenres
+     * const animeEntryGenres = await prisma.animeEntryGenre.findMany({ take: 10 })
+     * 
+     * // Only select the `animeEntryId`
+     * const animeEntryGenreWithAnimeEntryIdOnly = await prisma.animeEntryGenre.findMany({ select: { animeEntryId: true } })
+     * 
+     */
+    findMany<T extends AnimeEntryGenreFindManyArgs>(args?: SelectSubset<T, AnimeEntryGenreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AnimeEntryGenre.
+     * @param {AnimeEntryGenreCreateArgs} args - Arguments to create a AnimeEntryGenre.
+     * @example
+     * // Create one AnimeEntryGenre
+     * const AnimeEntryGenre = await prisma.animeEntryGenre.create({
+     *   data: {
+     *     // ... data to create a AnimeEntryGenre
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnimeEntryGenreCreateArgs>(args: SelectSubset<T, AnimeEntryGenreCreateArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AnimeEntryGenres.
+     * @param {AnimeEntryGenreCreateManyArgs} args - Arguments to create many AnimeEntryGenres.
+     * @example
+     * // Create many AnimeEntryGenres
+     * const animeEntryGenre = await prisma.animeEntryGenre.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnimeEntryGenreCreateManyArgs>(args?: SelectSubset<T, AnimeEntryGenreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AnimeEntryGenres and returns the data saved in the database.
+     * @param {AnimeEntryGenreCreateManyAndReturnArgs} args - Arguments to create many AnimeEntryGenres.
+     * @example
+     * // Create many AnimeEntryGenres
+     * const animeEntryGenre = await prisma.animeEntryGenre.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AnimeEntryGenres and only return the `animeEntryId`
+     * const animeEntryGenreWithAnimeEntryIdOnly = await prisma.animeEntryGenre.createManyAndReturn({
+     *   select: { animeEntryId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnimeEntryGenreCreateManyAndReturnArgs>(args?: SelectSubset<T, AnimeEntryGenreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AnimeEntryGenre.
+     * @param {AnimeEntryGenreDeleteArgs} args - Arguments to delete one AnimeEntryGenre.
+     * @example
+     * // Delete one AnimeEntryGenre
+     * const AnimeEntryGenre = await prisma.animeEntryGenre.delete({
+     *   where: {
+     *     // ... filter to delete one AnimeEntryGenre
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnimeEntryGenreDeleteArgs>(args: SelectSubset<T, AnimeEntryGenreDeleteArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AnimeEntryGenre.
+     * @param {AnimeEntryGenreUpdateArgs} args - Arguments to update one AnimeEntryGenre.
+     * @example
+     * // Update one AnimeEntryGenre
+     * const animeEntryGenre = await prisma.animeEntryGenre.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnimeEntryGenreUpdateArgs>(args: SelectSubset<T, AnimeEntryGenreUpdateArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AnimeEntryGenres.
+     * @param {AnimeEntryGenreDeleteManyArgs} args - Arguments to filter AnimeEntryGenres to delete.
+     * @example
+     * // Delete a few AnimeEntryGenres
+     * const { count } = await prisma.animeEntryGenre.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnimeEntryGenreDeleteManyArgs>(args?: SelectSubset<T, AnimeEntryGenreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnimeEntryGenres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AnimeEntryGenres
+     * const animeEntryGenre = await prisma.animeEntryGenre.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnimeEntryGenreUpdateManyArgs>(args: SelectSubset<T, AnimeEntryGenreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnimeEntryGenres and returns the data updated in the database.
+     * @param {AnimeEntryGenreUpdateManyAndReturnArgs} args - Arguments to update many AnimeEntryGenres.
+     * @example
+     * // Update many AnimeEntryGenres
+     * const animeEntryGenre = await prisma.animeEntryGenre.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AnimeEntryGenres and only return the `animeEntryId`
+     * const animeEntryGenreWithAnimeEntryIdOnly = await prisma.animeEntryGenre.updateManyAndReturn({
+     *   select: { animeEntryId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AnimeEntryGenreUpdateManyAndReturnArgs>(args: SelectSubset<T, AnimeEntryGenreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AnimeEntryGenre.
+     * @param {AnimeEntryGenreUpsertArgs} args - Arguments to update or create a AnimeEntryGenre.
+     * @example
+     * // Update or create a AnimeEntryGenre
+     * const animeEntryGenre = await prisma.animeEntryGenre.upsert({
+     *   create: {
+     *     // ... data to create a AnimeEntryGenre
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AnimeEntryGenre we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnimeEntryGenreUpsertArgs>(args: SelectSubset<T, AnimeEntryGenreUpsertArgs<ExtArgs>>): Prisma__AnimeEntryGenreClient<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AnimeEntryGenres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreCountArgs} args - Arguments to filter AnimeEntryGenres to count.
+     * @example
+     * // Count the number of AnimeEntryGenres
+     * const count = await prisma.animeEntryGenre.count({
+     *   where: {
+     *     // ... the filter for the AnimeEntryGenres we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnimeEntryGenreCountArgs>(
+      args?: Subset<T, AnimeEntryGenreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnimeEntryGenreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AnimeEntryGenre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnimeEntryGenreAggregateArgs>(args: Subset<T, AnimeEntryGenreAggregateArgs>): Prisma.PrismaPromise<GetAnimeEntryGenreAggregateType<T>>
+
+    /**
+     * Group by AnimeEntryGenre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeEntryGenreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnimeEntryGenreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnimeEntryGenreGroupByArgs['orderBy'] }
+        : { orderBy?: AnimeEntryGenreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnimeEntryGenreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnimeEntryGenreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AnimeEntryGenre model
+   */
+  readonly fields: AnimeEntryGenreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AnimeEntryGenre.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnimeEntryGenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    animeEntry<T extends AnimeEntryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntryDefaultArgs<ExtArgs>>): Prisma__AnimeEntryClient<$Result.GetResult<Prisma.$AnimeEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    genre<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AnimeEntryGenre model
+   */
+  interface AnimeEntryGenreFieldRefs {
+    readonly animeEntryId: FieldRef<"AnimeEntryGenre", 'String'>
+    readonly genreId: FieldRef<"AnimeEntryGenre", 'String'>
+    readonly createdAt: FieldRef<"AnimeEntryGenre", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AnimeEntryGenre findUnique
+   */
+  export type AnimeEntryGenreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeEntryGenre to fetch.
+     */
+    where: AnimeEntryGenreWhereUniqueInput
+  }
+
+  /**
+   * AnimeEntryGenre findUniqueOrThrow
+   */
+  export type AnimeEntryGenreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeEntryGenre to fetch.
+     */
+    where: AnimeEntryGenreWhereUniqueInput
+  }
+
+  /**
+   * AnimeEntryGenre findFirst
+   */
+  export type AnimeEntryGenreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeEntryGenre to fetch.
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeEntryGenres to fetch.
+     */
+    orderBy?: AnimeEntryGenreOrderByWithRelationInput | AnimeEntryGenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnimeEntryGenres.
+     */
+    cursor?: AnimeEntryGenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeEntryGenres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeEntryGenres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnimeEntryGenres.
+     */
+    distinct?: AnimeEntryGenreScalarFieldEnum | AnimeEntryGenreScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeEntryGenre findFirstOrThrow
+   */
+  export type AnimeEntryGenreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeEntryGenre to fetch.
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeEntryGenres to fetch.
+     */
+    orderBy?: AnimeEntryGenreOrderByWithRelationInput | AnimeEntryGenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnimeEntryGenres.
+     */
+    cursor?: AnimeEntryGenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeEntryGenres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeEntryGenres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnimeEntryGenres.
+     */
+    distinct?: AnimeEntryGenreScalarFieldEnum | AnimeEntryGenreScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeEntryGenre findMany
+   */
+  export type AnimeEntryGenreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeEntryGenres to fetch.
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeEntryGenres to fetch.
+     */
+    orderBy?: AnimeEntryGenreOrderByWithRelationInput | AnimeEntryGenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AnimeEntryGenres.
+     */
+    cursor?: AnimeEntryGenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeEntryGenres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeEntryGenres.
+     */
+    skip?: number
+    distinct?: AnimeEntryGenreScalarFieldEnum | AnimeEntryGenreScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeEntryGenre create
+   */
+  export type AnimeEntryGenreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AnimeEntryGenre.
+     */
+    data: XOR<AnimeEntryGenreCreateInput, AnimeEntryGenreUncheckedCreateInput>
+  }
+
+  /**
+   * AnimeEntryGenre createMany
+   */
+  export type AnimeEntryGenreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AnimeEntryGenres.
+     */
+    data: AnimeEntryGenreCreateManyInput | AnimeEntryGenreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnimeEntryGenre createManyAndReturn
+   */
+  export type AnimeEntryGenreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * The data used to create many AnimeEntryGenres.
+     */
+    data: AnimeEntryGenreCreateManyInput | AnimeEntryGenreCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AnimeEntryGenre update
+   */
+  export type AnimeEntryGenreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AnimeEntryGenre.
+     */
+    data: XOR<AnimeEntryGenreUpdateInput, AnimeEntryGenreUncheckedUpdateInput>
+    /**
+     * Choose, which AnimeEntryGenre to update.
+     */
+    where: AnimeEntryGenreWhereUniqueInput
+  }
+
+  /**
+   * AnimeEntryGenre updateMany
+   */
+  export type AnimeEntryGenreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AnimeEntryGenres.
+     */
+    data: XOR<AnimeEntryGenreUpdateManyMutationInput, AnimeEntryGenreUncheckedUpdateManyInput>
+    /**
+     * Filter which AnimeEntryGenres to update
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * Limit how many AnimeEntryGenres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeEntryGenre updateManyAndReturn
+   */
+  export type AnimeEntryGenreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * The data used to update AnimeEntryGenres.
+     */
+    data: XOR<AnimeEntryGenreUpdateManyMutationInput, AnimeEntryGenreUncheckedUpdateManyInput>
+    /**
+     * Filter which AnimeEntryGenres to update
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * Limit how many AnimeEntryGenres to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AnimeEntryGenre upsert
+   */
+  export type AnimeEntryGenreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AnimeEntryGenre to update in case it exists.
+     */
+    where: AnimeEntryGenreWhereUniqueInput
+    /**
+     * In case the AnimeEntryGenre found by the `where` argument doesn't exist, create a new AnimeEntryGenre with this data.
+     */
+    create: XOR<AnimeEntryGenreCreateInput, AnimeEntryGenreUncheckedCreateInput>
+    /**
+     * In case the AnimeEntryGenre was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnimeEntryGenreUpdateInput, AnimeEntryGenreUncheckedUpdateInput>
+  }
+
+  /**
+   * AnimeEntryGenre delete
+   */
+  export type AnimeEntryGenreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
+    /**
+     * Filter which AnimeEntryGenre to delete.
+     */
+    where: AnimeEntryGenreWhereUniqueInput
+  }
+
+  /**
+   * AnimeEntryGenre deleteMany
+   */
+  export type AnimeEntryGenreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnimeEntryGenres to delete
+     */
+    where?: AnimeEntryGenreWhereInput
+    /**
+     * Limit how many AnimeEntryGenres to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeEntryGenre without action
+   */
+  export type AnimeEntryGenreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeEntryGenre
+     */
+    select?: AnimeEntryGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeEntryGenre
+     */
+    omit?: AnimeEntryGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeEntryGenreInclude<ExtArgs> | null
   }
 
 
@@ -13007,11 +16573,41 @@ export namespace Prisma {
     status: 'status',
     notes: 'notes',
     userId: 'userId',
+    typeId: 'typeId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type AnimeEntryScalarFieldEnum = (typeof AnimeEntryScalarFieldEnum)[keyof typeof AnimeEntryScalarFieldEnum]
+
+
+  export const GenreScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum]
+
+
+  export const AnimeTypeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AnimeTypeScalarFieldEnum = (typeof AnimeTypeScalarFieldEnum)[keyof typeof AnimeTypeScalarFieldEnum]
+
+
+  export const AnimeEntryGenreScalarFieldEnum: {
+    animeEntryId: 'animeEntryId',
+    genreId: 'genreId',
+    createdAt: 'createdAt'
+  };
+
+  export type AnimeEntryGenreScalarFieldEnum = (typeof AnimeEntryGenreScalarFieldEnum)[keyof typeof AnimeEntryGenreScalarFieldEnum]
 
 
   export const AnimeRatingScalarFieldEnum: {
@@ -13456,12 +17052,15 @@ export namespace Prisma {
     status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
     notes?: StringNullableFilter<"AnimeEntry"> | string | null
     userId?: StringFilter<"AnimeEntry"> | string
+    typeId?: StringNullableFilter<"AnimeEntry"> | string | null
     createdAt?: DateTimeFilter<"AnimeEntry"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeEntry"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     episodes?: AnimeEpisodeListRelationFilter
     authorLinks?: AnimeEntryAuthorListRelationFilter
     ratings?: AnimeRatingListRelationFilter
+    genreLinks?: AnimeEntryGenreListRelationFilter
+    type?: XOR<AnimeTypeNullableScalarRelationFilter, AnimeTypeWhereInput> | null
   }
 
   export type AnimeEntryOrderByWithRelationInput = {
@@ -13472,12 +17071,15 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrderInput | SortOrder
     userId?: SortOrder
+    typeId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     episodes?: AnimeEpisodeOrderByRelationAggregateInput
     authorLinks?: AnimeEntryAuthorOrderByRelationAggregateInput
     ratings?: AnimeRatingOrderByRelationAggregateInput
+    genreLinks?: AnimeEntryGenreOrderByRelationAggregateInput
+    type?: AnimeTypeOrderByWithRelationInput
   }
 
   export type AnimeEntryWhereUniqueInput = Prisma.AtLeast<{
@@ -13491,12 +17093,15 @@ export namespace Prisma {
     status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
     notes?: StringNullableFilter<"AnimeEntry"> | string | null
     userId?: StringFilter<"AnimeEntry"> | string
+    typeId?: StringNullableFilter<"AnimeEntry"> | string | null
     createdAt?: DateTimeFilter<"AnimeEntry"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeEntry"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     episodes?: AnimeEpisodeListRelationFilter
     authorLinks?: AnimeEntryAuthorListRelationFilter
     ratings?: AnimeRatingListRelationFilter
+    genreLinks?: AnimeEntryGenreListRelationFilter
+    type?: XOR<AnimeTypeNullableScalarRelationFilter, AnimeTypeWhereInput> | null
   }, "id">
 
   export type AnimeEntryOrderByWithAggregationInput = {
@@ -13507,6 +17112,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrderInput | SortOrder
     userId?: SortOrder
+    typeId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AnimeEntryCountOrderByAggregateInput
@@ -13525,8 +17131,158 @@ export namespace Prisma {
     status?: EnumWatchStatusWithAggregatesFilter<"AnimeEntry"> | $Enums.WatchStatus
     notes?: StringNullableWithAggregatesFilter<"AnimeEntry"> | string | null
     userId?: StringWithAggregatesFilter<"AnimeEntry"> | string
+    typeId?: StringNullableWithAggregatesFilter<"AnimeEntry"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AnimeEntry"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AnimeEntry"> | Date | string
+  }
+
+  export type GenreWhereInput = {
+    AND?: GenreWhereInput | GenreWhereInput[]
+    OR?: GenreWhereInput[]
+    NOT?: GenreWhereInput | GenreWhereInput[]
+    id?: StringFilter<"Genre"> | string
+    name?: StringFilter<"Genre"> | string
+    createdAt?: DateTimeFilter<"Genre"> | Date | string
+    updatedAt?: DateTimeFilter<"Genre"> | Date | string
+    animeLinks?: AnimeEntryGenreListRelationFilter
+  }
+
+  export type GenreOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    animeLinks?: AnimeEntryGenreOrderByRelationAggregateInput
+  }
+
+  export type GenreWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: GenreWhereInput | GenreWhereInput[]
+    OR?: GenreWhereInput[]
+    NOT?: GenreWhereInput | GenreWhereInput[]
+    createdAt?: DateTimeFilter<"Genre"> | Date | string
+    updatedAt?: DateTimeFilter<"Genre"> | Date | string
+    animeLinks?: AnimeEntryGenreListRelationFilter
+  }, "id" | "name">
+
+  export type GenreOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GenreCountOrderByAggregateInput
+    _max?: GenreMaxOrderByAggregateInput
+    _min?: GenreMinOrderByAggregateInput
+  }
+
+  export type GenreScalarWhereWithAggregatesInput = {
+    AND?: GenreScalarWhereWithAggregatesInput | GenreScalarWhereWithAggregatesInput[]
+    OR?: GenreScalarWhereWithAggregatesInput[]
+    NOT?: GenreScalarWhereWithAggregatesInput | GenreScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Genre"> | string
+    name?: StringWithAggregatesFilter<"Genre"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Genre"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Genre"> | Date | string
+  }
+
+  export type AnimeTypeWhereInput = {
+    AND?: AnimeTypeWhereInput | AnimeTypeWhereInput[]
+    OR?: AnimeTypeWhereInput[]
+    NOT?: AnimeTypeWhereInput | AnimeTypeWhereInput[]
+    id?: StringFilter<"AnimeType"> | string
+    name?: StringFilter<"AnimeType"> | string
+    createdAt?: DateTimeFilter<"AnimeType"> | Date | string
+    updatedAt?: DateTimeFilter<"AnimeType"> | Date | string
+    animeEntries?: AnimeEntryListRelationFilter
+  }
+
+  export type AnimeTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    animeEntries?: AnimeEntryOrderByRelationAggregateInput
+  }
+
+  export type AnimeTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: AnimeTypeWhereInput | AnimeTypeWhereInput[]
+    OR?: AnimeTypeWhereInput[]
+    NOT?: AnimeTypeWhereInput | AnimeTypeWhereInput[]
+    createdAt?: DateTimeFilter<"AnimeType"> | Date | string
+    updatedAt?: DateTimeFilter<"AnimeType"> | Date | string
+    animeEntries?: AnimeEntryListRelationFilter
+  }, "id" | "name">
+
+  export type AnimeTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AnimeTypeCountOrderByAggregateInput
+    _max?: AnimeTypeMaxOrderByAggregateInput
+    _min?: AnimeTypeMinOrderByAggregateInput
+  }
+
+  export type AnimeTypeScalarWhereWithAggregatesInput = {
+    AND?: AnimeTypeScalarWhereWithAggregatesInput | AnimeTypeScalarWhereWithAggregatesInput[]
+    OR?: AnimeTypeScalarWhereWithAggregatesInput[]
+    NOT?: AnimeTypeScalarWhereWithAggregatesInput | AnimeTypeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AnimeType"> | string
+    name?: StringWithAggregatesFilter<"AnimeType"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AnimeType"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AnimeType"> | Date | string
+  }
+
+  export type AnimeEntryGenreWhereInput = {
+    AND?: AnimeEntryGenreWhereInput | AnimeEntryGenreWhereInput[]
+    OR?: AnimeEntryGenreWhereInput[]
+    NOT?: AnimeEntryGenreWhereInput | AnimeEntryGenreWhereInput[]
+    animeEntryId?: StringFilter<"AnimeEntryGenre"> | string
+    genreId?: StringFilter<"AnimeEntryGenre"> | string
+    createdAt?: DateTimeFilter<"AnimeEntryGenre"> | Date | string
+    animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
+    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+  }
+
+  export type AnimeEntryGenreOrderByWithRelationInput = {
+    animeEntryId?: SortOrder
+    genreId?: SortOrder
+    createdAt?: SortOrder
+    animeEntry?: AnimeEntryOrderByWithRelationInput
+    genre?: GenreOrderByWithRelationInput
+  }
+
+  export type AnimeEntryGenreWhereUniqueInput = Prisma.AtLeast<{
+    animeEntryId_genreId?: AnimeEntryGenreAnimeEntryIdGenreIdCompoundUniqueInput
+    AND?: AnimeEntryGenreWhereInput | AnimeEntryGenreWhereInput[]
+    OR?: AnimeEntryGenreWhereInput[]
+    NOT?: AnimeEntryGenreWhereInput | AnimeEntryGenreWhereInput[]
+    animeEntryId?: StringFilter<"AnimeEntryGenre"> | string
+    genreId?: StringFilter<"AnimeEntryGenre"> | string
+    createdAt?: DateTimeFilter<"AnimeEntryGenre"> | Date | string
+    animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
+    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+  }, "animeEntryId_genreId">
+
+  export type AnimeEntryGenreOrderByWithAggregationInput = {
+    animeEntryId?: SortOrder
+    genreId?: SortOrder
+    createdAt?: SortOrder
+    _count?: AnimeEntryGenreCountOrderByAggregateInput
+    _max?: AnimeEntryGenreMaxOrderByAggregateInput
+    _min?: AnimeEntryGenreMinOrderByAggregateInput
+  }
+
+  export type AnimeEntryGenreScalarWhereWithAggregatesInput = {
+    AND?: AnimeEntryGenreScalarWhereWithAggregatesInput | AnimeEntryGenreScalarWhereWithAggregatesInput[]
+    OR?: AnimeEntryGenreScalarWhereWithAggregatesInput[]
+    NOT?: AnimeEntryGenreScalarWhereWithAggregatesInput | AnimeEntryGenreScalarWhereWithAggregatesInput[]
+    animeEntryId?: StringWithAggregatesFilter<"AnimeEntryGenre"> | string
+    genreId?: StringWithAggregatesFilter<"AnimeEntryGenre"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AnimeEntryGenre"> | Date | string
   }
 
   export type AnimeRatingWhereInput = {
@@ -14087,6 +17843,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
   export type AnimeEntryUncheckedCreateInput = {
@@ -14097,11 +17855,13 @@ export namespace Prisma {
     status?: $Enums.WatchStatus
     notes?: string | null
     userId: string
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryUpdateInput = {
@@ -14117,6 +17877,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateInput = {
@@ -14127,11 +17889,13 @@ export namespace Prisma {
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryCreateManyInput = {
@@ -14142,6 +17906,7 @@ export namespace Prisma {
     status?: $Enums.WatchStatus
     notes?: string | null
     userId: string
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14165,8 +17930,155 @@ export namespace Prisma {
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GenreCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeLinks?: AnimeEntryGenreCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeLinks?: AnimeEntryGenreUpdateManyWithoutGenreNestedInput
+  }
+
+  export type GenreUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutGenreNestedInput
+  }
+
+  export type GenreCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GenreUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GenreUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeTypeCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntries?: AnimeEntryCreateNestedManyWithoutTypeInput
+  }
+
+  export type AnimeTypeUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutTypeInput
+  }
+
+  export type AnimeTypeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntries?: AnimeEntryUpdateManyWithoutTypeNestedInput
+  }
+
+  export type AnimeTypeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntries?: AnimeEntryUncheckedUpdateManyWithoutTypeNestedInput
+  }
+
+  export type AnimeTypeCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimeTypeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeTypeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreCreateInput = {
+    createdAt?: Date | string
+    animeEntry: AnimeEntryCreateNestedOneWithoutGenreLinksInput
+    genre: GenreCreateNestedOneWithoutAnimeLinksInput
+  }
+
+  export type AnimeEntryGenreUncheckedCreateInput = {
+    animeEntryId: string
+    genreId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeEntryGenreUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntry?: AnimeEntryUpdateOneRequiredWithoutGenreLinksNestedInput
+    genre?: GenreUpdateOneRequiredWithoutAnimeLinksNestedInput
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateInput = {
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    genreId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreCreateManyInput = {
+    animeEntryId: string
+    genreId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeEntryGenreUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateManyInput = {
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    genreId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AnimeRatingCreateInput = {
@@ -14727,11 +18639,26 @@ export namespace Prisma {
     none?: AnimeEntryAuthorWhereInput
   }
 
+  export type AnimeEntryGenreListRelationFilter = {
+    every?: AnimeEntryGenreWhereInput
+    some?: AnimeEntryGenreWhereInput
+    none?: AnimeEntryGenreWhereInput
+  }
+
+  export type AnimeTypeNullableScalarRelationFilter = {
+    is?: AnimeTypeWhereInput | null
+    isNot?: AnimeTypeWhereInput | null
+  }
+
   export type AnimeEpisodeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type AnimeEntryAuthorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AnimeEntryGenreOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14743,6 +18670,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrder
     userId?: SortOrder
+    typeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14755,6 +18683,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrder
     userId?: SortOrder
+    typeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14767,6 +18696,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrder
     userId?: SortOrder
+    typeId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14781,6 +18711,81 @@ export namespace Prisma {
     _max?: NestedEnumWatchStatusFilter<$PrismaModel>
   }
 
+  export type GenreCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GenreMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GenreMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimeTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimeTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimeTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AnimeEntryScalarRelationFilter = {
+    is?: AnimeEntryWhereInput
+    isNot?: AnimeEntryWhereInput
+  }
+
+  export type GenreScalarRelationFilter = {
+    is?: GenreWhereInput
+    isNot?: GenreWhereInput
+  }
+
+  export type AnimeEntryGenreAnimeEntryIdGenreIdCompoundUniqueInput = {
+    animeEntryId: string
+    genreId: string
+  }
+
+  export type AnimeEntryGenreCountOrderByAggregateInput = {
+    animeEntryId?: SortOrder
+    genreId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AnimeEntryGenreMaxOrderByAggregateInput = {
+    animeEntryId?: SortOrder
+    genreId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AnimeEntryGenreMinOrderByAggregateInput = {
+    animeEntryId?: SortOrder
+    genreId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -14790,11 +18795,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type AnimeEntryScalarRelationFilter = {
-    is?: AnimeEntryWhereInput
-    isNot?: AnimeEntryWhereInput
   }
 
   export type AnimeRatingAnimeEntryIdUserIdCompoundUniqueInput = {
@@ -15408,6 +19408,19 @@ export namespace Prisma {
     connect?: AnimeRatingWhereUniqueInput | AnimeRatingWhereUniqueInput[]
   }
 
+  export type AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput> | AnimeEntryGenreCreateWithoutAnimeEntryInput[] | AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput | AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput[]
+    createMany?: AnimeEntryGenreCreateManyAnimeEntryInputEnvelope
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+  }
+
+  export type AnimeTypeCreateNestedOneWithoutAnimeEntriesInput = {
+    create?: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
+    connectOrCreate?: AnimeTypeCreateOrConnectWithoutAnimeEntriesInput
+    connect?: AnimeTypeWhereUniqueInput
+  }
+
   export type AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput = {
     create?: XOR<AnimeEpisodeCreateWithoutAnimeEntryInput, AnimeEpisodeUncheckedCreateWithoutAnimeEntryInput> | AnimeEpisodeCreateWithoutAnimeEntryInput[] | AnimeEpisodeUncheckedCreateWithoutAnimeEntryInput[]
     connectOrCreate?: AnimeEpisodeCreateOrConnectWithoutAnimeEntryInput | AnimeEpisodeCreateOrConnectWithoutAnimeEntryInput[]
@@ -15427,6 +19440,13 @@ export namespace Prisma {
     connectOrCreate?: AnimeRatingCreateOrConnectWithoutAnimeEntryInput | AnimeRatingCreateOrConnectWithoutAnimeEntryInput[]
     createMany?: AnimeRatingCreateManyAnimeEntryInputEnvelope
     connect?: AnimeRatingWhereUniqueInput | AnimeRatingWhereUniqueInput[]
+  }
+
+  export type AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput> | AnimeEntryGenreCreateWithoutAnimeEntryInput[] | AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput | AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput[]
+    createMany?: AnimeEntryGenreCreateManyAnimeEntryInputEnvelope
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
   }
 
   export type EnumWatchStatusFieldUpdateOperationsInput = {
@@ -15483,6 +19503,30 @@ export namespace Prisma {
     deleteMany?: AnimeRatingScalarWhereInput | AnimeRatingScalarWhereInput[]
   }
 
+  export type AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput> | AnimeEntryGenreCreateWithoutAnimeEntryInput[] | AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput | AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput[]
+    upsert?: AnimeEntryGenreUpsertWithWhereUniqueWithoutAnimeEntryInput | AnimeEntryGenreUpsertWithWhereUniqueWithoutAnimeEntryInput[]
+    createMany?: AnimeEntryGenreCreateManyAnimeEntryInputEnvelope
+    set?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    disconnect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    delete?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    update?: AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput | AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput[]
+    updateMany?: AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput | AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput[]
+    deleteMany?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+  }
+
+  export type AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput = {
+    create?: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
+    connectOrCreate?: AnimeTypeCreateOrConnectWithoutAnimeEntriesInput
+    upsert?: AnimeTypeUpsertWithoutAnimeEntriesInput
+    disconnect?: AnimeTypeWhereInput | boolean
+    delete?: AnimeTypeWhereInput | boolean
+    connect?: AnimeTypeWhereUniqueInput
+    update?: XOR<XOR<AnimeTypeUpdateToOneWithWhereWithoutAnimeEntriesInput, AnimeTypeUpdateWithoutAnimeEntriesInput>, AnimeTypeUncheckedUpdateWithoutAnimeEntriesInput>
+  }
+
   export type AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput = {
     create?: XOR<AnimeEpisodeCreateWithoutAnimeEntryInput, AnimeEpisodeUncheckedCreateWithoutAnimeEntryInput> | AnimeEpisodeCreateWithoutAnimeEntryInput[] | AnimeEpisodeUncheckedCreateWithoutAnimeEntryInput[]
     connectOrCreate?: AnimeEpisodeCreateOrConnectWithoutAnimeEntryInput | AnimeEpisodeCreateOrConnectWithoutAnimeEntryInput[]
@@ -15523,6 +19567,132 @@ export namespace Prisma {
     update?: AnimeRatingUpdateWithWhereUniqueWithoutAnimeEntryInput | AnimeRatingUpdateWithWhereUniqueWithoutAnimeEntryInput[]
     updateMany?: AnimeRatingUpdateManyWithWhereWithoutAnimeEntryInput | AnimeRatingUpdateManyWithWhereWithoutAnimeEntryInput[]
     deleteMany?: AnimeRatingScalarWhereInput | AnimeRatingScalarWhereInput[]
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput> | AnimeEntryGenreCreateWithoutAnimeEntryInput[] | AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput | AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput[]
+    upsert?: AnimeEntryGenreUpsertWithWhereUniqueWithoutAnimeEntryInput | AnimeEntryGenreUpsertWithWhereUniqueWithoutAnimeEntryInput[]
+    createMany?: AnimeEntryGenreCreateManyAnimeEntryInputEnvelope
+    set?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    disconnect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    delete?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    update?: AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput | AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput[]
+    updateMany?: AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput | AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput[]
+    deleteMany?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+  }
+
+  export type AnimeEntryGenreCreateNestedManyWithoutGenreInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutGenreInput, AnimeEntryGenreUncheckedCreateWithoutGenreInput> | AnimeEntryGenreCreateWithoutGenreInput[] | AnimeEntryGenreUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutGenreInput | AnimeEntryGenreCreateOrConnectWithoutGenreInput[]
+    createMany?: AnimeEntryGenreCreateManyGenreInputEnvelope
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+  }
+
+  export type AnimeEntryGenreUncheckedCreateNestedManyWithoutGenreInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutGenreInput, AnimeEntryGenreUncheckedCreateWithoutGenreInput> | AnimeEntryGenreCreateWithoutGenreInput[] | AnimeEntryGenreUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutGenreInput | AnimeEntryGenreCreateOrConnectWithoutGenreInput[]
+    createMany?: AnimeEntryGenreCreateManyGenreInputEnvelope
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+  }
+
+  export type AnimeEntryGenreUpdateManyWithoutGenreNestedInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutGenreInput, AnimeEntryGenreUncheckedCreateWithoutGenreInput> | AnimeEntryGenreCreateWithoutGenreInput[] | AnimeEntryGenreUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutGenreInput | AnimeEntryGenreCreateOrConnectWithoutGenreInput[]
+    upsert?: AnimeEntryGenreUpsertWithWhereUniqueWithoutGenreInput | AnimeEntryGenreUpsertWithWhereUniqueWithoutGenreInput[]
+    createMany?: AnimeEntryGenreCreateManyGenreInputEnvelope
+    set?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    disconnect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    delete?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    update?: AnimeEntryGenreUpdateWithWhereUniqueWithoutGenreInput | AnimeEntryGenreUpdateWithWhereUniqueWithoutGenreInput[]
+    updateMany?: AnimeEntryGenreUpdateManyWithWhereWithoutGenreInput | AnimeEntryGenreUpdateManyWithWhereWithoutGenreInput[]
+    deleteMany?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateManyWithoutGenreNestedInput = {
+    create?: XOR<AnimeEntryGenreCreateWithoutGenreInput, AnimeEntryGenreUncheckedCreateWithoutGenreInput> | AnimeEntryGenreCreateWithoutGenreInput[] | AnimeEntryGenreUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AnimeEntryGenreCreateOrConnectWithoutGenreInput | AnimeEntryGenreCreateOrConnectWithoutGenreInput[]
+    upsert?: AnimeEntryGenreUpsertWithWhereUniqueWithoutGenreInput | AnimeEntryGenreUpsertWithWhereUniqueWithoutGenreInput[]
+    createMany?: AnimeEntryGenreCreateManyGenreInputEnvelope
+    set?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    disconnect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    delete?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
+    update?: AnimeEntryGenreUpdateWithWhereUniqueWithoutGenreInput | AnimeEntryGenreUpdateWithWhereUniqueWithoutGenreInput[]
+    updateMany?: AnimeEntryGenreUpdateManyWithWhereWithoutGenreInput | AnimeEntryGenreUpdateManyWithWhereWithoutGenreInput[]
+    deleteMany?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+  }
+
+  export type AnimeEntryCreateNestedManyWithoutTypeInput = {
+    create?: XOR<AnimeEntryCreateWithoutTypeInput, AnimeEntryUncheckedCreateWithoutTypeInput> | AnimeEntryCreateWithoutTypeInput[] | AnimeEntryUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutTypeInput | AnimeEntryCreateOrConnectWithoutTypeInput[]
+    createMany?: AnimeEntryCreateManyTypeInputEnvelope
+    connect?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+  }
+
+  export type AnimeEntryUncheckedCreateNestedManyWithoutTypeInput = {
+    create?: XOR<AnimeEntryCreateWithoutTypeInput, AnimeEntryUncheckedCreateWithoutTypeInput> | AnimeEntryCreateWithoutTypeInput[] | AnimeEntryUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutTypeInput | AnimeEntryCreateOrConnectWithoutTypeInput[]
+    createMany?: AnimeEntryCreateManyTypeInputEnvelope
+    connect?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+  }
+
+  export type AnimeEntryUpdateManyWithoutTypeNestedInput = {
+    create?: XOR<AnimeEntryCreateWithoutTypeInput, AnimeEntryUncheckedCreateWithoutTypeInput> | AnimeEntryCreateWithoutTypeInput[] | AnimeEntryUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutTypeInput | AnimeEntryCreateOrConnectWithoutTypeInput[]
+    upsert?: AnimeEntryUpsertWithWhereUniqueWithoutTypeInput | AnimeEntryUpsertWithWhereUniqueWithoutTypeInput[]
+    createMany?: AnimeEntryCreateManyTypeInputEnvelope
+    set?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    disconnect?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    delete?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    connect?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    update?: AnimeEntryUpdateWithWhereUniqueWithoutTypeInput | AnimeEntryUpdateWithWhereUniqueWithoutTypeInput[]
+    updateMany?: AnimeEntryUpdateManyWithWhereWithoutTypeInput | AnimeEntryUpdateManyWithWhereWithoutTypeInput[]
+    deleteMany?: AnimeEntryScalarWhereInput | AnimeEntryScalarWhereInput[]
+  }
+
+  export type AnimeEntryUncheckedUpdateManyWithoutTypeNestedInput = {
+    create?: XOR<AnimeEntryCreateWithoutTypeInput, AnimeEntryUncheckedCreateWithoutTypeInput> | AnimeEntryCreateWithoutTypeInput[] | AnimeEntryUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutTypeInput | AnimeEntryCreateOrConnectWithoutTypeInput[]
+    upsert?: AnimeEntryUpsertWithWhereUniqueWithoutTypeInput | AnimeEntryUpsertWithWhereUniqueWithoutTypeInput[]
+    createMany?: AnimeEntryCreateManyTypeInputEnvelope
+    set?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    disconnect?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    delete?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    connect?: AnimeEntryWhereUniqueInput | AnimeEntryWhereUniqueInput[]
+    update?: AnimeEntryUpdateWithWhereUniqueWithoutTypeInput | AnimeEntryUpdateWithWhereUniqueWithoutTypeInput[]
+    updateMany?: AnimeEntryUpdateManyWithWhereWithoutTypeInput | AnimeEntryUpdateManyWithWhereWithoutTypeInput[]
+    deleteMany?: AnimeEntryScalarWhereInput | AnimeEntryScalarWhereInput[]
+  }
+
+  export type AnimeEntryCreateNestedOneWithoutGenreLinksInput = {
+    create?: XOR<AnimeEntryCreateWithoutGenreLinksInput, AnimeEntryUncheckedCreateWithoutGenreLinksInput>
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutGenreLinksInput
+    connect?: AnimeEntryWhereUniqueInput
+  }
+
+  export type GenreCreateNestedOneWithoutAnimeLinksInput = {
+    create?: XOR<GenreCreateWithoutAnimeLinksInput, GenreUncheckedCreateWithoutAnimeLinksInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutAnimeLinksInput
+    connect?: GenreWhereUniqueInput
+  }
+
+  export type AnimeEntryUpdateOneRequiredWithoutGenreLinksNestedInput = {
+    create?: XOR<AnimeEntryCreateWithoutGenreLinksInput, AnimeEntryUncheckedCreateWithoutGenreLinksInput>
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutGenreLinksInput
+    upsert?: AnimeEntryUpsertWithoutGenreLinksInput
+    connect?: AnimeEntryWhereUniqueInput
+    update?: XOR<XOR<AnimeEntryUpdateToOneWithWhereWithoutGenreLinksInput, AnimeEntryUpdateWithoutGenreLinksInput>, AnimeEntryUncheckedUpdateWithoutGenreLinksInput>
+  }
+
+  export type GenreUpdateOneRequiredWithoutAnimeLinksNestedInput = {
+    create?: XOR<GenreCreateWithoutAnimeLinksInput, GenreUncheckedCreateWithoutAnimeLinksInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutAnimeLinksInput
+    upsert?: GenreUpsertWithoutAnimeLinksInput
+    connect?: GenreWhereUniqueInput
+    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutAnimeLinksInput, GenreUpdateWithoutAnimeLinksInput>, GenreUncheckedUpdateWithoutAnimeLinksInput>
   }
 
   export type AnimeEntryCreateNestedOneWithoutRatingsInput = {
@@ -15888,6 +20058,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
   export type AnimeEntryUncheckedCreateWithoutUserInput = {
@@ -15897,11 +20069,13 @@ export namespace Prisma {
     coverImageUrl: string
     status?: $Enums.WatchStatus
     notes?: string | null
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutUserInput = {
@@ -16015,6 +20189,7 @@ export namespace Prisma {
     status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
     notes?: StringNullableFilter<"AnimeEntry"> | string | null
     userId?: StringFilter<"AnimeEntry"> | string
+    typeId?: StringNullableFilter<"AnimeEntry"> | string | null
     createdAt?: DateTimeFilter<"AnimeEntry"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeEntry"> | Date | string
   }
@@ -16542,6 +20717,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AnimeEntryGenreCreateWithoutAnimeEntryInput = {
+    createdAt?: Date | string
+    genre: GenreCreateNestedOneWithoutAnimeLinksInput
+  }
+
+  export type AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput = {
+    genreId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeEntryGenreCreateOrConnectWithoutAnimeEntryInput = {
+    where: AnimeEntryGenreWhereUniqueInput
+    create: XOR<AnimeEntryGenreCreateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput>
+  }
+
+  export type AnimeEntryGenreCreateManyAnimeEntryInputEnvelope = {
+    data: AnimeEntryGenreCreateManyAnimeEntryInput | AnimeEntryGenreCreateManyAnimeEntryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AnimeTypeCreateWithoutAnimeEntriesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimeTypeUncheckedCreateWithoutAnimeEntriesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimeTypeCreateOrConnectWithoutAnimeEntriesInput = {
+    where: AnimeTypeWhereUniqueInput
+    create: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
+  }
+
   export type UserUpsertWithoutAnimeEntriesInput = {
     update: XOR<UserUpdateWithoutAnimeEntriesInput, UserUncheckedUpdateWithoutAnimeEntriesInput>
     create: XOR<UserCreateWithoutAnimeEntriesInput, UserUncheckedCreateWithoutAnimeEntriesInput>
@@ -16650,6 +20864,274 @@ export namespace Prisma {
     data: XOR<AnimeRatingUpdateManyMutationInput, AnimeRatingUncheckedUpdateManyWithoutAnimeEntryInput>
   }
 
+  export type AnimeEntryGenreUpsertWithWhereUniqueWithoutAnimeEntryInput = {
+    where: AnimeEntryGenreWhereUniqueInput
+    update: XOR<AnimeEntryGenreUpdateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedUpdateWithoutAnimeEntryInput>
+    create: XOR<AnimeEntryGenreCreateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedCreateWithoutAnimeEntryInput>
+  }
+
+  export type AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput = {
+    where: AnimeEntryGenreWhereUniqueInput
+    data: XOR<AnimeEntryGenreUpdateWithoutAnimeEntryInput, AnimeEntryGenreUncheckedUpdateWithoutAnimeEntryInput>
+  }
+
+  export type AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput = {
+    where: AnimeEntryGenreScalarWhereInput
+    data: XOR<AnimeEntryGenreUpdateManyMutationInput, AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryInput>
+  }
+
+  export type AnimeEntryGenreScalarWhereInput = {
+    AND?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+    OR?: AnimeEntryGenreScalarWhereInput[]
+    NOT?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+    animeEntryId?: StringFilter<"AnimeEntryGenre"> | string
+    genreId?: StringFilter<"AnimeEntryGenre"> | string
+    createdAt?: DateTimeFilter<"AnimeEntryGenre"> | Date | string
+  }
+
+  export type AnimeTypeUpsertWithoutAnimeEntriesInput = {
+    update: XOR<AnimeTypeUpdateWithoutAnimeEntriesInput, AnimeTypeUncheckedUpdateWithoutAnimeEntriesInput>
+    create: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
+    where?: AnimeTypeWhereInput
+  }
+
+  export type AnimeTypeUpdateToOneWithWhereWithoutAnimeEntriesInput = {
+    where?: AnimeTypeWhereInput
+    data: XOR<AnimeTypeUpdateWithoutAnimeEntriesInput, AnimeTypeUncheckedUpdateWithoutAnimeEntriesInput>
+  }
+
+  export type AnimeTypeUpdateWithoutAnimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeTypeUncheckedUpdateWithoutAnimeEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreCreateWithoutGenreInput = {
+    createdAt?: Date | string
+    animeEntry: AnimeEntryCreateNestedOneWithoutGenreLinksInput
+  }
+
+  export type AnimeEntryGenreUncheckedCreateWithoutGenreInput = {
+    animeEntryId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeEntryGenreCreateOrConnectWithoutGenreInput = {
+    where: AnimeEntryGenreWhereUniqueInput
+    create: XOR<AnimeEntryGenreCreateWithoutGenreInput, AnimeEntryGenreUncheckedCreateWithoutGenreInput>
+  }
+
+  export type AnimeEntryGenreCreateManyGenreInputEnvelope = {
+    data: AnimeEntryGenreCreateManyGenreInput | AnimeEntryGenreCreateManyGenreInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AnimeEntryGenreUpsertWithWhereUniqueWithoutGenreInput = {
+    where: AnimeEntryGenreWhereUniqueInput
+    update: XOR<AnimeEntryGenreUpdateWithoutGenreInput, AnimeEntryGenreUncheckedUpdateWithoutGenreInput>
+    create: XOR<AnimeEntryGenreCreateWithoutGenreInput, AnimeEntryGenreUncheckedCreateWithoutGenreInput>
+  }
+
+  export type AnimeEntryGenreUpdateWithWhereUniqueWithoutGenreInput = {
+    where: AnimeEntryGenreWhereUniqueInput
+    data: XOR<AnimeEntryGenreUpdateWithoutGenreInput, AnimeEntryGenreUncheckedUpdateWithoutGenreInput>
+  }
+
+  export type AnimeEntryGenreUpdateManyWithWhereWithoutGenreInput = {
+    where: AnimeEntryGenreScalarWhereInput
+    data: XOR<AnimeEntryGenreUpdateManyMutationInput, AnimeEntryGenreUncheckedUpdateManyWithoutGenreInput>
+  }
+
+  export type AnimeEntryCreateWithoutTypeInput = {
+    id?: string
+    title: string
+    description: string
+    coverImageUrl: string
+    status?: $Enums.WatchStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeEntriesInput
+    episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+  }
+
+  export type AnimeEntryUncheckedCreateWithoutTypeInput = {
+    id?: string
+    title: string
+    description: string
+    coverImageUrl: string
+    status?: $Enums.WatchStatus
+    notes?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+  }
+
+  export type AnimeEntryCreateOrConnectWithoutTypeInput = {
+    where: AnimeEntryWhereUniqueInput
+    create: XOR<AnimeEntryCreateWithoutTypeInput, AnimeEntryUncheckedCreateWithoutTypeInput>
+  }
+
+  export type AnimeEntryCreateManyTypeInputEnvelope = {
+    data: AnimeEntryCreateManyTypeInput | AnimeEntryCreateManyTypeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AnimeEntryUpsertWithWhereUniqueWithoutTypeInput = {
+    where: AnimeEntryWhereUniqueInput
+    update: XOR<AnimeEntryUpdateWithoutTypeInput, AnimeEntryUncheckedUpdateWithoutTypeInput>
+    create: XOR<AnimeEntryCreateWithoutTypeInput, AnimeEntryUncheckedCreateWithoutTypeInput>
+  }
+
+  export type AnimeEntryUpdateWithWhereUniqueWithoutTypeInput = {
+    where: AnimeEntryWhereUniqueInput
+    data: XOR<AnimeEntryUpdateWithoutTypeInput, AnimeEntryUncheckedUpdateWithoutTypeInput>
+  }
+
+  export type AnimeEntryUpdateManyWithWhereWithoutTypeInput = {
+    where: AnimeEntryScalarWhereInput
+    data: XOR<AnimeEntryUpdateManyMutationInput, AnimeEntryUncheckedUpdateManyWithoutTypeInput>
+  }
+
+  export type AnimeEntryCreateWithoutGenreLinksInput = {
+    id?: string
+    title: string
+    description: string
+    coverImageUrl: string
+    status?: $Enums.WatchStatus
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeEntriesInput
+    episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
+  }
+
+  export type AnimeEntryUncheckedCreateWithoutGenreLinksInput = {
+    id?: string
+    title: string
+    description: string
+    coverImageUrl: string
+    status?: $Enums.WatchStatus
+    notes?: string | null
+    userId: string
+    typeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+  }
+
+  export type AnimeEntryCreateOrConnectWithoutGenreLinksInput = {
+    where: AnimeEntryWhereUniqueInput
+    create: XOR<AnimeEntryCreateWithoutGenreLinksInput, AnimeEntryUncheckedCreateWithoutGenreLinksInput>
+  }
+
+  export type GenreCreateWithoutAnimeLinksInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GenreUncheckedCreateWithoutAnimeLinksInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GenreCreateOrConnectWithoutAnimeLinksInput = {
+    where: GenreWhereUniqueInput
+    create: XOR<GenreCreateWithoutAnimeLinksInput, GenreUncheckedCreateWithoutAnimeLinksInput>
+  }
+
+  export type AnimeEntryUpsertWithoutGenreLinksInput = {
+    update: XOR<AnimeEntryUpdateWithoutGenreLinksInput, AnimeEntryUncheckedUpdateWithoutGenreLinksInput>
+    create: XOR<AnimeEntryCreateWithoutGenreLinksInput, AnimeEntryUncheckedCreateWithoutGenreLinksInput>
+    where?: AnimeEntryWhereInput
+  }
+
+  export type AnimeEntryUpdateToOneWithWhereWithoutGenreLinksInput = {
+    where?: AnimeEntryWhereInput
+    data: XOR<AnimeEntryUpdateWithoutGenreLinksInput, AnimeEntryUncheckedUpdateWithoutGenreLinksInput>
+  }
+
+  export type AnimeEntryUpdateWithoutGenreLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
+    episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
+  }
+
+  export type AnimeEntryUncheckedUpdateWithoutGenreLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+  }
+
+  export type GenreUpsertWithoutAnimeLinksInput = {
+    update: XOR<GenreUpdateWithoutAnimeLinksInput, GenreUncheckedUpdateWithoutAnimeLinksInput>
+    create: XOR<GenreCreateWithoutAnimeLinksInput, GenreUncheckedCreateWithoutAnimeLinksInput>
+    where?: GenreWhereInput
+  }
+
+  export type GenreUpdateToOneWithWhereWithoutAnimeLinksInput = {
+    where?: GenreWhereInput
+    data: XOR<GenreUpdateWithoutAnimeLinksInput, GenreUncheckedUpdateWithoutAnimeLinksInput>
+  }
+
+  export type GenreUpdateWithoutAnimeLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GenreUncheckedUpdateWithoutAnimeLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AnimeEntryCreateWithoutRatingsInput = {
     id?: string
     title: string
@@ -16662,6 +21144,8 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutAnimeEntriesInput
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
   export type AnimeEntryUncheckedCreateWithoutRatingsInput = {
@@ -16672,10 +21156,12 @@ export namespace Prisma {
     status?: $Enums.WatchStatus
     notes?: string | null
     userId: string
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutRatingsInput = {
@@ -16735,6 +21221,8 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateWithoutRatingsInput = {
@@ -16745,10 +21233,12 @@ export namespace Prisma {
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type UserUpsertWithoutAnimeRatingsInput = {
@@ -16798,6 +21288,8 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutAnimeEntriesInput
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
   export type AnimeEntryUncheckedCreateWithoutEpisodesInput = {
@@ -16808,10 +21300,12 @@ export namespace Prisma {
     status?: $Enums.WatchStatus
     notes?: string | null
     userId: string
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutEpisodesInput = {
@@ -16842,6 +21336,8 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateWithoutEpisodesInput = {
@@ -16852,10 +21348,12 @@ export namespace Prisma {
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type UserCreateWithoutAnimeAuthorsInput = {
@@ -16972,6 +21470,8 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutAnimeEntriesInput
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
   export type AnimeEntryUncheckedCreateWithoutAuthorLinksInput = {
@@ -16982,10 +21482,12 @@ export namespace Prisma {
     status?: $Enums.WatchStatus
     notes?: string | null
     userId: string
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutAuthorLinksInput = {
@@ -17039,6 +21541,8 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateWithoutAuthorLinksInput = {
@@ -17049,10 +21553,12 @@ export namespace Prisma {
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeAuthorUpsertWithoutAnimeLinksInput = {
@@ -17091,6 +21597,7 @@ export namespace Prisma {
     coverImageUrl: string
     status?: $Enums.WatchStatus
     notes?: string | null
+    typeId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17128,6 +21635,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateWithoutUserInput = {
@@ -17137,11 +21646,13 @@ export namespace Prisma {
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateManyWithoutUserInput = {
@@ -17151,6 +21662,7 @@ export namespace Prisma {
     coverImageUrl?: StringFieldUpdateOperationsInput | string
     status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17305,6 +21817,11 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type AnimeEntryGenreCreateManyAnimeEntryInput = {
+    genreId: string
+    createdAt?: Date | string
+  }
+
   export type AnimeEpisodeUpdateWithoutAnimeEntryInput = {
     id?: StringFieldUpdateOperationsInput | string
     episodeNumber?: IntFieldUpdateOperationsInput | number
@@ -17376,6 +21893,97 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     value?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreUpdateWithoutAnimeEntryInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    genre?: GenreUpdateOneRequiredWithoutAnimeLinksNestedInput
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateWithoutAnimeEntryInput = {
+    genreId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryInput = {
+    genreId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreCreateManyGenreInput = {
+    animeEntryId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeEntryGenreUpdateWithoutGenreInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntry?: AnimeEntryUpdateOneRequiredWithoutGenreLinksNestedInput
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateWithoutGenreInput = {
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryGenreUncheckedUpdateManyWithoutGenreInput = {
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeEntryCreateManyTypeInput = {
+    id?: string
+    title: string
+    description: string
+    coverImageUrl: string
+    status?: $Enums.WatchStatus
+    notes?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimeEntryUpdateWithoutTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
+    episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+  }
+
+  export type AnimeEntryUncheckedUpdateWithoutTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+  }
+
+  export type AnimeEntryUncheckedUpdateManyWithoutTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

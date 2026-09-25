@@ -4,6 +4,10 @@ async function findUserByEmail(email) {
   return prisma.user.findUnique({ where: { email } });
 }
 
+async function findUserById(id) {
+  return prisma.user.findUnique({ where: { id } });
+}
+
 async function createUser(data) {
   return prisma.user.create({ data });
 }
@@ -19,6 +23,13 @@ async function assignRoleToUser(userId, roleId) {
     },
     update: {},
     create: { userId, roleId },
+  });
+}
+
+async function updateUserById(id, data) {
+  return prisma.user.update({
+    where: { id },
+    data,
   });
 }
 
@@ -78,9 +89,11 @@ async function findUserAuthContextById(id) {
 
 module.exports = {
   findUserByEmail,
+  findUserById,
   createUser,
   findRoleByName,
   assignRoleToUser,
+  updateUserById,
   findUserProfileById,
   findUserAuthContextById,
 };

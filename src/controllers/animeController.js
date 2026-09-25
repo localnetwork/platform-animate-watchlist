@@ -90,6 +90,33 @@ async function detachAuthor(req, res, next) {
   }
 }
 
+async function getOwnRating(req, res, next) {
+  try {
+    const result = await animeService.getOwnRating(req.user.id, req.params.id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function setOwnRating(req, res, next) {
+  try {
+    const result = await animeService.setOwnRating(req.user.id, req.params.id, req.body);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function removeOwnRating(req, res, next) {
+  try {
+    await animeService.removeOwnRating(req.user.id, req.params.id);
+    res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   list,
   getOne,
@@ -101,4 +128,7 @@ module.exports = {
   removeEpisode,
   attachAuthor,
   detachAuthor,
+  getOwnRating,
+  setOwnRating,
+  removeOwnRating,
 };

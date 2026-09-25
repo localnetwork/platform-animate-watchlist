@@ -1,122 +1,126 @@
 const { WatchStatus } = require('../../src/generated/prisma');
-const { cover } = require('./seedData');
+const { SEED_COUNTS, cover } = require('./seedData');
 
-async function seedAnimeForUserOne(prisma, user, authors) {
-  const demonSlayerAuthor = authors.find((author) => author.name === 'Koyoharu Gotouge');
-  const narutoAuthor = authors.find((author) => author.name === 'Masashi Kishimoto');
+const STATUSES = [
+  WatchStatus.PLANNED,
+  WatchStatus.WATCHING,
+  WatchStatus.COMPLETED,
+  WatchStatus.DROPPED,
+];
 
-  const demonSlayer = await prisma.animeEntry.create({
-    data: {
-      userId: user.id,
-      title: 'Demon Slayer',
-      description: 'A young swordsman fights demons to cure his sister.',
-      coverImageUrl: cover('covers/demon-slayer.jpg'),
-      status: WatchStatus.WATCHING,
-      notes: 'Great animation quality.',
-      authorLinks: {
-        create: [{ authorId: demonSlayerAuthor.id, role: 'Manga Creator' }],
-      },
-    },
-  });
-
-  await prisma.animeEpisode.createMany({
-    data: [
-      {
-        animeEntryId: demonSlayer.id,
-        episodeNumber: 1,
-        title: 'Cruelty',
-        durationMinutes: 24,
-      },
-      {
-        animeEntryId: demonSlayer.id,
-        episodeNumber: 2,
-        title: 'Trainer Sakonji Urokodaki',
-        durationMinutes: 24,
-      },
-    ],
-  });
-
-  await prisma.animeRating.create({
-    data: {
-      userId: user.id,
-      animeEntryId: demonSlayer.id,
-      value: 9,
-    },
-  });
-
-  const naruto = await prisma.animeEntry.create({
-    data: {
-      userId: user.id,
-      title: 'Naruto',
-      description: 'A ninja seeks recognition and dreams of becoming Hokage.',
-      coverImageUrl: cover('covers/naruto.jpg'),
-      status: WatchStatus.COMPLETED,
-      notes: 'Classic shonen series.',
-      authorLinks: {
-        create: [{ authorId: narutoAuthor.id, role: 'Manga Creator' }],
-      },
-    },
-  });
-
-  await prisma.animeEpisode.createMany({
-    data: [
-      {
-        animeEntryId: naruto.id,
-        episodeNumber: 1,
-        title: 'Enter Naruto Uzumaki!',
-        durationMinutes: 23,
-      },
-      {
-        animeEntryId: naruto.id,
-        episodeNumber: 2,
-        title: 'My Name is Konohamaru!',
-        durationMinutes: 23,
-      },
-    ],
-  });
-
-  await prisma.animeRating.create({
-    data: {
-      userId: user.id,
-      animeEntryId: naruto.id,
-      value: 8,
-    },
-  });
+function rotate(list, index) {
+  return list[index % list.length];
 }
 
-async function seedAnimeForUserTwo(prisma, user, authors) {
-  const aotAuthor = authors.find((author) => author.name === 'Hajime Isayama');
+async function seedAnimeForAdmin(prisma, user, authors, genresByName, typesByName) {
+  const genreList = Object.values(genresByName);
+  const typeList = Object.values(typesByName);
 
-  const aot = await prisma.animeEntry.create({
+  for (let index = 0; index < SEED_COUNTS.ANIME; index += 1) {
+    const author = rotate(authors, index);
+    const status = rotate(STATUSES, index);
+    const type = rotate(typeList, index);
+    const genreOne = rotate(genreList, index);
+    const genreTwo = rotate(genreList, index + 7);
+
+    const animeEntry = await prisma.animeEntry.create({
+      data: {
+        userId: user.id,
+        title: `Seeded Anime ${String(index + 1).padStart(3, '0')}`,
+        description: `Auto-generated description for seeded anime #${index + 1}.`,
+        coverImageUrl: cover(`covers/seeded-anime-${index + 1}.jpg`),
+        status,
+        notes: `Auto note ${index + 1}.`,
+        typeId: type.id,
+        authorLinks: {
+          create: [{ authorId: author.id, role: 'Creator' }],
+        },
+        genreLinks: {
+          create: [{ genreId: genreOne.id }, { genreId: genreTwo.id }],
+        },
+      },
+    });
+
+    await prisma.animeEpisode.createMany({
+      data: [
+        {
+          animeEntryId: animeEntry.id,
+          episodeNumber: 1,
+          title: `Episode 1 - Anime ${index + 1}`,
+          description: `Opening episode for seeded anime #${index + 1}.`,
+          durationMinutes: 24,
+        },
+        {
+          animeEntryId: animeEntry.id,
+          episodeNumber: 2,
+          title: `Episode 2 - Anime ${index + 1}`,
+          description: `Second episode for seeded anime #${index + 1}.`,
+          durationMinutes: 24,
+        },
+      ],
+    });
+
+    await prisma.animeRating.create({
+      data: {
+        userId: user.id,
+        animeEntryId: animeEntry.id,
+        value: (index % 10) + 1,
+      },
+    });
+  }
+}
+
+async function seedAnimeForMember(prisma, user, authors, genresByName, typesByName) {
+  const author = authors[0];
+  const type = typesByName.TV || Object.values(typesByName)[0];
+  const genre = genresByName.Action || Object.values(genresByName)[0];
+
+  const anime = await prisma.animeEntry.create({
     data: {
       userId: user.id,
-      title: 'Attack on Titan',
-      description: 'Humanity fights for survival against gigantic titans.',
-      coverImageUrl: cover('covers/attack-on-titan.jpg'),
-      status: WatchStatus.PLANNED,
-      notes: 'Queued for next month.',
+      title: 'Member Seeded Anime 001',
+      description: 'Sample anime owned by seeded member user.',
+      coverImageUrl: cover('covers/member-seeded-anime-001.jpg'),
+      status: WatchStatus.WATCHING,
+      notes: 'Used for member-role testing.',
+      typeId: type.id,
       authorLinks: {
-        create: [{ authorId: aotAuthor.id, role: 'Manga Creator' }],
+        create: [{ authorId: author.id, role: 'Creator' }],
+      },
+      genreLinks: {
+        create: [{ genreId: genre.id }],
       },
     },
   });
 
   await prisma.animeEpisode.create({
     data: {
-      animeEntryId: aot.id,
+      animeEntryId: anime.id,
       episodeNumber: 1,
-      title: 'To You, in 2000 Years',
+      title: 'Member Episode 1',
       durationMinutes: 24,
     },
   });
 }
 
-async function seedAnime(prisma, users, authorsByUserEmail) {
-  const userOne = users.find((user) => user.email === 'demo1@anime.local');
-  const userTwo = users.find((user) => user.email === 'demo2@anime.local');
+async function seedAnime(prisma, users, authorsByUserEmail, genresByName, typesByName) {
+  const adminUser = users.find((user) => user.email === 'demo1@anime.local');
+  const memberUser = users.find((user) => user.email === 'demo2@anime.local');
 
-  await seedAnimeForUserOne(prisma, userOne, authorsByUserEmail[userOne.email]);
-  await seedAnimeForUserTwo(prisma, userTwo, authorsByUserEmail[userTwo.email]);
+  await seedAnimeForAdmin(
+    prisma,
+    adminUser,
+    authorsByUserEmail[adminUser.email],
+    genresByName,
+    typesByName,
+  );
+  await seedAnimeForMember(
+    prisma,
+    memberUser,
+    authorsByUserEmail[memberUser.email],
+    genresByName,
+    typesByName,
+  );
 }
 
 module.exports = {

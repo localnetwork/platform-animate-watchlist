@@ -44,8 +44,21 @@ function validateAuthorIds(authorIds, required) {
   }
 }
 
+function validateGenreIds(genreIds, required) {
+  if (genreIds === undefined && !required) return;
+  if (!Array.isArray(genreIds)) {
+    throw createHttpError(400, 'genreIds must be an array');
+  }
+}
+
+function validateTypeId(typeId) {
+  if (typeId !== undefined && typeId !== null && typeof typeId !== 'string') {
+    throw createHttpError(400, 'typeId must be a string');
+  }
+}
+
 function validateCreateAnimeInput(payload) {
-  const { title, description, coverImageUrl, status, rating, authorIds } = payload;
+  const { title, description, coverImageUrl, status, rating, authorIds, genreIds, typeId } = payload;
 
   if (!title || !description) {
     throw createHttpError(400, 'title and description are required');
@@ -54,10 +67,12 @@ function validateCreateAnimeInput(payload) {
   validateStatus(status);
   validateRating(rating);
   validateAuthorIds(authorIds, false);
+  validateGenreIds(genreIds, false);
+  validateTypeId(typeId);
 }
 
 function validateUpdateAnimeInput(payload) {
-  const { coverImageUrl, status, rating, authorIds } = payload;
+  const { coverImageUrl, status, rating, authorIds, genreIds, typeId } = payload;
   validateStatus(status);
   validateRating(rating);
 
@@ -67,6 +82,10 @@ function validateUpdateAnimeInput(payload) {
   if (authorIds !== undefined) {
     validateAuthorIds(authorIds, false);
   }
+  if (genreIds !== undefined) {
+    validateGenreIds(genreIds, false);
+  }
+  validateTypeId(typeId);
 }
 
 function validateEpisodeNumber(episodeNumber, required) {
@@ -90,6 +109,11 @@ function toAnimeResponse(entry) {
     createdAt: entry.createdAt,
     updatedAt: entry.updatedAt,
     episodes: entry.episodes,
+    type: entry.type ? { id: entry.type.id, name: entry.type.name } : null,
+    genres: (entry.genreLinks || []).map((link) => ({
+      id: link.genre.id,
+      name: link.genre.name,
+    })),
     authors: entry.authorLinks.map((link) => ({
       id: link.author.id,
       name: link.author.name,

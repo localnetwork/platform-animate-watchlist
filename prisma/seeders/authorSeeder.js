@@ -1,37 +1,38 @@
+const { SEED_COUNTS } = require('./seedData');
+
+function buildAuthorName(index) {
+  return `Author ${String(index + 1).padStart(3, '0')}`;
+}
+
+function buildAuthorBio(index) {
+  return `Auto-generated author profile #${index + 1} for seeding large datasets.`;
+}
+
 async function seedAuthors(prisma, users) {
   const userOne = users.find((user) => user.email === 'demo1@anime.local');
   const userTwo = users.find((user) => user.email === 'demo2@anime.local');
 
   const userOneAuthors = [];
-  userOneAuthors.push(
-    await prisma.animeAuthor.create({
+  for (let index = 0; index < SEED_COUNTS.AUTHORS; index += 1) {
+    const author = await prisma.animeAuthor.create({
       data: {
         userId: userOne.id,
-        name: 'Koyoharu Gotouge',
-        bio: 'Japanese manga artist, best known for Demon Slayer.',
+        name: buildAuthorName(index),
+        bio: buildAuthorBio(index),
       },
-    }),
-  );
-  userOneAuthors.push(
-    await prisma.animeAuthor.create({
-      data: {
-        userId: userOne.id,
-        name: 'Masashi Kishimoto',
-        bio: 'Japanese manga artist, creator of Naruto.',
-      },
-    }),
-  );
+    });
+    userOneAuthors.push(author);
+  }
 
-  const userTwoAuthors = [];
-  userTwoAuthors.push(
+  const userTwoAuthors = [
     await prisma.animeAuthor.create({
       data: {
         userId: userTwo.id,
-        name: 'Hajime Isayama',
-        bio: 'Japanese manga artist, creator of Attack on Titan.',
+        name: 'Member Author 001',
+        bio: 'Member-owned sample author.',
       },
     }),
-  );
+  ];
 
   return {
     [userOne.email]: userOneAuthors,

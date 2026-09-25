@@ -12,6 +12,10 @@ const SEED_USERS = [
 ];
 
 const COVER_BASE = process.env.R2_PUBLIC_BASE_URL || 'https://pub-demo-anime.r2.dev/';
+const SEED_COUNTS = {
+  AUTHORS: 500,
+  ANIME: 500,
+};
 
 function cover(path) {
   const normalized = COVER_BASE.endsWith('/') ? COVER_BASE : `${COVER_BASE}/`;
@@ -20,5 +24,6 @@ function cover(path) {
 
 module.exports = {
   SEED_USERS,
+  SEED_COUNTS,
   cover,
 };

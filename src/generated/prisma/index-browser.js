@@ -166,8 +166,29 @@ exports.Prisma.AnimeEntryScalarFieldEnum = {
   status: 'status',
   notes: 'notes',
   userId: 'userId',
+  typeId: 'typeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GenreScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AnimeTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AnimeEntryGenreScalarFieldEnum = {
+  animeEntryId: 'animeEntryId',
+  genreId: 'genreId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.AnimeRatingScalarFieldEnum = {
@@ -235,6 +256,9 @@ exports.Prisma.ModelName = {
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
   AnimeEntry: 'AnimeEntry',
+  Genre: 'Genre',
+  AnimeType: 'AnimeType',
+  AnimeEntryGenre: 'AnimeEntryGenre',
   AnimeRating: 'AnimeRating',
   AnimeEpisode: 'AnimeEpisode',
   AnimeAuthor: 'AnimeAuthor',

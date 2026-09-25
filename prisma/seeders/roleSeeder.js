@@ -1,8 +1,11 @@
-const { PERMISSIONS, ALL_PERMISSION_VALUES } = require('../../src/models/permissions');
+const {
+  PERMISSIONS,
+  ALL_PERMISSION_VALUES,
+} = require("../../src/models/permissions");
 
 const ROLE_NAMES = {
-  ADMIN: 'admin',
-  MEMBER: 'member',
+  ADMIN: "admin",
+  MEMBER: "member",
 };
 
 async function upsertPermissions(prisma) {
@@ -26,19 +29,19 @@ async function upsertPermissions(prisma) {
 async function upsertRoles(prisma) {
   const admin = await prisma.role.upsert({
     where: { name: ROLE_NAMES.ADMIN },
-    update: { description: 'Full access role' },
+    update: { description: "Full access role" },
     create: {
       name: ROLE_NAMES.ADMIN,
-      description: 'Full access role',
+      description: "Full access role",
     },
   });
 
   const member = await prisma.role.upsert({
     where: { name: ROLE_NAMES.MEMBER },
-    update: { description: 'Standard member role' },
+    update: { description: "Standard member role" },
     create: {
       name: ROLE_NAMES.MEMBER,
-      description: 'Standard member role',
+      description: "Standard member role",
     },
   });
 
@@ -76,23 +79,20 @@ async function seedRoles(prisma, users) {
   const allPermissions = Object.values(permissionsByName);
   const memberPermissionNames = [
     PERMISSIONS.AUTH_ME_READ,
+    PERMISSIONS.AUTH_PROFILE_UPDATE,
     PERMISSIONS.ANIME_READ,
-    PERMISSIONS.ANIME_CREATE,
-    PERMISSIONS.ANIME_UPDATE,
-    PERMISSIONS.ANIME_EPISODE_MANAGE,
-    PERMISSIONS.ANIME_AUTHOR_LINK_MANAGE,
+    PERMISSIONS.ANIME_RATING_MANAGE,
     PERMISSIONS.AUTHOR_READ,
-    PERMISSIONS.AUTHOR_CREATE,
-    PERMISSIONS.AUTHOR_UPDATE,
-    PERMISSIONS.AUTHOR_DELETE,
   ];
-  const memberPermissions = memberPermissionNames.map((name) => permissionsByName[name]);
+  const memberPermissions = memberPermissionNames.map(
+    (name) => permissionsByName[name],
+  );
 
   await setRolePermissions(prisma, admin, allPermissions);
   await setRolePermissions(prisma, member, memberPermissions);
 
-  const adminUser = users.find((user) => user.email === 'demo1@anime.local');
-  const memberUser = users.find((user) => user.email === 'demo2@anime.local');
+  const adminUser = users.find((user) => user.email === "demo1@anime.local");
+  const memberUser = users.find((user) => user.email === "demo2@anime.local");
 
   await prisma.userRole.deleteMany({
     where: {

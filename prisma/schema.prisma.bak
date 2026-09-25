@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WatchStatus {
+  PLANNED
+  WATCHING
+  COMPLETED
+  DROPPED
+}
+
+model User {
+  id           String           @id @default(uuid())
+  email        String           @unique
+  password     String
+  name         String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  animeEntries AnimeEntry[]
+  animeAuthors AnimeAuthor[]
+  animeRatings AnimeRating[]
+  roleLinks    UserRole[]
+
+  @@map("users")
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  userLinks   UserRole[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  roles       RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("permissions")
+}
+
+model UserRole {
+  userId    String
+  roleId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role      @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("roles_permissions")
+}
+
+model AnimeEntry {
+  id            String           @id @default(uuid())
+  title         String
+  description   String
+  coverImageUrl String
+  status        WatchStatus      @default(PLANNED)
+  notes         String?
+  userId        String
+  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episodes      AnimeEpisode[]
+  authorLinks   AnimeEntryAuthor[]
+  ratings       AnimeRating[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("anime_entries")
+}
+
+model AnimeRating {
+  id          String    @id @default(uuid())
+  animeEntryId String
+  userId      String
+  value       Int
+  animeEntry  AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([animeEntryId, userId])
+  @@index([userId])
+  @@index([animeEntryId])
+  @@map("anime_ratings")
+}
+
+model AnimeEpisode {
+  id              String     @id @default(uuid())
+  animeEntryId    String
+  episodeNumber   Int
+  title           String?
+  description     String?
+  durationMinutes Int?
+  airDate         DateTime?
+  animeEntry      AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@unique([animeEntryId, episodeNumber])
+  @@index([animeEntryId])
+  @@map("anime_episodes")
+}
+
+model AnimeAuthor {
+  id          String           @id @default(uuid())
+  name        String
+  bio         String?
+  userId      String
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  animeLinks  AnimeEntryAuthor[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@unique([userId, name])
+  @@index([userId])
+  @@map("anime_authors")
+}
+
+model AnimeEntryAuthor {
+  animeEntryId String
+  authorId     String
+  role         String?
+  animeEntry   AnimeEntry  @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  author       AnimeAuthor @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt    DateTime    @default(now())
+
+  @@id([animeEntryId, authorId])
+  @@index([authorId])
+  @@map("anime_entry_authors")
+}
