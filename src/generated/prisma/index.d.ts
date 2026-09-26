@@ -13341,6 +13341,7 @@ export namespace Prisma {
     description: string | null
     durationMinutes: number | null
     airDate: Date | null
+    videoUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13353,6 +13354,7 @@ export namespace Prisma {
     description: string | null
     durationMinutes: number | null
     airDate: Date | null
+    videoUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13365,6 +13367,7 @@ export namespace Prisma {
     description: number
     durationMinutes: number
     airDate: number
+    videoUrl: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -13389,6 +13392,7 @@ export namespace Prisma {
     description?: true
     durationMinutes?: true
     airDate?: true
+    videoUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13401,6 +13405,7 @@ export namespace Prisma {
     description?: true
     durationMinutes?: true
     airDate?: true
+    videoUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13413,6 +13418,7 @@ export namespace Prisma {
     description?: true
     durationMinutes?: true
     airDate?: true
+    videoUrl?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -13512,6 +13518,7 @@ export namespace Prisma {
     description: string | null
     durationMinutes: number | null
     airDate: Date | null
+    videoUrl: string | null
     createdAt: Date
     updatedAt: Date
     _count: AnimeEpisodeCountAggregateOutputType | null
@@ -13543,6 +13550,7 @@ export namespace Prisma {
     description?: boolean
     durationMinutes?: boolean
     airDate?: boolean
+    videoUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
@@ -13556,6 +13564,7 @@ export namespace Prisma {
     description?: boolean
     durationMinutes?: boolean
     airDate?: boolean
+    videoUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
@@ -13569,6 +13578,7 @@ export namespace Prisma {
     description?: boolean
     durationMinutes?: boolean
     airDate?: boolean
+    videoUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
@@ -13582,11 +13592,12 @@ export namespace Prisma {
     description?: boolean
     durationMinutes?: boolean
     airDate?: boolean
+    videoUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AnimeEpisodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "animeEntryId" | "episodeNumber" | "title" | "description" | "durationMinutes" | "airDate" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEpisode"]>
+  export type AnimeEpisodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "animeEntryId" | "episodeNumber" | "title" | "description" | "durationMinutes" | "airDate" | "videoUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEpisode"]>
   export type AnimeEpisodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
   }
@@ -13610,6 +13621,7 @@ export namespace Prisma {
       description: string | null
       durationMinutes: number | null
       airDate: Date | null
+      videoUrl: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["animeEpisode"]>
@@ -14043,6 +14055,7 @@ export namespace Prisma {
     readonly description: FieldRef<"AnimeEpisode", 'String'>
     readonly durationMinutes: FieldRef<"AnimeEpisode", 'Int'>
     readonly airDate: FieldRef<"AnimeEpisode", 'DateTime'>
+    readonly videoUrl: FieldRef<"AnimeEpisode", 'String'>
     readonly createdAt: FieldRef<"AnimeEpisode", 'DateTime'>
     readonly updatedAt: FieldRef<"AnimeEpisode", 'DateTime'>
   }
@@ -16749,6 +16762,7 @@ export namespace Prisma {
     description: 'description',
     durationMinutes: 'durationMinutes',
     airDate: 'airDate',
+    videoUrl: 'videoUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -17522,6 +17536,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"AnimeEpisode"> | string | null
     durationMinutes?: IntNullableFilter<"AnimeEpisode"> | number | null
     airDate?: DateTimeNullableFilter<"AnimeEpisode"> | Date | string | null
+    videoUrl?: StringNullableFilter<"AnimeEpisode"> | string | null
     createdAt?: DateTimeFilter<"AnimeEpisode"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeEpisode"> | Date | string
     animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
@@ -17535,6 +17550,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     durationMinutes?: SortOrderInput | SortOrder
     airDate?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     animeEntry?: AnimeEntryOrderByWithRelationInput
@@ -17552,6 +17568,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"AnimeEpisode"> | string | null
     durationMinutes?: IntNullableFilter<"AnimeEpisode"> | number | null
     airDate?: DateTimeNullableFilter<"AnimeEpisode"> | Date | string | null
+    videoUrl?: StringNullableFilter<"AnimeEpisode"> | string | null
     createdAt?: DateTimeFilter<"AnimeEpisode"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeEpisode"> | Date | string
     animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
@@ -17565,6 +17582,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     durationMinutes?: SortOrderInput | SortOrder
     airDate?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AnimeEpisodeCountOrderByAggregateInput
@@ -17585,6 +17603,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"AnimeEpisode"> | string | null
     durationMinutes?: IntNullableWithAggregatesFilter<"AnimeEpisode"> | number | null
     airDate?: DateTimeNullableWithAggregatesFilter<"AnimeEpisode"> | Date | string | null
+    videoUrl?: StringNullableWithAggregatesFilter<"AnimeEpisode"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AnimeEpisode"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AnimeEpisode"> | Date | string
   }
@@ -18344,6 +18363,7 @@ export namespace Prisma {
     description?: string | null
     durationMinutes?: number | null
     airDate?: Date | string | null
+    videoUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     animeEntry: AnimeEntryCreateNestedOneWithoutEpisodesInput
@@ -18357,6 +18377,7 @@ export namespace Prisma {
     description?: string | null
     durationMinutes?: number | null
     airDate?: Date | string | null
+    videoUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18368,6 +18389,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeEntry?: AnimeEntryUpdateOneRequiredWithoutEpisodesNestedInput
@@ -18381,6 +18403,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18393,6 +18416,7 @@ export namespace Prisma {
     description?: string | null
     durationMinutes?: number | null
     airDate?: Date | string | null
+    videoUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18404,6 +18428,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18416,6 +18441,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19137,6 +19163,7 @@ export namespace Prisma {
     description?: SortOrder
     durationMinutes?: SortOrder
     airDate?: SortOrder
+    videoUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19154,6 +19181,7 @@ export namespace Prisma {
     description?: SortOrder
     durationMinutes?: SortOrder
     airDate?: SortOrder
+    videoUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19166,6 +19194,7 @@ export namespace Prisma {
     description?: SortOrder
     durationMinutes?: SortOrder
     airDate?: SortOrder
+    videoUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20915,6 +20944,7 @@ export namespace Prisma {
     description?: string | null
     durationMinutes?: number | null
     airDate?: Date | string | null
+    videoUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20926,6 +20956,7 @@ export namespace Prisma {
     description?: string | null
     durationMinutes?: number | null
     airDate?: Date | string | null
+    videoUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21089,6 +21120,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"AnimeEpisode"> | string | null
     durationMinutes?: IntNullableFilter<"AnimeEpisode"> | number | null
     airDate?: DateTimeNullableFilter<"AnimeEpisode"> | Date | string | null
+    videoUrl?: StringNullableFilter<"AnimeEpisode"> | string | null
     createdAt?: DateTimeFilter<"AnimeEpisode"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeEpisode"> | Date | string
   }
@@ -22180,6 +22212,7 @@ export namespace Prisma {
     description?: string | null
     durationMinutes?: number | null
     airDate?: Date | string | null
+    videoUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -22210,6 +22243,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22221,6 +22255,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22232,6 +22267,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     airDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

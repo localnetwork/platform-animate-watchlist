@@ -213,6 +213,7 @@ exports.Prisma.AnimeEpisodeScalarFieldEnum = {
   description: 'description',
   durationMinutes: 'durationMinutes',
   airDate: 'airDate',
+  videoUrl: 'videoUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

@@ -136,6 +136,13 @@ function validateEpisodeNumber(episodeNumber, required) {
   }
 }
 
+function validateVideoUrl(videoUrl) {
+  if (videoUrl === undefined || videoUrl === null || videoUrl === '') return;
+  if (!COVER_IMAGE_REGEX.test(videoUrl)) {
+    throw createHttpError(400, 'videoUrl must be a valid URL');
+  }
+}
+
 function toAnimeResponse(entry) {
   const currentUserRating = entry.ratings && entry.ratings.length ? entry.ratings[0].value : null;
 
@@ -232,6 +239,7 @@ module.exports = {
   validateCreateAnimeInput,
   validateUpdateAnimeInput,
   validateEpisodeNumber,
+  validateVideoUrl,
   toAnimeResponse,
   toPublicAnimeResponse,
 };

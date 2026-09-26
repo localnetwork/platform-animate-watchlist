@@ -9,4 +9,13 @@ async function uploadCover(req, res, next) {
   }
 }
 
-module.exports = { uploadCover };
+async function uploadEpisodeVideo(req, res, next) {
+  try {
+    const result = await uploadService.uploadEpisodeVideo(req.file);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { uploadCover, uploadEpisodeVideo };

@@ -4,6 +4,7 @@ const {
   validateCreateAnimeInput,
   validateUpdateAnimeInput,
   validateEpisodeNumber,
+  validateVideoUrl,
   validateStatus,
   validateAiredStatus,
   validateRating,
@@ -283,6 +284,7 @@ async function remove(userId, id) {
 
 async function addEpisode(userId, animeEntryId, payload) {
   validateEpisodeNumber(payload.episodeNumber, true);
+  validateVideoUrl(payload.videoUrl);
 
   const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
   if (!entry) {
@@ -296,6 +298,7 @@ async function addEpisode(userId, animeEntryId, payload) {
     description: payload.description,
     durationMinutes: payload.durationMinutes ?? undefined,
     airDate: payload.airDate ? new Date(payload.airDate) : undefined,
+    videoUrl: payload.videoUrl ?? undefined,
   });
 }
 
@@ -303,6 +306,7 @@ async function updateEpisode(userId, animeEntryId, episodeId, payload) {
   if (payload.episodeNumber !== undefined) {
     validateEpisodeNumber(payload.episodeNumber, false);
   }
+  validateVideoUrl(payload.videoUrl);
 
   const existing = await animeRepository.findEpisodeForEntryUser(animeEntryId, episodeId, userId);
   if (!existing) {
@@ -315,6 +319,7 @@ async function updateEpisode(userId, animeEntryId, episodeId, payload) {
     description: payload.description ?? undefined,
     durationMinutes: payload.durationMinutes ?? undefined,
     airDate: payload.airDate ? new Date(payload.airDate) : undefined,
+    videoUrl: payload.videoUrl !== undefined ? payload.videoUrl : undefined,
   });
 }
 

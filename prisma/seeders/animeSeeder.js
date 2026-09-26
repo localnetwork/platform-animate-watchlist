@@ -286,7 +286,7 @@ async function seedAnimeForAdmin(
       authorCandidates,
     );
 
-    console.log("anime", anime);
+    console.log("anime", )
     const status = STATUSES[index % STATUSES.length];
     const airedStatus = toAiredStatus(anime.status);
     const slugBase = slugifyTitle(title) || `anime-${anime.id}`;

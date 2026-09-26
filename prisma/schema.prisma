@@ -172,6 +172,7 @@ model AnimeEpisode {
   description     String?
   durationMinutes Int?
   airDate         DateTime?
+  videoUrl        String?
   animeEntry      AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
