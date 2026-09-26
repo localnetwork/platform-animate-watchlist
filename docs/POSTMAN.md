@@ -16,7 +16,7 @@ This project includes ready-to-import Postman files:
 
 - `baseUrl`: default is `http://localhost:3001`
 - `token`: leave empty (auto-filled after login requests)
-- `animeId`, `episodeId`, `authorId`: leave empty initially (set from response IDs as you test)
+- `animeId`, `episodeId`, `authorId`, `genreId`, `typeId`: leave empty initially (set from response IDs as you test)
 
 ## 3) Seeded credentials
 
@@ -35,24 +35,44 @@ you can use:
   - email: `demo2@anime.local`
   - password: `password123`
 
-## 4) Recommended test flow
+## 4) Public endpoints (no login required)
+
+These do **not** require an Authorization header:
+
+- `Public > List Genres` — `GET /api/genres`
+- `Public > List Types` — `GET /api/types`
+- `Public > Anime Catalog - Top Viewed` — `GET /api/animes?sort=top`
+- `Public > Anime Catalog - Most Rated` — `GET /api/animes?sort=rated`
+- `Public > Anime Catalog - Recently Added` — `GET /api/animes?sort=recent`
+- `Public > Anime Catalog - Filter by Genre & Type` — `GET /api/animes?genreId=&typeId=`
+- `Public > Anime Catalog - Search` — `GET /api/animes?search=`
+- `Public > Anime Catalog - Select Includes` — `GET /api/animes?includes=genres,type`
+
+`GET /api/animes` supports combining `sort`, `genreId` (comma-separated for multiple), `typeId`, `search`, `page`, `limit`, and `includes` in a single request. It aggregates entries across all users and returns `averageRating`/`ratingCount` instead of a personal rating.
+
+`includes` accepts a comma-separated subset of `episodes`, `genres`, `authors`, `type` to shape the response (e.g. `includes=genres,type`); omit it to include all four relations. An unrecognized value in `includes` (with no valid values) returns **400 Bad Request**.
+
+## 5) Recommended test flow
 
 1. `Health > GET /api/health`
-2. `Auth > Login (Admin)` (auto-saves bearer token)
-3. `Auth > Update Profile` (optional)
-3. `Authors > Create Author` (copy `id` to environment `authorId`)
-4. `Watchlist > Create Anime` (copy `id` to `animeId`)
-5. `Watchlist > Add Episode` (copy `id` to `episodeId`)
-6. `Watchlist > Set Own Rating`
-6. `Watchlist > Attach Author`
-7. `Watchlist > List` / `Get One`
-8. `Watchlist > Update Anime`
-9. `Watchlist > Delete Anime` (admin allowed)
+2. `Public > List Genres` / `Public > List Types` (copy an `id` into `genreId` / `typeId`)
+3. `Auth > Login (Admin)` (auto-saves bearer token)
+4. `Auth > Update Profile` (optional)
+5. `Authors > Create Author` (copy `id` to environment `authorId`)
+6. `Watchlist > Create Anime` (copy `id` to `animeId`)
+7. `Watchlist > Add Episode` (copy `id` to `episodeId`)
+8. `Watchlist > Set Own Rating`
+9. `Watchlist > Attach Author`
+10. `Watchlist > List` / `Get One`
+11. `Watchlist > Update Anime`
+12. `Watchlist > Delete Anime` (admin allowed)
 
 For RBAC check:
 - Login as **Member** and run `Watchlist > Delete Anime` → should return **403 Forbidden**.
 
-## 5) Notes
+## 6) Notes
+
+- Public routes (`/api/genres`, `/api/types`, `/api/animes`) require no Authorization header at all.
 
 - All protected routes use `Authorization: Bearer {{token}}`.
 - Login requests include a Postman test script to automatically store `token`.

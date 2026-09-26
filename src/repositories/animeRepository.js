@@ -131,6 +131,13 @@ async function topViewedByUser(userId, limit) {
   });
 }
 
+async function publicList(where, include) {
+  return prisma.animeEntry.findMany({
+    where,
+    include,
+  });
+}
+
 async function findRatingForEntryUser(animeEntryId, userId) {
   return prisma.animeRating.findUnique({
     where: {
@@ -258,6 +265,7 @@ module.exports = {
   deleteEntryById,
   incrementViewCountById,
   topViewedByUser,
+  publicList,
   findRatingForEntryUser,
   upsertRatingForEntryUser,
   deleteRatingForEntryUser,

@@ -8,7 +8,43 @@ const {
   validateAiredStatus,
   validateRating,
   toAnimeResponse,
+  toPublicAnimeResponse,
+  ANIME_INCLUDE_OPTIONS,
 } = require('../models/animeModel');
+
+function parseIncludes(raw) {
+  if (raw === undefined || raw === null || raw === '') {
+    return undefined;
+  }
+  const requested = String(raw)
+    .split(',')
+    .map((token) => token.trim())
+    .filter(Boolean);
+  const valid = requested.filter((token) => ANIME_INCLUDE_OPTIONS.includes(token));
+  if (!valid.length) {
+    throw createHttpError(400, `Invalid includes. Use comma-separated values from: ${ANIME_INCLUDE_OPTIONS.join(', ')}`);
+  }
+  return new Set(valid);
+}
+
+function buildPublicInclude(includeSet) {
+  const include = { ratings: { select: { value: true } } };
+  const includeAll = !includeSet;
+
+  if (includeAll || includeSet.has('episodes')) {
+    include.episodes = { orderBy: { episodeNumber: 'asc' } };
+  }
+  if (includeAll || includeSet.has('authors')) {
+    include.authorLinks = { include: { author: true } };
+  }
+  if (includeAll || includeSet.has('genres')) {
+    include.genreLinks = { include: { genre: true } };
+  }
+  if (includeAll || includeSet.has('type')) {
+    include.type = true;
+  }
+  return include;
+}
 
 function ensureOwnedAuthors(authorIds, ownedAuthors) {
   if (authorIds.length && ownedAuthors.length !== authorIds.length) {
@@ -384,6 +420,80 @@ async function topViewed(userId, limit = 10) {
   return rows.map(toAnimeResponse);
 }
 
+async function publicList(query) {
+  const page = Math.max(1, Number(query.page) || 1);
+  const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
+  const skip = (page - 1) * limit;
+
+  const where = {};
+
+  if (query.search) {
+    where.OR = [
+      { title: { contains: query.search, mode: 'insensitive' } },
+      { description: { contains: query.search, mode: 'insensitive' } },
+      { slug: { contains: query.search, mode: 'insensitive' } },
+    ];
+  }
+
+  const normalizedAiredStatus = query.airedStatus ? validateAiredStatus(query.airedStatus) : undefined;
+  if (normalizedAiredStatus) {
+    where.airedStatus = normalizedAiredStatus;
+  }
+
+  if (query.typeId) {
+    where.typeId = query.typeId;
+  }
+
+  if (query.genreId) {
+    const genreIds = String(query.genreId)
+      .split(',')
+      .map((id) => id.trim())
+      .filter(Boolean);
+    if (genreIds.length) {
+      where.genreLinks = { some: { genreId: { in: genreIds } } };
+    }
+  }
+
+  const allowedSorts = new Set(['top', 'rated', 'recent']);
+  const sort = allowedSorts.has(query.sort) ? query.sort : 'recent';
+
+  const includeSet = parseIncludes(query.includes);
+  const include = buildPublicInclude(includeSet);
+
+  const rows = await animeRepository.publicList(where, include);
+
+  const withRating = rows.map((entry) => {
+    const values = (entry.ratings || []).map((r) => r.value);
+    const ratingCount = values.length;
+    const averageRating = ratingCount ? values.reduce((sum, v) => sum + v, 0) / ratingCount : 0;
+    return { entry, averageRating, ratingCount };
+  });
+
+  if (sort === 'top') {
+    withRating.sort((a, b) => b.entry.viewCount - a.entry.viewCount);
+  } else if (sort === 'rated') {
+    withRating.sort((a, b) => b.averageRating - a.averageRating || b.ratingCount - a.ratingCount);
+  } else {
+    withRating.sort((a, b) => new Date(b.entry.createdAt) - new Date(a.entry.createdAt));
+  }
+
+  const total = withRating.length;
+  const paged = withRating.slice(skip, skip + limit);
+
+  return {
+    data: paged.map(({ entry, averageRating, ratingCount }) =>
+      toPublicAnimeResponse(entry, { averageRating, ratingCount, includeSet })),
+    meta: {
+      page,
+      limit,
+      total,
+      totalPages: Math.max(1, Math.ceil(total / limit)),
+      sort,
+      includes: includeSet ? Array.from(includeSet) : ANIME_INCLUDE_OPTIONS,
+    },
+  };
+}
+
 async function manageList(userId, query) {
   const page = Math.max(1, Number(query.page) || 1);
   const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
@@ -447,6 +557,7 @@ module.exports = {
   list,
   manageList,
   topViewed,
+  publicList,
   incrementView,
   getOne,
   create,

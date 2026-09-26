@@ -27,6 +27,8 @@ query ($page: Int!, $perPage: Int!) {
       episodes
       duration
       genres
+      startDate { year month day }
+      endDate { year month day }
       staff(sort: RELEVANCE, perPage: 5) {
         edges {
           role
@@ -74,6 +76,14 @@ function toAiredStatus(anilistStatus) {
   if (value === "HIATUS") return AnimeAiredStatus.HIATUS;
   if (value === "CANCELLED") return AnimeAiredStatus.CANCELLED;
   return AnimeAiredStatus.NOT_YET_RELEASED;
+}
+
+function fuzzyDateToDate(fuzzyDate) {
+  if (!fuzzyDate || !fuzzyDate.year) return null;
+  const month = fuzzyDate.month || 1;
+  const day = fuzzyDate.day || 1;
+  const date = new Date(Date.UTC(fuzzyDate.year, month - 1, day));
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
 function getAnimeType(anime, typesByName) {
@@ -144,7 +154,8 @@ function extensionFromContentType(contentType) {
 }
 
 function r2PublicUrl(key) {
-  const base = process.env.R2_PUBLIC_BASE_URL || process.env.CF_PUBLIC_ACCESS_URL;
+  const base =
+    process.env.R2_PUBLIC_BASE_URL || process.env.CF_PUBLIC_ACCESS_URL;
   if (!base) {
     throw new Error(
       "R2 public URL is required for AniList image upload seeding (set R2_PUBLIC_BASE_URL or CF_PUBLIC_ACCESS_URL).",
@@ -235,7 +246,7 @@ async function fetchActualAnime(limit = 50) {
   let page = 1;
 
   while (anime.length < limit) {
-    const result = await fetchAnimePage(page, 50);
+    const result = await fetchAnimePage(page, 20);
     for (const item of result.media) {
       if (anime.length >= limit) break;
       if (seenIds.has(item.id)) continue;
@@ -265,17 +276,23 @@ async function seedAnimeForAdmin(
     const title = getAnimeTitle(anime);
     const type = getAnimeType(anime, typesByName);
     const genres = getGenres(anime, genresByName);
-    const authorCandidates = getUniqueAuthorLinks(anime, adminAuthorsByAniListId);
+    const authorCandidates = getUniqueAuthorLinks(
+      anime,
+      adminAuthorsByAniListId,
+    );
     const authors = await filterExistingAuthorLinks(
       prisma,
       user.id,
       authorCandidates,
     );
+
+    console.log("anime", anime);
     const status = STATUSES[index % STATUSES.length];
     const airedStatus = toAiredStatus(anime.status);
     const slugBase = slugifyTitle(title) || `anime-${anime.id}`;
     const slug = `${slugBase}-${anime.id}`;
-    const now = new Date();
+    const airedFrom = fuzzyDateToDate(anime.startDate);
+    const airedTo = fuzzyDateToDate(anime.endDate);
 
     const selectedGenres = genres.slice(0, 3);
     if (selectedGenres.length === 0) {
@@ -291,7 +308,7 @@ async function seedAnimeForAdmin(
       imageCache,
     );
 
-    const episodeCount = Math.min(anime.episodes || 0, 12);
+    const episodeCount = Math.min(anime.episodes || 0, 5);
     const episodeSeedData =
       episodeCount > 0
         ? Array.from({ length: episodeCount }, (_, episodeIndex) => ({
@@ -311,8 +328,8 @@ async function seedAnimeForAdmin(
         coverImageUrl,
         status,
         airedStatus,
-        airedFrom: airedStatus === AnimeAiredStatus.NOT_YET_RELEASED ? null : now,
-        airedTo: airedStatus === AnimeAiredStatus.FINISHED ? now : null,
+        airedFrom,
+        airedTo,
         viewCount: Math.max(0, animeList.length - index),
         notes: `Imported from AniList. AniList ID: ${anime.id}`,
         typeId: type?.id || null,

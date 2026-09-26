@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const animeRoutes = require('./routes/animeRoutes');
+const animePublicRoutes = require('./routes/animePublicRoutes');
 const authorRoutes = require('./routes/authorRoutes');
 const genreRoutes = require('./routes/genreRoutes');
 const typeRoutes = require('./routes/typeRoutes');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/animes', animePublicRoutes);
 app.use('/api/watchlist', animeRoutes);
 app.use('/api/authors', authorRoutes);
 app.use('/api/genres', genreRoutes);

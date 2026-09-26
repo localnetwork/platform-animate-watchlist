@@ -1,5 +1,6 @@
-const TYPE_NAMES = ['TV', 'Movie', 'OVA', 'ONA', 'Special'];
+const TYPE_NAMES = ["TV", "Movie", "OVA", "ONA", "Special"];
 
+console.log("TYPE_NAMES", TYPE_NAMES);
 async function seedTypes(prisma) {
   const typesByName = {};
 

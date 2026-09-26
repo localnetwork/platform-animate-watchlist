@@ -171,9 +171,59 @@ function toAnimeResponse(entry) {
   };
 }
 
+const ANIME_INCLUDE_OPTIONS = ['episodes', 'genres', 'authors', 'type'];
+
+function toPublicAnimeResponse(entry, { averageRating = 0, ratingCount = 0, includeSet } = {}) {
+  const includeAll = !includeSet;
+  const response = {
+    id: entry.id,
+    title: entry.title,
+    description: entry.description,
+    coverImageUrl: entry.coverImageUrl,
+    slug: entry.slug,
+    airedFrom: entry.airedFrom,
+    airedTo: entry.airedTo,
+    airedStatus: entry.airedStatus,
+    viewCount: entry.viewCount,
+    averageRating: Number(averageRating.toFixed(2)),
+    ratingCount,
+    createdAt: entry.createdAt,
+    updatedAt: entry.updatedAt,
+  };
+
+  if (includeAll || includeSet.has('type')) {
+    response.type = entry.type ? { id: entry.type.id, name: entry.type.name } : null;
+  }
+
+  if (includeAll || includeSet.has('genres')) {
+    response.genres = (entry.genreLinks || []).map((link) => ({
+      id: link.genre.id,
+      name: link.genre.name,
+    }));
+  }
+
+  if (includeAll || includeSet.has('authors')) {
+    response.authors = (entry.authorLinks || []).map((link) => ({
+      id: link.author.id,
+      name: link.author.name,
+      bio: link.author.bio,
+      role: link.role,
+      createdAt: link.author.createdAt,
+      updatedAt: link.author.updatedAt,
+    }));
+  }
+
+  if (includeAll || includeSet.has('episodes')) {
+    response.episodes = entry.episodes || [];
+  }
+
+  return response;
+}
+
 module.exports = {
   VALID_STATUSES,
   VALID_AIRED_STATUSES,
+  ANIME_INCLUDE_OPTIONS,
   normalizeStatus,
   normalizeAiredStatus,
   validateStatus,
@@ -183,4 +233,5 @@ module.exports = {
   validateUpdateAnimeInput,
   validateEpisodeNumber,
   toAnimeResponse,
+  toPublicAnimeResponse,
 };

@@ -144,10 +144,20 @@ async function topViewed(req, res, next) {
   }
 }
 
+async function publicList(req, res, next) {
+  try {
+    const result = await animeService.publicList(req.query);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   list,
   manageList,
   topViewed,
+  publicList,
   incrementView,
   getOne,
   create,

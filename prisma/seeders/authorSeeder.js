@@ -1,11 +1,13 @@
+console.log("Author Seeder Loaded");
+
 function isAuthorRole(roleValue) {
-  const role = (roleValue || '').toLowerCase();
+  const role = (roleValue || "").toLowerCase();
   return (
-    role.includes('original creator') ||
-    role.includes('original author') ||
-    role.includes('creator') ||
-    role.includes('author') ||
-    role.includes('manga')
+    role.includes("original creator") ||
+    role.includes("original author") ||
+    role.includes("creator") ||
+    role.includes("author") ||
+    role.includes("manga")
   );
 }
 
@@ -35,14 +37,14 @@ function collectAniListAuthors(animeList) {
 }
 
 async function seedAuthors(prisma, users, animeList) {
-  const adminUser = users.find((user) => user.email === 'demo1@anime.local');
-  const memberUser = users.find((user) => user.email === 'demo2@anime.local');
+  const adminUser = users.find((user) => user.email === "demo1@anime.local");
+  const memberUser = users.find((user) => user.email === "demo2@anime.local");
 
   if (!adminUser) {
-    throw new Error('Admin seed user demo1@anime.local was not found.');
+    throw new Error("Admin seed user demo1@anime.local was not found.");
   }
   if (!memberUser) {
-    throw new Error('Member seed user demo2@anime.local was not found.');
+    throw new Error("Member seed user demo2@anime.local was not found.");
   }
 
   const collected = collectAniListAuthors(animeList);
@@ -75,16 +77,16 @@ async function seedAuthors(prisma, users, animeList) {
     where: {
       userId_name: {
         userId: memberUser.id,
-        name: 'Member Author 001',
+        name: "Member Author 001",
       },
     },
     update: {
-      bio: 'Member-owned sample author.',
+      bio: "Member-owned sample author.",
     },
     create: {
       userId: memberUser.id,
-      name: 'Member Author 001',
-      bio: 'Member-owned sample author.',
+      name: "Member Author 001",
+      bio: "Member-owned sample author.",
     },
   });
 
