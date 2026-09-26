@@ -8,6 +8,7 @@ const {
   validateUpdateProfileInput,
   toAuthResponse,
   toUserProfile,
+  toPublicUserProfile,
 } = require('../models/authModel');
 
 function generateToken(user) {
@@ -74,7 +75,31 @@ async function updateProfile(userId, payload) {
     updateData.name = payload.name;
   }
   if (Object.prototype.hasOwnProperty.call(payload, 'password')) {
+    const valid = await bcrypt.compare(payload.currentPassword, existing.password);
+    if (!valid) {
+      throw createHttpError(401, 'Current password is incorrect');
+    }
     updateData.password = await bcrypt.hash(payload.password, 10);
+  }
+  if (Object.prototype.hasOwnProperty.call(payload, 'bio')) {
+    updateData.bio = payload.bio;
+  }
+  if (Object.prototype.hasOwnProperty.call(payload, 'avatarUrl')) {
+    updateData.avatarUrl = payload.avatarUrl;
+  }
+  if (Object.prototype.hasOwnProperty.call(payload, 'socialLinks')) {
+    updateData.socialLinks = payload.socialLinks;
+  }
+  if (Object.prototype.hasOwnProperty.call(payload, 'username')) {
+    const normalizedUsername =
+      payload.username === null ? null : payload.username.toLowerCase();
+    if (normalizedUsername !== null) {
+      const owner = await authRepository.findUserByUsername(normalizedUsername);
+      if (owner && owner.id !== userId) {
+        throw createHttpError(409, 'Username is already taken');
+      }
+    }
+    updateData.username = normalizedUsername;
   }
 
   await authRepository.updateUserById(userId, updateData);
@@ -82,9 +107,21 @@ async function updateProfile(userId, payload) {
   return toUserProfile(updated);
 }
 
+async function getPublicProfile(username) {
+  if (!username || typeof username !== 'string') {
+    throw createHttpError(400, 'username is required');
+  }
+  const user = await authRepository.findUserByUsername(username.toLowerCase());
+  if (!user) {
+    throw createHttpError(404, 'Profile not found');
+  }
+  return toPublicUserProfile(user);
+}
+
 module.exports = {
   register,
   login,
   me,
   updateProfile,
+  getPublicProfile,
 };

@@ -9,6 +9,15 @@ async function uploadCover(req, res, next) {
   }
 }
 
+async function uploadAvatar(req, res, next) {
+  try {
+    const result = await uploadService.uploadAvatarImage(req.file);
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function uploadEpisodeVideo(req, res, next) {
   try {
     const result = await uploadService.uploadEpisodeVideo(req.file);
@@ -18,4 +27,4 @@ async function uploadEpisodeVideo(req, res, next) {
   }
 }
 
-module.exports = { uploadCover, uploadEpisodeVideo };
+module.exports = { uploadCover, uploadAvatar, uploadEpisodeVideo };

@@ -114,6 +114,19 @@ async function findBySlug(slug) {
   });
 }
 
+async function findPublicBySlug(slug) {
+  return prisma.animeEntry.findFirst({
+    where: { slug },
+    include: {
+      episodes: { orderBy: { episodeNumber: 'asc' } },
+      authorLinks: { include: { author: true } },
+      genreLinks: { include: { genre: true } },
+      type: true,
+      ratings: { select: { value: true } },
+    },
+  });
+}
+
 async function incrementViewCountById(id) {
   return prisma.animeEntry.update({
     where: { id },
@@ -257,6 +270,7 @@ module.exports = {
   findEntryRefByIdForUser,
   findBySlugForUser,
   findBySlug,
+  findPublicBySlug,
   findOwnedAuthorsByIds,
   findGenresByIds,
   findTypeById,

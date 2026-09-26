@@ -499,6 +499,24 @@ async function publicList(query) {
   };
 }
 
+async function publicGetBySlug(slug) {
+  const entry = await animeRepository.findPublicBySlug(slug);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  await animeRepository.incrementViewCountById(entry.id);
+
+  const values = (entry.ratings || []).map((r) => r.value);
+  const ratingCount = values.length;
+  const averageRating = ratingCount ? values.reduce((sum, v) => sum + v, 0) / ratingCount : 0;
+
+  return toPublicAnimeResponse(
+    { ...entry, viewCount: entry.viewCount + 1 },
+    { averageRating, ratingCount },
+  );
+}
+
 async function manageList(userId, query) {
   const page = Math.max(1, Number(query.page) || 1);
   const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
@@ -563,6 +581,7 @@ module.exports = {
   manageList,
   topViewed,
   publicList,
+  publicGetBySlug,
   incrementView,
   getOne,
   create,

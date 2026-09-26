@@ -36,4 +36,13 @@ async function updateProfile(req, res, next) {
   }
 }
 
-module.exports = { register, login, me, updateProfile };
+async function publicProfile(req, res, next) {
+  try {
+    const profile = await authService.getPublicProfile(req.params.username);
+    res.json(profile);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { register, login, me, updateProfile, publicProfile };

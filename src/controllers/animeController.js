@@ -153,11 +153,21 @@ async function publicList(req, res, next) {
   }
 }
 
+async function publicGetBySlug(req, res, next) {
+  try {
+    const result = await animeService.publicGetBySlug(req.params.slug);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   list,
   manageList,
   topViewed,
   publicList,
+  publicGetBySlug,
   incrementView,
   getOne,
   create,

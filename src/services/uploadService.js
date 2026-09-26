@@ -81,6 +81,31 @@ async function uploadCoverImage(file) {
   return { url: publicUrlFor(key), key };
 }
 
+async function uploadAvatarImage(file) {
+  if (!file) {
+    throw createHttpError(400, 'No file was provided');
+  }
+  if (!ALLOWED_MIME_TYPES.has(file.mimetype)) {
+    throw createHttpError(400, 'Only JPEG, PNG, WEBP or GIF images are allowed');
+  }
+  if (file.size > MAX_FILE_SIZE_BYTES) {
+    throw createHttpError(400, 'Image must be 5MB or smaller');
+  }
+
+  const key = `avatars/${crypto.randomUUID()}.${extensionForMimeType(file.mimetype)}`;
+
+  await r2Client.send(
+    new PutObjectCommand({
+      Bucket: process.env.CF_BUCKET,
+      Key: key,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    }),
+  );
+
+  return { url: publicUrlFor(key), key };
+}
+
 async function uploadEpisodeVideo(file) {
   if (!file) {
     throw createHttpError(400, 'No file was provided');
@@ -108,5 +133,6 @@ async function uploadEpisodeVideo(file) {
 
 module.exports = {
   uploadCoverImage,
+  uploadAvatarImage,
   uploadEpisodeVideo,
 };

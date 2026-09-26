@@ -7,6 +7,7 @@ const authorRoutes = require('./routes/authorRoutes');
 const genreRoutes = require('./routes/genreRoutes');
 const typeRoutes = require('./routes/typeRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -23,6 +24,7 @@ app.use('/api/authors', authorRoutes);
 app.use('/api/genres', genreRoutes);
 app.use('/api/types', typeRoutes);
 app.use('/api/uploads', uploadRoutes);
+app.use('/api/users', userRoutes);
 
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 app.use(errorHandler);

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const multer = require('multer');
 const auth = require('../middleware/auth');
-const { requireAnyPermission } = require('../middleware/rbac');
+const { requireAnyPermission, requirePermission } = require('../middleware/rbac');
 const { PERMISSIONS } = require('../models/permissions');
-const { uploadCover, uploadEpisodeVideo } = require('../controllers/uploadController');
+const { uploadCover, uploadAvatar, uploadEpisodeVideo } = require('../controllers/uploadController');
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -22,6 +22,13 @@ router.post(
   requireAnyPermission([PERMISSIONS.ANIME_CREATE, PERMISSIONS.ANIME_UPDATE]),
   upload.single('file'),
   uploadCover,
+);
+
+router.post(
+  '/avatar',
+  requirePermission(PERMISSIONS.AUTH_PROFILE_UPDATE),
+  upload.single('file'),
+  uploadAvatar,
 );
 
 router.post(
