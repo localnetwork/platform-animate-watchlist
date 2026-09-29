@@ -1,5 +1,8 @@
-const router = require('express').Router();
-const { publicList, publicGetBySlug } = require('../controllers/animeController');
+const router = require("express").Router();
+const {
+  publicList,
+  publicGetBySlug,
+} = require("../controllers/animeController");
 
 // Public, unauthenticated catalog of anime entries.
 // Query params:
@@ -9,9 +12,9 @@ const { publicList, publicGetBySlug } = require('../controllers/animeController'
 //   search   - text search across title/description/slug
 //   page     - page number (default 1)
 //   limit    - page size (default 20, max 100)
-router.get('/', publicList);
+router.get("/", publicList);
 
 // Public, unauthenticated single anime detail lookup by slug.
-router.get('/:slug', publicGetBySlug);
+router.get("/:slug", publicGetBySlug);
 
 module.exports = router;

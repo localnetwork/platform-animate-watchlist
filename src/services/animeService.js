@@ -67,36 +67,32 @@ async function ensureValidType(typeId) {
   }
 }
 
+function slugifyTitle(title) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80);
+}
+
+async function buildUniqueSlug(title) {
+  const base = slugifyTitle(title) || 'anime';
+  let candidate = base;
+  let counter = 2;
+
+  while (true) {
+    const existing = await animeRepository.findBySlug(candidate);
+    if (!existing) return candidate;
+    candidate = `${base}-${counter}`;
+    counter += 1;
+  }
+}
+
 async function list(userId, query) {
-  const { status, search } = query;
+  const { search } = query;
   const filter = { userId };
 
-  const normalizedStatus = validateStatus(status);
-  if (normalizedStatus) {
-    filter.status = normalizedStatus;
-  }
-
-  function slugifyTitle(title) {
-    return title
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 80);
-  }
-
-  async function buildUniqueSlug(title) {
-    const base = slugifyTitle(title) || 'anime';
-    let candidate = base;
-    let counter = 2;
-
-    while (true) {
-      const existing = await animeRepository.findBySlug(candidate);
-      if (!existing) return candidate;
-      candidate = `${base}-${counter}`;
-      counter += 1;
-    }
-  }
   if (search) {
     filter.OR = [
       { title: { contains: search, mode: 'insensitive' } },
@@ -122,7 +118,6 @@ async function create(userId, payload) {
     title,
     description,
     coverImageUrl,
-    status,
     airedStatus,
     airedFrom,
     airedTo,
@@ -141,7 +136,6 @@ async function create(userId, payload) {
   ensureValidGenres(genreIds, validGenres);
   await ensureValidType(typeId);
 
-  const normalizedStatus = status ? validateStatus(status) : undefined;
   const normalizedAiredStatus = airedStatus ? validateAiredStatus(airedStatus) : undefined;
   const slug = await buildUniqueSlug(title);
   const entry = await animeRepository.createEntryForUser(userId, {
@@ -149,7 +143,6 @@ async function create(userId, payload) {
     title,
     description,
     coverImageUrl,
-    status: normalizedStatus || undefined,
     airedStatus: normalizedAiredStatus || undefined,
     airedFrom: airedFrom ? new Date(airedFrom) : undefined,
     airedTo: airedTo ? new Date(airedTo) : undefined,
@@ -204,7 +197,6 @@ async function update(userId, id, payload) {
     await ensureValidType(payload.typeId);
   }
 
-  const normalizedStatus = payload.status ? validateStatus(payload.status) : undefined;
   const normalizedAiredStatus = payload.airedStatus ? validateAiredStatus(payload.airedStatus) : undefined;
   const shouldRegenerateSlug = payload.title !== undefined && payload.title !== null && payload.title !== '';
   const nextSlug = shouldRegenerateSlug ? await buildUniqueSlug(payload.title) : undefined;
@@ -213,7 +205,6 @@ async function update(userId, id, payload) {
     title: payload.title ?? undefined,
     description: payload.description ?? undefined,
     coverImageUrl: payload.coverImageUrl ?? undefined,
-    status: normalizedStatus || undefined,
     ...(payload.airedStatus !== undefined ? { airedStatus: normalizedAiredStatus || null } : {}),
     ...(payload.airedFrom !== undefined
       ? { airedFrom: payload.airedFrom ? new Date(payload.airedFrom) : null }
@@ -411,6 +402,119 @@ async function removeOwnRating(userId, animeEntryId) {
   await animeRepository.deleteRatingForEntryUser(entry.id, userId);
 }
 
+async function getOwnStatus(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  const record = await animeRepository.findUserStatusForEntryUser(animeEntryId, userId);
+  return {
+    animeEntryId: entry.id,
+    status: record ? record.status : null,
+  };
+}
+
+async function setOwnStatus(userId, animeEntryId, payload) {
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  const normalizedStatus = validateStatus(payload.status);
+  if (!normalizedStatus) {
+    throw createHttpError(400, 'status is required');
+  }
+
+  const record = await animeRepository.upsertUserStatusForEntryUser(entry.id, userId, normalizedStatus);
+  return {
+    animeEntryId: entry.id,
+    status: record.status,
+    createdAt: record.createdAt,
+    updatedAt: record.updatedAt,
+  };
+}
+
+async function removeOwnStatus(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  const existing = await animeRepository.findUserStatusForEntryUser(entry.id, userId);
+  if (!existing) {
+    throw createHttpError(404, 'Status not found');
+  }
+
+  await animeRepository.deleteUserStatusForEntryUser(entry.id, userId);
+}
+
+async function getOwnFavorite(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  const record = await animeRepository.findFavoriteForEntryUser(animeEntryId, userId);
+  return {
+    animeEntryId: entry.id,
+    favorited: Boolean(record),
+  };
+}
+
+async function addFavorite(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  const record = await animeRepository.createFavoriteForEntryUser(entry.id, userId);
+  return {
+    animeEntryId: entry.id,
+    favorited: true,
+    createdAt: record.createdAt,
+  };
+}
+
+async function removeFavorite(userId, animeEntryId) {
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
+  if (!entry) {
+    throw createHttpError(404, 'Anime not found');
+  }
+
+  const existing = await animeRepository.findFavoriteForEntryUser(entry.id, userId);
+  if (!existing) {
+    throw createHttpError(404, 'Favorite not found');
+  }
+
+  await animeRepository.deleteFavoriteForEntryUser(entry.id, userId);
+}
+
+async function listFavorites(userId, query) {
+  const page = Math.max(1, Number(query.page) || 1);
+  const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
+  const skip = (page - 1) * limit;
+
+  const { rows, total } = await animeRepository.listFavoritesByUserPaginated(userId, skip, limit);
+
+  return {
+    data: rows.map((entry) => {
+      const values = (entry.ratings || []).map((r) => r.value);
+      const ratingCount = values.length;
+      const averageRating = ratingCount ? values.reduce((sum, v) => sum + v, 0) / ratingCount : 0;
+      const response = toPublicAnimeResponse(entry, { averageRating, ratingCount });
+      response.favoritedAt = entry.favoritedAt;
+      return response;
+    }),
+    meta: {
+      page,
+      limit,
+      total,
+      totalPages: Math.max(1, Math.ceil(total / limit)),
+    },
+  };
+}
+
 async function incrementView(userId, animeEntryId) {
   const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
   if (!entry) {
@@ -532,11 +636,6 @@ async function manageList(userId, query) {
     ];
   }
 
-  const normalizedStatus = query.status ? validateStatus(query.status) : undefined;
-  if (normalizedStatus) {
-    where.status = normalizedStatus;
-  }
-
   const normalizedAiredStatus = query.airedStatus ? validateAiredStatus(query.airedStatus) : undefined;
   if (normalizedAiredStatus) {
     where.airedStatus = normalizedAiredStatus;
@@ -595,4 +694,11 @@ module.exports = {
   getOwnRating,
   setOwnRating,
   removeOwnRating,
+  getOwnStatus,
+  setOwnStatus,
+  removeOwnStatus,
+  getOwnFavorite,
+  addFavorite,
+  removeFavorite,
+  listFavorites,
 };

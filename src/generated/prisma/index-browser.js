@@ -168,7 +168,6 @@ exports.Prisma.AnimeEntryScalarFieldEnum = {
   title: 'title',
   description: 'description',
   coverImageUrl: 'coverImageUrl',
-  status: 'status',
   airedFrom: 'airedFrom',
   airedTo: 'airedTo',
   airedStatus: 'airedStatus',
@@ -178,6 +177,22 @@ exports.Prisma.AnimeEntryScalarFieldEnum = {
   typeId: 'typeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserAnimeStatusScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  animeEntryId: 'animeEntryId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AnimeFavoriteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  animeEntryId: 'animeEntryId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.GenreScalarFieldEnum = {
@@ -263,19 +278,19 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.WatchStatus = exports.$Enums.WatchStatus = {
-  PLANNED: 'PLANNED',
-  WATCHING: 'WATCHING',
-  COMPLETED: 'COMPLETED',
-  DROPPED: 'DROPPED'
-};
-
 exports.AnimeAiredStatus = exports.$Enums.AnimeAiredStatus = {
   NOT_YET_RELEASED: 'NOT_YET_RELEASED',
   AIRING: 'AIRING',
   FINISHED: 'FINISHED',
   HIATUS: 'HIATUS',
   CANCELLED: 'CANCELLED'
+};
+
+exports.WatchStatus = exports.$Enums.WatchStatus = {
+  PLANNED: 'PLANNED',
+  WATCHING: 'WATCHING',
+  COMPLETED: 'COMPLETED',
+  DROPPED: 'DROPPED'
 };
 
 exports.Prisma.ModelName = {
@@ -285,6 +300,8 @@ exports.Prisma.ModelName = {
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
   AnimeEntry: 'AnimeEntry',
+  UserAnimeStatus: 'UserAnimeStatus',
+  AnimeFavorite: 'AnimeFavorite',
   Genre: 'Genre',
   AnimeType: 'AnimeType',
   AnimeEntryGenre: 'AnimeEntryGenre',

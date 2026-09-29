@@ -6,6 +6,8 @@ const PERMISSIONS = {
   ANIME_UPDATE: 'anime.update',
   ANIME_DELETE: 'anime.delete',
   ANIME_RATING_MANAGE: 'anime.rating.manage',
+  ANIME_STATUS_MANAGE: 'anime.status.manage',
+  ANIME_FAVORITE_MANAGE: 'anime.favorite.manage',
   ANIME_EPISODE_MANAGE: 'anime.episode.manage',
   ANIME_AUTHOR_LINK_MANAGE: 'anime.author_link.manage',
   AUTHOR_READ: 'author.read',

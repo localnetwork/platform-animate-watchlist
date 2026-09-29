@@ -44,6 +44,16 @@ export type RolePermission = $Result.DefaultSelection<Prisma.$RolePermissionPayl
  */
 export type AnimeEntry = $Result.DefaultSelection<Prisma.$AnimeEntryPayload>
 /**
+ * Model UserAnimeStatus
+ * 
+ */
+export type UserAnimeStatus = $Result.DefaultSelection<Prisma.$UserAnimeStatusPayload>
+/**
+ * Model AnimeFavorite
+ * 
+ */
+export type AnimeFavorite = $Result.DefaultSelection<Prisma.$AnimeFavoritePayload>
+/**
  * Model Genre
  * 
  */
@@ -290,6 +300,26 @@ export class PrismaClient<
     * ```
     */
   get animeEntry(): Prisma.AnimeEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userAnimeStatus`: Exposes CRUD operations for the **UserAnimeStatus** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserAnimeStatuses
+    * const userAnimeStatuses = await prisma.userAnimeStatus.findMany()
+    * ```
+    */
+  get userAnimeStatus(): Prisma.UserAnimeStatusDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.animeFavorite`: Exposes CRUD operations for the **AnimeFavorite** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AnimeFavorites
+    * const animeFavorites = await prisma.animeFavorite.findMany()
+    * ```
+    */
+  get animeFavorite(): Prisma.AnimeFavoriteDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.genre`: Exposes CRUD operations for the **Genre** model.
@@ -807,6 +837,8 @@ export namespace Prisma {
     UserRole: 'UserRole',
     RolePermission: 'RolePermission',
     AnimeEntry: 'AnimeEntry',
+    UserAnimeStatus: 'UserAnimeStatus',
+    AnimeFavorite: 'AnimeFavorite',
     Genre: 'Genre',
     AnimeType: 'AnimeType',
     AnimeEntryGenre: 'AnimeEntryGenre',
@@ -832,7 +864,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "animeEntry" | "genre" | "animeType" | "animeEntryGenre" | "animeRating" | "animeEpisode" | "animeAuthor" | "animeEntryAuthor"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "animeEntry" | "userAnimeStatus" | "animeFavorite" | "genre" | "animeType" | "animeEntryGenre" | "animeRating" | "animeEpisode" | "animeAuthor" | "animeEntryAuthor"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1277,6 +1309,154 @@ export namespace Prisma {
           count: {
             args: Prisma.AnimeEntryCountArgs<ExtArgs>
             result: $Utils.Optional<AnimeEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserAnimeStatus: {
+        payload: Prisma.$UserAnimeStatusPayload<ExtArgs>
+        fields: Prisma.UserAnimeStatusFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserAnimeStatusFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserAnimeStatusFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>
+          }
+          findFirst: {
+            args: Prisma.UserAnimeStatusFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserAnimeStatusFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>
+          }
+          findMany: {
+            args: Prisma.UserAnimeStatusFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>[]
+          }
+          create: {
+            args: Prisma.UserAnimeStatusCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>
+          }
+          createMany: {
+            args: Prisma.UserAnimeStatusCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserAnimeStatusCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>[]
+          }
+          delete: {
+            args: Prisma.UserAnimeStatusDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>
+          }
+          update: {
+            args: Prisma.UserAnimeStatusUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserAnimeStatusDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserAnimeStatusUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserAnimeStatusUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserAnimeStatusUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAnimeStatusPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAnimeStatusAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserAnimeStatus>
+          }
+          groupBy: {
+            args: Prisma.UserAnimeStatusGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserAnimeStatusGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserAnimeStatusCountArgs<ExtArgs>
+            result: $Utils.Optional<UserAnimeStatusCountAggregateOutputType> | number
+          }
+        }
+      }
+      AnimeFavorite: {
+        payload: Prisma.$AnimeFavoritePayload<ExtArgs>
+        fields: Prisma.AnimeFavoriteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnimeFavoriteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnimeFavoriteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>
+          }
+          findFirst: {
+            args: Prisma.AnimeFavoriteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnimeFavoriteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>
+          }
+          findMany: {
+            args: Prisma.AnimeFavoriteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>[]
+          }
+          create: {
+            args: Prisma.AnimeFavoriteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>
+          }
+          createMany: {
+            args: Prisma.AnimeFavoriteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnimeFavoriteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>[]
+          }
+          delete: {
+            args: Prisma.AnimeFavoriteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>
+          }
+          update: {
+            args: Prisma.AnimeFavoriteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>
+          }
+          deleteMany: {
+            args: Prisma.AnimeFavoriteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnimeFavoriteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AnimeFavoriteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>[]
+          }
+          upsert: {
+            args: Prisma.AnimeFavoriteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnimeFavoritePayload>
+          }
+          aggregate: {
+            args: Prisma.AnimeFavoriteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnimeFavorite>
+          }
+          groupBy: {
+            args: Prisma.AnimeFavoriteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnimeFavoriteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnimeFavoriteCountArgs<ExtArgs>
+            result: $Utils.Optional<AnimeFavoriteCountAggregateOutputType> | number
           }
         }
       }
@@ -1900,6 +2080,8 @@ export namespace Prisma {
     userRole?: UserRoleOmit
     rolePermission?: RolePermissionOmit
     animeEntry?: AnimeEntryOmit
+    userAnimeStatus?: UserAnimeStatusOmit
+    animeFavorite?: AnimeFavoriteOmit
     genre?: GenreOmit
     animeType?: AnimeTypeOmit
     animeEntryGenre?: AnimeEntryGenreOmit
@@ -1990,6 +2172,8 @@ export namespace Prisma {
     animeEntries: number
     animeAuthors: number
     animeRatings: number
+    animeStatuses: number
+    animeFavorites: number
     roleLinks: number
   }
 
@@ -1997,6 +2181,8 @@ export namespace Prisma {
     animeEntries?: boolean | UserCountOutputTypeCountAnimeEntriesArgs
     animeAuthors?: boolean | UserCountOutputTypeCountAnimeAuthorsArgs
     animeRatings?: boolean | UserCountOutputTypeCountAnimeRatingsArgs
+    animeStatuses?: boolean | UserCountOutputTypeCountAnimeStatusesArgs
+    animeFavorites?: boolean | UserCountOutputTypeCountAnimeFavoritesArgs
     roleLinks?: boolean | UserCountOutputTypeCountRoleLinksArgs
   }
 
@@ -2030,6 +2216,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAnimeRatingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AnimeRatingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAnimeStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAnimeStatusWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAnimeFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeFavoriteWhereInput
   }
 
   /**
@@ -2120,6 +2320,8 @@ export namespace Prisma {
     authorLinks: number
     ratings: number
     genreLinks: number
+    userStatuses: number
+    favorites: number
   }
 
   export type AnimeEntryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2127,6 +2329,8 @@ export namespace Prisma {
     authorLinks?: boolean | AnimeEntryCountOutputTypeCountAuthorLinksArgs
     ratings?: boolean | AnimeEntryCountOutputTypeCountRatingsArgs
     genreLinks?: boolean | AnimeEntryCountOutputTypeCountGenreLinksArgs
+    userStatuses?: boolean | AnimeEntryCountOutputTypeCountUserStatusesArgs
+    favorites?: boolean | AnimeEntryCountOutputTypeCountFavoritesArgs
   }
 
   // Custom InputTypes
@@ -2166,6 +2370,20 @@ export namespace Prisma {
    */
   export type AnimeEntryCountOutputTypeCountGenreLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AnimeEntryGenreWhereInput
+  }
+
+  /**
+   * AnimeEntryCountOutputType without action
+   */
+  export type AnimeEntryCountOutputTypeCountUserStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAnimeStatusWhereInput
+  }
+
+  /**
+   * AnimeEntryCountOutputType without action
+   */
+  export type AnimeEntryCountOutputTypeCountFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeFavoriteWhereInput
   }
 
 
@@ -2469,6 +2687,8 @@ export namespace Prisma {
     animeEntries?: boolean | User$animeEntriesArgs<ExtArgs>
     animeAuthors?: boolean | User$animeAuthorsArgs<ExtArgs>
     animeRatings?: boolean | User$animeRatingsArgs<ExtArgs>
+    animeStatuses?: boolean | User$animeStatusesArgs<ExtArgs>
+    animeFavorites?: boolean | User$animeFavoritesArgs<ExtArgs>
     roleLinks?: boolean | User$roleLinksArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -2517,6 +2737,8 @@ export namespace Prisma {
     animeEntries?: boolean | User$animeEntriesArgs<ExtArgs>
     animeAuthors?: boolean | User$animeAuthorsArgs<ExtArgs>
     animeRatings?: boolean | User$animeRatingsArgs<ExtArgs>
+    animeStatuses?: boolean | User$animeStatusesArgs<ExtArgs>
+    animeFavorites?: boolean | User$animeFavoritesArgs<ExtArgs>
     roleLinks?: boolean | User$roleLinksArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2529,6 +2751,8 @@ export namespace Prisma {
       animeEntries: Prisma.$AnimeEntryPayload<ExtArgs>[]
       animeAuthors: Prisma.$AnimeAuthorPayload<ExtArgs>[]
       animeRatings: Prisma.$AnimeRatingPayload<ExtArgs>[]
+      animeStatuses: Prisma.$UserAnimeStatusPayload<ExtArgs>[]
+      animeFavorites: Prisma.$AnimeFavoritePayload<ExtArgs>[]
       roleLinks: Prisma.$UserRolePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2939,6 +3163,8 @@ export namespace Prisma {
     animeEntries<T extends User$animeEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$animeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     animeAuthors<T extends User$animeAuthorsArgs<ExtArgs> = {}>(args?: Subset<T, User$animeAuthorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeAuthorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     animeRatings<T extends User$animeRatingsArgs<ExtArgs> = {}>(args?: Subset<T, User$animeRatingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    animeStatuses<T extends User$animeStatusesArgs<ExtArgs> = {}>(args?: Subset<T, User$animeStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    animeFavorites<T extends User$animeFavoritesArgs<ExtArgs> = {}>(args?: Subset<T, User$animeFavoritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     roleLinks<T extends User$roleLinksArgs<ExtArgs> = {}>(args?: Subset<T, User$roleLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3436,6 +3662,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AnimeRatingScalarFieldEnum | AnimeRatingScalarFieldEnum[]
+  }
+
+  /**
+   * User.animeStatuses
+   */
+  export type User$animeStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    where?: UserAnimeStatusWhereInput
+    orderBy?: UserAnimeStatusOrderByWithRelationInput | UserAnimeStatusOrderByWithRelationInput[]
+    cursor?: UserAnimeStatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserAnimeStatusScalarFieldEnum | UserAnimeStatusScalarFieldEnum[]
+  }
+
+  /**
+   * User.animeFavorites
+   */
+  export type User$animeFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    where?: AnimeFavoriteWhereInput
+    orderBy?: AnimeFavoriteOrderByWithRelationInput | AnimeFavoriteOrderByWithRelationInput[]
+    cursor?: AnimeFavoriteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimeFavoriteScalarFieldEnum | AnimeFavoriteScalarFieldEnum[]
   }
 
   /**
@@ -7755,7 +8029,6 @@ export namespace Prisma {
     title: string | null
     description: string | null
     coverImageUrl: string | null
-    status: $Enums.WatchStatus | null
     airedFrom: Date | null
     airedTo: Date | null
     airedStatus: $Enums.AnimeAiredStatus | null
@@ -7773,7 +8046,6 @@ export namespace Prisma {
     title: string | null
     description: string | null
     coverImageUrl: string | null
-    status: $Enums.WatchStatus | null
     airedFrom: Date | null
     airedTo: Date | null
     airedStatus: $Enums.AnimeAiredStatus | null
@@ -7791,7 +8063,6 @@ export namespace Prisma {
     title: number
     description: number
     coverImageUrl: number
-    status: number
     airedFrom: number
     airedTo: number
     airedStatus: number
@@ -7819,7 +8090,6 @@ export namespace Prisma {
     title?: true
     description?: true
     coverImageUrl?: true
-    status?: true
     airedFrom?: true
     airedTo?: true
     airedStatus?: true
@@ -7837,7 +8107,6 @@ export namespace Prisma {
     title?: true
     description?: true
     coverImageUrl?: true
-    status?: true
     airedFrom?: true
     airedTo?: true
     airedStatus?: true
@@ -7855,7 +8124,6 @@ export namespace Prisma {
     title?: true
     description?: true
     coverImageUrl?: true
-    status?: true
     airedFrom?: true
     airedTo?: true
     airedStatus?: true
@@ -7960,7 +8228,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status: $Enums.WatchStatus
     airedFrom: Date | null
     airedTo: Date | null
     airedStatus: $Enums.AnimeAiredStatus
@@ -7997,7 +8264,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
-    status?: boolean
     airedFrom?: boolean
     airedTo?: boolean
     airedStatus?: boolean
@@ -8012,6 +8278,8 @@ export namespace Prisma {
     authorLinks?: boolean | AnimeEntry$authorLinksArgs<ExtArgs>
     ratings?: boolean | AnimeEntry$ratingsArgs<ExtArgs>
     genreLinks?: boolean | AnimeEntry$genreLinksArgs<ExtArgs>
+    userStatuses?: boolean | AnimeEntry$userStatusesArgs<ExtArgs>
+    favorites?: boolean | AnimeEntry$favoritesArgs<ExtArgs>
     type?: boolean | AnimeEntry$typeArgs<ExtArgs>
     _count?: boolean | AnimeEntryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["animeEntry"]>
@@ -8022,7 +8290,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
-    status?: boolean
     airedFrom?: boolean
     airedTo?: boolean
     airedStatus?: boolean
@@ -8042,7 +8309,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
-    status?: boolean
     airedFrom?: boolean
     airedTo?: boolean
     airedStatus?: boolean
@@ -8062,7 +8328,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     coverImageUrl?: boolean
-    status?: boolean
     airedFrom?: boolean
     airedTo?: boolean
     airedStatus?: boolean
@@ -8074,13 +8339,15 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AnimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "description" | "coverImageUrl" | "status" | "airedFrom" | "airedTo" | "airedStatus" | "viewCount" | "notes" | "userId" | "typeId" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEntry"]>
+  export type AnimeEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "description" | "coverImageUrl" | "airedFrom" | "airedTo" | "airedStatus" | "viewCount" | "notes" | "userId" | "typeId" | "createdAt" | "updatedAt", ExtArgs["result"]["animeEntry"]>
   export type AnimeEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     episodes?: boolean | AnimeEntry$episodesArgs<ExtArgs>
     authorLinks?: boolean | AnimeEntry$authorLinksArgs<ExtArgs>
     ratings?: boolean | AnimeEntry$ratingsArgs<ExtArgs>
     genreLinks?: boolean | AnimeEntry$genreLinksArgs<ExtArgs>
+    userStatuses?: boolean | AnimeEntry$userStatusesArgs<ExtArgs>
+    favorites?: boolean | AnimeEntry$favoritesArgs<ExtArgs>
     type?: boolean | AnimeEntry$typeArgs<ExtArgs>
     _count?: boolean | AnimeEntryCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -8101,6 +8368,8 @@ export namespace Prisma {
       authorLinks: Prisma.$AnimeEntryAuthorPayload<ExtArgs>[]
       ratings: Prisma.$AnimeRatingPayload<ExtArgs>[]
       genreLinks: Prisma.$AnimeEntryGenrePayload<ExtArgs>[]
+      userStatuses: Prisma.$UserAnimeStatusPayload<ExtArgs>[]
+      favorites: Prisma.$AnimeFavoritePayload<ExtArgs>[]
       type: Prisma.$AnimeTypePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -8109,7 +8378,6 @@ export namespace Prisma {
       title: string
       description: string
       coverImageUrl: string
-      status: $Enums.WatchStatus
       airedFrom: Date | null
       airedTo: Date | null
       airedStatus: $Enums.AnimeAiredStatus
@@ -8518,6 +8786,8 @@ export namespace Prisma {
     authorLinks<T extends AnimeEntry$authorLinksArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$authorLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryAuthorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ratings<T extends AnimeEntry$ratingsArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeRatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     genreLinks<T extends AnimeEntry$genreLinksArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$genreLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeEntryGenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userStatuses<T extends AnimeEntry$userStatusesArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$userStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favorites<T extends AnimeEntry$favoritesArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     type<T extends AnimeEntry$typeArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntry$typeArgs<ExtArgs>>): Prisma__AnimeTypeClient<$Result.GetResult<Prisma.$AnimeTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8553,7 +8823,6 @@ export namespace Prisma {
     readonly title: FieldRef<"AnimeEntry", 'String'>
     readonly description: FieldRef<"AnimeEntry", 'String'>
     readonly coverImageUrl: FieldRef<"AnimeEntry", 'String'>
-    readonly status: FieldRef<"AnimeEntry", 'WatchStatus'>
     readonly airedFrom: FieldRef<"AnimeEntry", 'DateTime'>
     readonly airedTo: FieldRef<"AnimeEntry", 'DateTime'>
     readonly airedStatus: FieldRef<"AnimeEntry", 'AnimeAiredStatus'>
@@ -9055,6 +9324,54 @@ export namespace Prisma {
   }
 
   /**
+   * AnimeEntry.userStatuses
+   */
+  export type AnimeEntry$userStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    where?: UserAnimeStatusWhereInput
+    orderBy?: UserAnimeStatusOrderByWithRelationInput | UserAnimeStatusOrderByWithRelationInput[]
+    cursor?: UserAnimeStatusWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserAnimeStatusScalarFieldEnum | UserAnimeStatusScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeEntry.favorites
+   */
+  export type AnimeEntry$favoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    where?: AnimeFavoriteWhereInput
+    orderBy?: AnimeFavoriteOrderByWithRelationInput | AnimeFavoriteOrderByWithRelationInput[]
+    cursor?: AnimeFavoriteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AnimeFavoriteScalarFieldEnum | AnimeFavoriteScalarFieldEnum[]
+  }
+
+  /**
    * AnimeEntry.type
    */
   export type AnimeEntry$typeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9089,6 +9406,2138 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AnimeEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserAnimeStatus
+   */
+
+  export type AggregateUserAnimeStatus = {
+    _count: UserAnimeStatusCountAggregateOutputType | null
+    _min: UserAnimeStatusMinAggregateOutputType | null
+    _max: UserAnimeStatusMaxAggregateOutputType | null
+  }
+
+  export type UserAnimeStatusMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    animeEntryId: string | null
+    status: $Enums.WatchStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAnimeStatusMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    animeEntryId: string | null
+    status: $Enums.WatchStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAnimeStatusCountAggregateOutputType = {
+    id: number
+    userId: number
+    animeEntryId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserAnimeStatusMinAggregateInputType = {
+    id?: true
+    userId?: true
+    animeEntryId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAnimeStatusMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    animeEntryId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAnimeStatusCountAggregateInputType = {
+    id?: true
+    userId?: true
+    animeEntryId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserAnimeStatusAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAnimeStatus to aggregate.
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnimeStatuses to fetch.
+     */
+    orderBy?: UserAnimeStatusOrderByWithRelationInput | UserAnimeStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserAnimeStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnimeStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnimeStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserAnimeStatuses
+    **/
+    _count?: true | UserAnimeStatusCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserAnimeStatusMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserAnimeStatusMaxAggregateInputType
+  }
+
+  export type GetUserAnimeStatusAggregateType<T extends UserAnimeStatusAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserAnimeStatus]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserAnimeStatus[P]>
+      : GetScalarType<T[P], AggregateUserAnimeStatus[P]>
+  }
+
+
+
+
+  export type UserAnimeStatusGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAnimeStatusWhereInput
+    orderBy?: UserAnimeStatusOrderByWithAggregationInput | UserAnimeStatusOrderByWithAggregationInput[]
+    by: UserAnimeStatusScalarFieldEnum[] | UserAnimeStatusScalarFieldEnum
+    having?: UserAnimeStatusScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserAnimeStatusCountAggregateInputType | true
+    _min?: UserAnimeStatusMinAggregateInputType
+    _max?: UserAnimeStatusMaxAggregateInputType
+  }
+
+  export type UserAnimeStatusGroupByOutputType = {
+    id: string
+    userId: string
+    animeEntryId: string
+    status: $Enums.WatchStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: UserAnimeStatusCountAggregateOutputType | null
+    _min: UserAnimeStatusMinAggregateOutputType | null
+    _max: UserAnimeStatusMaxAggregateOutputType | null
+  }
+
+  type GetUserAnimeStatusGroupByPayload<T extends UserAnimeStatusGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserAnimeStatusGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserAnimeStatusGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserAnimeStatusGroupByOutputType[P]>
+            : GetScalarType<T[P], UserAnimeStatusGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserAnimeStatusSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAnimeStatus"]>
+
+  export type UserAnimeStatusSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAnimeStatus"]>
+
+  export type UserAnimeStatusSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAnimeStatus"]>
+
+  export type UserAnimeStatusSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserAnimeStatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "animeEntryId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["userAnimeStatus"]>
+  export type UserAnimeStatusInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }
+  export type UserAnimeStatusIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }
+  export type UserAnimeStatusIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }
+
+  export type $UserAnimeStatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserAnimeStatus"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      animeEntry: Prisma.$AnimeEntryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      animeEntryId: string
+      status: $Enums.WatchStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userAnimeStatus"]>
+    composites: {}
+  }
+
+  type UserAnimeStatusGetPayload<S extends boolean | null | undefined | UserAnimeStatusDefaultArgs> = $Result.GetResult<Prisma.$UserAnimeStatusPayload, S>
+
+  type UserAnimeStatusCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserAnimeStatusFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserAnimeStatusCountAggregateInputType | true
+    }
+
+  export interface UserAnimeStatusDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserAnimeStatus'], meta: { name: 'UserAnimeStatus' } }
+    /**
+     * Find zero or one UserAnimeStatus that matches the filter.
+     * @param {UserAnimeStatusFindUniqueArgs} args - Arguments to find a UserAnimeStatus
+     * @example
+     * // Get one UserAnimeStatus
+     * const userAnimeStatus = await prisma.userAnimeStatus.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserAnimeStatusFindUniqueArgs>(args: SelectSubset<T, UserAnimeStatusFindUniqueArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserAnimeStatus that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserAnimeStatusFindUniqueOrThrowArgs} args - Arguments to find a UserAnimeStatus
+     * @example
+     * // Get one UserAnimeStatus
+     * const userAnimeStatus = await prisma.userAnimeStatus.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserAnimeStatusFindUniqueOrThrowArgs>(args: SelectSubset<T, UserAnimeStatusFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAnimeStatus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusFindFirstArgs} args - Arguments to find a UserAnimeStatus
+     * @example
+     * // Get one UserAnimeStatus
+     * const userAnimeStatus = await prisma.userAnimeStatus.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserAnimeStatusFindFirstArgs>(args?: SelectSubset<T, UserAnimeStatusFindFirstArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAnimeStatus that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusFindFirstOrThrowArgs} args - Arguments to find a UserAnimeStatus
+     * @example
+     * // Get one UserAnimeStatus
+     * const userAnimeStatus = await prisma.userAnimeStatus.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserAnimeStatusFindFirstOrThrowArgs>(args?: SelectSubset<T, UserAnimeStatusFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserAnimeStatuses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserAnimeStatuses
+     * const userAnimeStatuses = await prisma.userAnimeStatus.findMany()
+     * 
+     * // Get first 10 UserAnimeStatuses
+     * const userAnimeStatuses = await prisma.userAnimeStatus.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userAnimeStatusWithIdOnly = await prisma.userAnimeStatus.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserAnimeStatusFindManyArgs>(args?: SelectSubset<T, UserAnimeStatusFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserAnimeStatus.
+     * @param {UserAnimeStatusCreateArgs} args - Arguments to create a UserAnimeStatus.
+     * @example
+     * // Create one UserAnimeStatus
+     * const UserAnimeStatus = await prisma.userAnimeStatus.create({
+     *   data: {
+     *     // ... data to create a UserAnimeStatus
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserAnimeStatusCreateArgs>(args: SelectSubset<T, UserAnimeStatusCreateArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserAnimeStatuses.
+     * @param {UserAnimeStatusCreateManyArgs} args - Arguments to create many UserAnimeStatuses.
+     * @example
+     * // Create many UserAnimeStatuses
+     * const userAnimeStatus = await prisma.userAnimeStatus.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserAnimeStatusCreateManyArgs>(args?: SelectSubset<T, UserAnimeStatusCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserAnimeStatuses and returns the data saved in the database.
+     * @param {UserAnimeStatusCreateManyAndReturnArgs} args - Arguments to create many UserAnimeStatuses.
+     * @example
+     * // Create many UserAnimeStatuses
+     * const userAnimeStatus = await prisma.userAnimeStatus.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserAnimeStatuses and only return the `id`
+     * const userAnimeStatusWithIdOnly = await prisma.userAnimeStatus.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserAnimeStatusCreateManyAndReturnArgs>(args?: SelectSubset<T, UserAnimeStatusCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserAnimeStatus.
+     * @param {UserAnimeStatusDeleteArgs} args - Arguments to delete one UserAnimeStatus.
+     * @example
+     * // Delete one UserAnimeStatus
+     * const UserAnimeStatus = await prisma.userAnimeStatus.delete({
+     *   where: {
+     *     // ... filter to delete one UserAnimeStatus
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserAnimeStatusDeleteArgs>(args: SelectSubset<T, UserAnimeStatusDeleteArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserAnimeStatus.
+     * @param {UserAnimeStatusUpdateArgs} args - Arguments to update one UserAnimeStatus.
+     * @example
+     * // Update one UserAnimeStatus
+     * const userAnimeStatus = await prisma.userAnimeStatus.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserAnimeStatusUpdateArgs>(args: SelectSubset<T, UserAnimeStatusUpdateArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserAnimeStatuses.
+     * @param {UserAnimeStatusDeleteManyArgs} args - Arguments to filter UserAnimeStatuses to delete.
+     * @example
+     * // Delete a few UserAnimeStatuses
+     * const { count } = await prisma.userAnimeStatus.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserAnimeStatusDeleteManyArgs>(args?: SelectSubset<T, UserAnimeStatusDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAnimeStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserAnimeStatuses
+     * const userAnimeStatus = await prisma.userAnimeStatus.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserAnimeStatusUpdateManyArgs>(args: SelectSubset<T, UserAnimeStatusUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAnimeStatuses and returns the data updated in the database.
+     * @param {UserAnimeStatusUpdateManyAndReturnArgs} args - Arguments to update many UserAnimeStatuses.
+     * @example
+     * // Update many UserAnimeStatuses
+     * const userAnimeStatus = await prisma.userAnimeStatus.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserAnimeStatuses and only return the `id`
+     * const userAnimeStatusWithIdOnly = await prisma.userAnimeStatus.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserAnimeStatusUpdateManyAndReturnArgs>(args: SelectSubset<T, UserAnimeStatusUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserAnimeStatus.
+     * @param {UserAnimeStatusUpsertArgs} args - Arguments to update or create a UserAnimeStatus.
+     * @example
+     * // Update or create a UserAnimeStatus
+     * const userAnimeStatus = await prisma.userAnimeStatus.upsert({
+     *   create: {
+     *     // ... data to create a UserAnimeStatus
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserAnimeStatus we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserAnimeStatusUpsertArgs>(args: SelectSubset<T, UserAnimeStatusUpsertArgs<ExtArgs>>): Prisma__UserAnimeStatusClient<$Result.GetResult<Prisma.$UserAnimeStatusPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserAnimeStatuses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusCountArgs} args - Arguments to filter UserAnimeStatuses to count.
+     * @example
+     * // Count the number of UserAnimeStatuses
+     * const count = await prisma.userAnimeStatus.count({
+     *   where: {
+     *     // ... the filter for the UserAnimeStatuses we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserAnimeStatusCountArgs>(
+      args?: Subset<T, UserAnimeStatusCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserAnimeStatusCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserAnimeStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAnimeStatusAggregateArgs>(args: Subset<T, UserAnimeStatusAggregateArgs>): Prisma.PrismaPromise<GetUserAnimeStatusAggregateType<T>>
+
+    /**
+     * Group by UserAnimeStatus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAnimeStatusGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserAnimeStatusGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserAnimeStatusGroupByArgs['orderBy'] }
+        : { orderBy?: UserAnimeStatusGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserAnimeStatusGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserAnimeStatusGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserAnimeStatus model
+   */
+  readonly fields: UserAnimeStatusFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserAnimeStatus.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserAnimeStatusClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    animeEntry<T extends AnimeEntryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntryDefaultArgs<ExtArgs>>): Prisma__AnimeEntryClient<$Result.GetResult<Prisma.$AnimeEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserAnimeStatus model
+   */
+  interface UserAnimeStatusFieldRefs {
+    readonly id: FieldRef<"UserAnimeStatus", 'String'>
+    readonly userId: FieldRef<"UserAnimeStatus", 'String'>
+    readonly animeEntryId: FieldRef<"UserAnimeStatus", 'String'>
+    readonly status: FieldRef<"UserAnimeStatus", 'WatchStatus'>
+    readonly createdAt: FieldRef<"UserAnimeStatus", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserAnimeStatus", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserAnimeStatus findUnique
+   */
+  export type UserAnimeStatusFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnimeStatus to fetch.
+     */
+    where: UserAnimeStatusWhereUniqueInput
+  }
+
+  /**
+   * UserAnimeStatus findUniqueOrThrow
+   */
+  export type UserAnimeStatusFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnimeStatus to fetch.
+     */
+    where: UserAnimeStatusWhereUniqueInput
+  }
+
+  /**
+   * UserAnimeStatus findFirst
+   */
+  export type UserAnimeStatusFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnimeStatus to fetch.
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnimeStatuses to fetch.
+     */
+    orderBy?: UserAnimeStatusOrderByWithRelationInput | UserAnimeStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAnimeStatuses.
+     */
+    cursor?: UserAnimeStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnimeStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnimeStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAnimeStatuses.
+     */
+    distinct?: UserAnimeStatusScalarFieldEnum | UserAnimeStatusScalarFieldEnum[]
+  }
+
+  /**
+   * UserAnimeStatus findFirstOrThrow
+   */
+  export type UserAnimeStatusFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnimeStatus to fetch.
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnimeStatuses to fetch.
+     */
+    orderBy?: UserAnimeStatusOrderByWithRelationInput | UserAnimeStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAnimeStatuses.
+     */
+    cursor?: UserAnimeStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnimeStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnimeStatuses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAnimeStatuses.
+     */
+    distinct?: UserAnimeStatusScalarFieldEnum | UserAnimeStatusScalarFieldEnum[]
+  }
+
+  /**
+   * UserAnimeStatus findMany
+   */
+  export type UserAnimeStatusFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAnimeStatuses to fetch.
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAnimeStatuses to fetch.
+     */
+    orderBy?: UserAnimeStatusOrderByWithRelationInput | UserAnimeStatusOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserAnimeStatuses.
+     */
+    cursor?: UserAnimeStatusWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAnimeStatuses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAnimeStatuses.
+     */
+    skip?: number
+    distinct?: UserAnimeStatusScalarFieldEnum | UserAnimeStatusScalarFieldEnum[]
+  }
+
+  /**
+   * UserAnimeStatus create
+   */
+  export type UserAnimeStatusCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserAnimeStatus.
+     */
+    data: XOR<UserAnimeStatusCreateInput, UserAnimeStatusUncheckedCreateInput>
+  }
+
+  /**
+   * UserAnimeStatus createMany
+   */
+  export type UserAnimeStatusCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserAnimeStatuses.
+     */
+    data: UserAnimeStatusCreateManyInput | UserAnimeStatusCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserAnimeStatus createManyAndReturn
+   */
+  export type UserAnimeStatusCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserAnimeStatuses.
+     */
+    data: UserAnimeStatusCreateManyInput | UserAnimeStatusCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAnimeStatus update
+   */
+  export type UserAnimeStatusUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserAnimeStatus.
+     */
+    data: XOR<UserAnimeStatusUpdateInput, UserAnimeStatusUncheckedUpdateInput>
+    /**
+     * Choose, which UserAnimeStatus to update.
+     */
+    where: UserAnimeStatusWhereUniqueInput
+  }
+
+  /**
+   * UserAnimeStatus updateMany
+   */
+  export type UserAnimeStatusUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserAnimeStatuses.
+     */
+    data: XOR<UserAnimeStatusUpdateManyMutationInput, UserAnimeStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAnimeStatuses to update
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * Limit how many UserAnimeStatuses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAnimeStatus updateManyAndReturn
+   */
+  export type UserAnimeStatusUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * The data used to update UserAnimeStatuses.
+     */
+    data: XOR<UserAnimeStatusUpdateManyMutationInput, UserAnimeStatusUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAnimeStatuses to update
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * Limit how many UserAnimeStatuses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAnimeStatus upsert
+   */
+  export type UserAnimeStatusUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserAnimeStatus to update in case it exists.
+     */
+    where: UserAnimeStatusWhereUniqueInput
+    /**
+     * In case the UserAnimeStatus found by the `where` argument doesn't exist, create a new UserAnimeStatus with this data.
+     */
+    create: XOR<UserAnimeStatusCreateInput, UserAnimeStatusUncheckedCreateInput>
+    /**
+     * In case the UserAnimeStatus was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserAnimeStatusUpdateInput, UserAnimeStatusUncheckedUpdateInput>
+  }
+
+  /**
+   * UserAnimeStatus delete
+   */
+  export type UserAnimeStatusDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+    /**
+     * Filter which UserAnimeStatus to delete.
+     */
+    where: UserAnimeStatusWhereUniqueInput
+  }
+
+  /**
+   * UserAnimeStatus deleteMany
+   */
+  export type UserAnimeStatusDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAnimeStatuses to delete
+     */
+    where?: UserAnimeStatusWhereInput
+    /**
+     * Limit how many UserAnimeStatuses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAnimeStatus without action
+   */
+  export type UserAnimeStatusDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAnimeStatus
+     */
+    select?: UserAnimeStatusSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAnimeStatus
+     */
+    omit?: UserAnimeStatusOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAnimeStatusInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AnimeFavorite
+   */
+
+  export type AggregateAnimeFavorite = {
+    _count: AnimeFavoriteCountAggregateOutputType | null
+    _min: AnimeFavoriteMinAggregateOutputType | null
+    _max: AnimeFavoriteMaxAggregateOutputType | null
+  }
+
+  export type AnimeFavoriteMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    animeEntryId: string | null
+    createdAt: Date | null
+  }
+
+  export type AnimeFavoriteMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    animeEntryId: string | null
+    createdAt: Date | null
+  }
+
+  export type AnimeFavoriteCountAggregateOutputType = {
+    id: number
+    userId: number
+    animeEntryId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AnimeFavoriteMinAggregateInputType = {
+    id?: true
+    userId?: true
+    animeEntryId?: true
+    createdAt?: true
+  }
+
+  export type AnimeFavoriteMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    animeEntryId?: true
+    createdAt?: true
+  }
+
+  export type AnimeFavoriteCountAggregateInputType = {
+    id?: true
+    userId?: true
+    animeEntryId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AnimeFavoriteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnimeFavorite to aggregate.
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeFavorites to fetch.
+     */
+    orderBy?: AnimeFavoriteOrderByWithRelationInput | AnimeFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnimeFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeFavorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AnimeFavorites
+    **/
+    _count?: true | AnimeFavoriteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnimeFavoriteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnimeFavoriteMaxAggregateInputType
+  }
+
+  export type GetAnimeFavoriteAggregateType<T extends AnimeFavoriteAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnimeFavorite]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnimeFavorite[P]>
+      : GetScalarType<T[P], AggregateAnimeFavorite[P]>
+  }
+
+
+
+
+  export type AnimeFavoriteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnimeFavoriteWhereInput
+    orderBy?: AnimeFavoriteOrderByWithAggregationInput | AnimeFavoriteOrderByWithAggregationInput[]
+    by: AnimeFavoriteScalarFieldEnum[] | AnimeFavoriteScalarFieldEnum
+    having?: AnimeFavoriteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnimeFavoriteCountAggregateInputType | true
+    _min?: AnimeFavoriteMinAggregateInputType
+    _max?: AnimeFavoriteMaxAggregateInputType
+  }
+
+  export type AnimeFavoriteGroupByOutputType = {
+    id: string
+    userId: string
+    animeEntryId: string
+    createdAt: Date
+    _count: AnimeFavoriteCountAggregateOutputType | null
+    _min: AnimeFavoriteMinAggregateOutputType | null
+    _max: AnimeFavoriteMaxAggregateOutputType | null
+  }
+
+  type GetAnimeFavoriteGroupByPayload<T extends AnimeFavoriteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnimeFavoriteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnimeFavoriteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnimeFavoriteGroupByOutputType[P]>
+            : GetScalarType<T[P], AnimeFavoriteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnimeFavoriteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeFavorite"]>
+
+  export type AnimeFavoriteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeFavorite"]>
+
+  export type AnimeFavoriteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["animeFavorite"]>
+
+  export type AnimeFavoriteSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    animeEntryId?: boolean
+    createdAt?: boolean
+  }
+
+  export type AnimeFavoriteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "animeEntryId" | "createdAt", ExtArgs["result"]["animeFavorite"]>
+  export type AnimeFavoriteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }
+  export type AnimeFavoriteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }
+  export type AnimeFavoriteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    animeEntry?: boolean | AnimeEntryDefaultArgs<ExtArgs>
+  }
+
+  export type $AnimeFavoritePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AnimeFavorite"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      animeEntry: Prisma.$AnimeEntryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      animeEntryId: string
+      createdAt: Date
+    }, ExtArgs["result"]["animeFavorite"]>
+    composites: {}
+  }
+
+  type AnimeFavoriteGetPayload<S extends boolean | null | undefined | AnimeFavoriteDefaultArgs> = $Result.GetResult<Prisma.$AnimeFavoritePayload, S>
+
+  type AnimeFavoriteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AnimeFavoriteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AnimeFavoriteCountAggregateInputType | true
+    }
+
+  export interface AnimeFavoriteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AnimeFavorite'], meta: { name: 'AnimeFavorite' } }
+    /**
+     * Find zero or one AnimeFavorite that matches the filter.
+     * @param {AnimeFavoriteFindUniqueArgs} args - Arguments to find a AnimeFavorite
+     * @example
+     * // Get one AnimeFavorite
+     * const animeFavorite = await prisma.animeFavorite.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnimeFavoriteFindUniqueArgs>(args: SelectSubset<T, AnimeFavoriteFindUniqueArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AnimeFavorite that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AnimeFavoriteFindUniqueOrThrowArgs} args - Arguments to find a AnimeFavorite
+     * @example
+     * // Get one AnimeFavorite
+     * const animeFavorite = await prisma.animeFavorite.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnimeFavoriteFindUniqueOrThrowArgs>(args: SelectSubset<T, AnimeFavoriteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnimeFavorite that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteFindFirstArgs} args - Arguments to find a AnimeFavorite
+     * @example
+     * // Get one AnimeFavorite
+     * const animeFavorite = await prisma.animeFavorite.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnimeFavoriteFindFirstArgs>(args?: SelectSubset<T, AnimeFavoriteFindFirstArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnimeFavorite that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteFindFirstOrThrowArgs} args - Arguments to find a AnimeFavorite
+     * @example
+     * // Get one AnimeFavorite
+     * const animeFavorite = await prisma.animeFavorite.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnimeFavoriteFindFirstOrThrowArgs>(args?: SelectSubset<T, AnimeFavoriteFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AnimeFavorites that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AnimeFavorites
+     * const animeFavorites = await prisma.animeFavorite.findMany()
+     * 
+     * // Get first 10 AnimeFavorites
+     * const animeFavorites = await prisma.animeFavorite.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const animeFavoriteWithIdOnly = await prisma.animeFavorite.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AnimeFavoriteFindManyArgs>(args?: SelectSubset<T, AnimeFavoriteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AnimeFavorite.
+     * @param {AnimeFavoriteCreateArgs} args - Arguments to create a AnimeFavorite.
+     * @example
+     * // Create one AnimeFavorite
+     * const AnimeFavorite = await prisma.animeFavorite.create({
+     *   data: {
+     *     // ... data to create a AnimeFavorite
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnimeFavoriteCreateArgs>(args: SelectSubset<T, AnimeFavoriteCreateArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AnimeFavorites.
+     * @param {AnimeFavoriteCreateManyArgs} args - Arguments to create many AnimeFavorites.
+     * @example
+     * // Create many AnimeFavorites
+     * const animeFavorite = await prisma.animeFavorite.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnimeFavoriteCreateManyArgs>(args?: SelectSubset<T, AnimeFavoriteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AnimeFavorites and returns the data saved in the database.
+     * @param {AnimeFavoriteCreateManyAndReturnArgs} args - Arguments to create many AnimeFavorites.
+     * @example
+     * // Create many AnimeFavorites
+     * const animeFavorite = await prisma.animeFavorite.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AnimeFavorites and only return the `id`
+     * const animeFavoriteWithIdOnly = await prisma.animeFavorite.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnimeFavoriteCreateManyAndReturnArgs>(args?: SelectSubset<T, AnimeFavoriteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AnimeFavorite.
+     * @param {AnimeFavoriteDeleteArgs} args - Arguments to delete one AnimeFavorite.
+     * @example
+     * // Delete one AnimeFavorite
+     * const AnimeFavorite = await prisma.animeFavorite.delete({
+     *   where: {
+     *     // ... filter to delete one AnimeFavorite
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnimeFavoriteDeleteArgs>(args: SelectSubset<T, AnimeFavoriteDeleteArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AnimeFavorite.
+     * @param {AnimeFavoriteUpdateArgs} args - Arguments to update one AnimeFavorite.
+     * @example
+     * // Update one AnimeFavorite
+     * const animeFavorite = await prisma.animeFavorite.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnimeFavoriteUpdateArgs>(args: SelectSubset<T, AnimeFavoriteUpdateArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AnimeFavorites.
+     * @param {AnimeFavoriteDeleteManyArgs} args - Arguments to filter AnimeFavorites to delete.
+     * @example
+     * // Delete a few AnimeFavorites
+     * const { count } = await prisma.animeFavorite.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnimeFavoriteDeleteManyArgs>(args?: SelectSubset<T, AnimeFavoriteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnimeFavorites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AnimeFavorites
+     * const animeFavorite = await prisma.animeFavorite.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnimeFavoriteUpdateManyArgs>(args: SelectSubset<T, AnimeFavoriteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnimeFavorites and returns the data updated in the database.
+     * @param {AnimeFavoriteUpdateManyAndReturnArgs} args - Arguments to update many AnimeFavorites.
+     * @example
+     * // Update many AnimeFavorites
+     * const animeFavorite = await prisma.animeFavorite.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AnimeFavorites and only return the `id`
+     * const animeFavoriteWithIdOnly = await prisma.animeFavorite.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AnimeFavoriteUpdateManyAndReturnArgs>(args: SelectSubset<T, AnimeFavoriteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AnimeFavorite.
+     * @param {AnimeFavoriteUpsertArgs} args - Arguments to update or create a AnimeFavorite.
+     * @example
+     * // Update or create a AnimeFavorite
+     * const animeFavorite = await prisma.animeFavorite.upsert({
+     *   create: {
+     *     // ... data to create a AnimeFavorite
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AnimeFavorite we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnimeFavoriteUpsertArgs>(args: SelectSubset<T, AnimeFavoriteUpsertArgs<ExtArgs>>): Prisma__AnimeFavoriteClient<$Result.GetResult<Prisma.$AnimeFavoritePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AnimeFavorites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteCountArgs} args - Arguments to filter AnimeFavorites to count.
+     * @example
+     * // Count the number of AnimeFavorites
+     * const count = await prisma.animeFavorite.count({
+     *   where: {
+     *     // ... the filter for the AnimeFavorites we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnimeFavoriteCountArgs>(
+      args?: Subset<T, AnimeFavoriteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnimeFavoriteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AnimeFavorite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnimeFavoriteAggregateArgs>(args: Subset<T, AnimeFavoriteAggregateArgs>): Prisma.PrismaPromise<GetAnimeFavoriteAggregateType<T>>
+
+    /**
+     * Group by AnimeFavorite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnimeFavoriteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnimeFavoriteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnimeFavoriteGroupByArgs['orderBy'] }
+        : { orderBy?: AnimeFavoriteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnimeFavoriteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnimeFavoriteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AnimeFavorite model
+   */
+  readonly fields: AnimeFavoriteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AnimeFavorite.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnimeFavoriteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    animeEntry<T extends AnimeEntryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AnimeEntryDefaultArgs<ExtArgs>>): Prisma__AnimeEntryClient<$Result.GetResult<Prisma.$AnimeEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AnimeFavorite model
+   */
+  interface AnimeFavoriteFieldRefs {
+    readonly id: FieldRef<"AnimeFavorite", 'String'>
+    readonly userId: FieldRef<"AnimeFavorite", 'String'>
+    readonly animeEntryId: FieldRef<"AnimeFavorite", 'String'>
+    readonly createdAt: FieldRef<"AnimeFavorite", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AnimeFavorite findUnique
+   */
+  export type AnimeFavoriteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeFavorite to fetch.
+     */
+    where: AnimeFavoriteWhereUniqueInput
+  }
+
+  /**
+   * AnimeFavorite findUniqueOrThrow
+   */
+  export type AnimeFavoriteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeFavorite to fetch.
+     */
+    where: AnimeFavoriteWhereUniqueInput
+  }
+
+  /**
+   * AnimeFavorite findFirst
+   */
+  export type AnimeFavoriteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeFavorite to fetch.
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeFavorites to fetch.
+     */
+    orderBy?: AnimeFavoriteOrderByWithRelationInput | AnimeFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnimeFavorites.
+     */
+    cursor?: AnimeFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeFavorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnimeFavorites.
+     */
+    distinct?: AnimeFavoriteScalarFieldEnum | AnimeFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeFavorite findFirstOrThrow
+   */
+  export type AnimeFavoriteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeFavorite to fetch.
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeFavorites to fetch.
+     */
+    orderBy?: AnimeFavoriteOrderByWithRelationInput | AnimeFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnimeFavorites.
+     */
+    cursor?: AnimeFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeFavorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnimeFavorites.
+     */
+    distinct?: AnimeFavoriteScalarFieldEnum | AnimeFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeFavorite findMany
+   */
+  export type AnimeFavoriteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which AnimeFavorites to fetch.
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnimeFavorites to fetch.
+     */
+    orderBy?: AnimeFavoriteOrderByWithRelationInput | AnimeFavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AnimeFavorites.
+     */
+    cursor?: AnimeFavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnimeFavorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnimeFavorites.
+     */
+    skip?: number
+    distinct?: AnimeFavoriteScalarFieldEnum | AnimeFavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * AnimeFavorite create
+   */
+  export type AnimeFavoriteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AnimeFavorite.
+     */
+    data: XOR<AnimeFavoriteCreateInput, AnimeFavoriteUncheckedCreateInput>
+  }
+
+  /**
+   * AnimeFavorite createMany
+   */
+  export type AnimeFavoriteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AnimeFavorites.
+     */
+    data: AnimeFavoriteCreateManyInput | AnimeFavoriteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnimeFavorite createManyAndReturn
+   */
+  export type AnimeFavoriteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * The data used to create many AnimeFavorites.
+     */
+    data: AnimeFavoriteCreateManyInput | AnimeFavoriteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AnimeFavorite update
+   */
+  export type AnimeFavoriteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AnimeFavorite.
+     */
+    data: XOR<AnimeFavoriteUpdateInput, AnimeFavoriteUncheckedUpdateInput>
+    /**
+     * Choose, which AnimeFavorite to update.
+     */
+    where: AnimeFavoriteWhereUniqueInput
+  }
+
+  /**
+   * AnimeFavorite updateMany
+   */
+  export type AnimeFavoriteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AnimeFavorites.
+     */
+    data: XOR<AnimeFavoriteUpdateManyMutationInput, AnimeFavoriteUncheckedUpdateManyInput>
+    /**
+     * Filter which AnimeFavorites to update
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * Limit how many AnimeFavorites to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeFavorite updateManyAndReturn
+   */
+  export type AnimeFavoriteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * The data used to update AnimeFavorites.
+     */
+    data: XOR<AnimeFavoriteUpdateManyMutationInput, AnimeFavoriteUncheckedUpdateManyInput>
+    /**
+     * Filter which AnimeFavorites to update
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * Limit how many AnimeFavorites to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AnimeFavorite upsert
+   */
+  export type AnimeFavoriteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AnimeFavorite to update in case it exists.
+     */
+    where: AnimeFavoriteWhereUniqueInput
+    /**
+     * In case the AnimeFavorite found by the `where` argument doesn't exist, create a new AnimeFavorite with this data.
+     */
+    create: XOR<AnimeFavoriteCreateInput, AnimeFavoriteUncheckedCreateInput>
+    /**
+     * In case the AnimeFavorite was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnimeFavoriteUpdateInput, AnimeFavoriteUncheckedUpdateInput>
+  }
+
+  /**
+   * AnimeFavorite delete
+   */
+  export type AnimeFavoriteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
+    /**
+     * Filter which AnimeFavorite to delete.
+     */
+    where: AnimeFavoriteWhereUniqueInput
+  }
+
+  /**
+   * AnimeFavorite deleteMany
+   */
+  export type AnimeFavoriteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnimeFavorites to delete
+     */
+    where?: AnimeFavoriteWhereInput
+    /**
+     * Limit how many AnimeFavorites to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnimeFavorite without action
+   */
+  export type AnimeFavoriteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnimeFavorite
+     */
+    select?: AnimeFavoriteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnimeFavorite
+     */
+    omit?: AnimeFavoriteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnimeFavoriteInclude<ExtArgs> | null
   }
 
 
@@ -16750,7 +19199,6 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     coverImageUrl: 'coverImageUrl',
-    status: 'status',
     airedFrom: 'airedFrom',
     airedTo: 'airedTo',
     airedStatus: 'airedStatus',
@@ -16763,6 +19211,28 @@ export namespace Prisma {
   };
 
   export type AnimeEntryScalarFieldEnum = (typeof AnimeEntryScalarFieldEnum)[keyof typeof AnimeEntryScalarFieldEnum]
+
+
+  export const UserAnimeStatusScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    animeEntryId: 'animeEntryId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserAnimeStatusScalarFieldEnum = (typeof UserAnimeStatusScalarFieldEnum)[keyof typeof UserAnimeStatusScalarFieldEnum]
+
+
+  export const AnimeFavoriteScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    animeEntryId: 'animeEntryId',
+    createdAt: 'createdAt'
+  };
+
+  export type AnimeFavoriteScalarFieldEnum = (typeof AnimeFavoriteScalarFieldEnum)[keyof typeof AnimeFavoriteScalarFieldEnum]
 
 
   export const GenreScalarFieldEnum: {
@@ -16933,20 +19403,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'WatchStatus'
-   */
-  export type EnumWatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WatchStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'WatchStatus[]'
-   */
-  export type ListEnumWatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WatchStatus[]'>
-    
-
-
-  /**
    * Reference to a field of type 'AnimeAiredStatus'
    */
   export type EnumAnimeAiredStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnimeAiredStatus'>
@@ -16971,6 +19427,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WatchStatus'
+   */
+  export type EnumWatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WatchStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'WatchStatus[]'
+   */
+  export type ListEnumWatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WatchStatus[]'>
     
 
 
@@ -17008,6 +19478,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryListRelationFilter
     animeAuthors?: AnimeAuthorListRelationFilter
     animeRatings?: AnimeRatingListRelationFilter
+    animeStatuses?: UserAnimeStatusListRelationFilter
+    animeFavorites?: AnimeFavoriteListRelationFilter
     roleLinks?: UserRoleListRelationFilter
   }
 
@@ -17025,6 +19497,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryOrderByRelationAggregateInput
     animeAuthors?: AnimeAuthorOrderByRelationAggregateInput
     animeRatings?: AnimeRatingOrderByRelationAggregateInput
+    animeStatuses?: UserAnimeStatusOrderByRelationAggregateInput
+    animeFavorites?: AnimeFavoriteOrderByRelationAggregateInput
     roleLinks?: UserRoleOrderByRelationAggregateInput
   }
 
@@ -17045,6 +19519,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryListRelationFilter
     animeAuthors?: AnimeAuthorListRelationFilter
     animeRatings?: AnimeRatingListRelationFilter
+    animeStatuses?: UserAnimeStatusListRelationFilter
+    animeFavorites?: AnimeFavoriteListRelationFilter
     roleLinks?: UserRoleListRelationFilter
   }, "id" | "email" | "username">
 
@@ -17300,7 +19776,6 @@ export namespace Prisma {
     title?: StringFilter<"AnimeEntry"> | string
     description?: StringFilter<"AnimeEntry"> | string
     coverImageUrl?: StringFilter<"AnimeEntry"> | string
-    status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
     airedFrom?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
     airedTo?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
@@ -17315,6 +19790,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorListRelationFilter
     ratings?: AnimeRatingListRelationFilter
     genreLinks?: AnimeEntryGenreListRelationFilter
+    userStatuses?: UserAnimeStatusListRelationFilter
+    favorites?: AnimeFavoriteListRelationFilter
     type?: XOR<AnimeTypeNullableScalarRelationFilter, AnimeTypeWhereInput> | null
   }
 
@@ -17324,7 +19801,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
-    status?: SortOrder
     airedFrom?: SortOrderInput | SortOrder
     airedTo?: SortOrderInput | SortOrder
     airedStatus?: SortOrder
@@ -17339,6 +19815,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorOrderByRelationAggregateInput
     ratings?: AnimeRatingOrderByRelationAggregateInput
     genreLinks?: AnimeEntryGenreOrderByRelationAggregateInput
+    userStatuses?: UserAnimeStatusOrderByRelationAggregateInput
+    favorites?: AnimeFavoriteOrderByRelationAggregateInput
     type?: AnimeTypeOrderByWithRelationInput
   }
 
@@ -17351,7 +19829,6 @@ export namespace Prisma {
     title?: StringFilter<"AnimeEntry"> | string
     description?: StringFilter<"AnimeEntry"> | string
     coverImageUrl?: StringFilter<"AnimeEntry"> | string
-    status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
     airedFrom?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
     airedTo?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
@@ -17366,6 +19843,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorListRelationFilter
     ratings?: AnimeRatingListRelationFilter
     genreLinks?: AnimeEntryGenreListRelationFilter
+    userStatuses?: UserAnimeStatusListRelationFilter
+    favorites?: AnimeFavoriteListRelationFilter
     type?: XOR<AnimeTypeNullableScalarRelationFilter, AnimeTypeWhereInput> | null
   }, "id" | "slug">
 
@@ -17375,7 +19854,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
-    status?: SortOrder
     airedFrom?: SortOrderInput | SortOrder
     airedTo?: SortOrderInput | SortOrder
     airedStatus?: SortOrder
@@ -17401,7 +19879,6 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"AnimeEntry"> | string
     description?: StringWithAggregatesFilter<"AnimeEntry"> | string
     coverImageUrl?: StringWithAggregatesFilter<"AnimeEntry"> | string
-    status?: EnumWatchStatusWithAggregatesFilter<"AnimeEntry"> | $Enums.WatchStatus
     airedFrom?: DateTimeNullableWithAggregatesFilter<"AnimeEntry"> | Date | string | null
     airedTo?: DateTimeNullableWithAggregatesFilter<"AnimeEntry"> | Date | string | null
     airedStatus?: EnumAnimeAiredStatusWithAggregatesFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
@@ -17411,6 +19888,124 @@ export namespace Prisma {
     typeId?: StringNullableWithAggregatesFilter<"AnimeEntry"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AnimeEntry"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AnimeEntry"> | Date | string
+  }
+
+  export type UserAnimeStatusWhereInput = {
+    AND?: UserAnimeStatusWhereInput | UserAnimeStatusWhereInput[]
+    OR?: UserAnimeStatusWhereInput[]
+    NOT?: UserAnimeStatusWhereInput | UserAnimeStatusWhereInput[]
+    id?: StringFilter<"UserAnimeStatus"> | string
+    userId?: StringFilter<"UserAnimeStatus"> | string
+    animeEntryId?: StringFilter<"UserAnimeStatus"> | string
+    status?: EnumWatchStatusFilter<"UserAnimeStatus"> | $Enums.WatchStatus
+    createdAt?: DateTimeFilter<"UserAnimeStatus"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAnimeStatus"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
+  }
+
+  export type UserAnimeStatusOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    animeEntry?: AnimeEntryOrderByWithRelationInput
+  }
+
+  export type UserAnimeStatusWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_animeEntryId?: UserAnimeStatusUserIdAnimeEntryIdCompoundUniqueInput
+    AND?: UserAnimeStatusWhereInput | UserAnimeStatusWhereInput[]
+    OR?: UserAnimeStatusWhereInput[]
+    NOT?: UserAnimeStatusWhereInput | UserAnimeStatusWhereInput[]
+    userId?: StringFilter<"UserAnimeStatus"> | string
+    animeEntryId?: StringFilter<"UserAnimeStatus"> | string
+    status?: EnumWatchStatusFilter<"UserAnimeStatus"> | $Enums.WatchStatus
+    createdAt?: DateTimeFilter<"UserAnimeStatus"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAnimeStatus"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
+  }, "id" | "userId_animeEntryId">
+
+  export type UserAnimeStatusOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserAnimeStatusCountOrderByAggregateInput
+    _max?: UserAnimeStatusMaxOrderByAggregateInput
+    _min?: UserAnimeStatusMinOrderByAggregateInput
+  }
+
+  export type UserAnimeStatusScalarWhereWithAggregatesInput = {
+    AND?: UserAnimeStatusScalarWhereWithAggregatesInput | UserAnimeStatusScalarWhereWithAggregatesInput[]
+    OR?: UserAnimeStatusScalarWhereWithAggregatesInput[]
+    NOT?: UserAnimeStatusScalarWhereWithAggregatesInput | UserAnimeStatusScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserAnimeStatus"> | string
+    userId?: StringWithAggregatesFilter<"UserAnimeStatus"> | string
+    animeEntryId?: StringWithAggregatesFilter<"UserAnimeStatus"> | string
+    status?: EnumWatchStatusWithAggregatesFilter<"UserAnimeStatus"> | $Enums.WatchStatus
+    createdAt?: DateTimeWithAggregatesFilter<"UserAnimeStatus"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserAnimeStatus"> | Date | string
+  }
+
+  export type AnimeFavoriteWhereInput = {
+    AND?: AnimeFavoriteWhereInput | AnimeFavoriteWhereInput[]
+    OR?: AnimeFavoriteWhereInput[]
+    NOT?: AnimeFavoriteWhereInput | AnimeFavoriteWhereInput[]
+    id?: StringFilter<"AnimeFavorite"> | string
+    userId?: StringFilter<"AnimeFavorite"> | string
+    animeEntryId?: StringFilter<"AnimeFavorite"> | string
+    createdAt?: DateTimeFilter<"AnimeFavorite"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
+  }
+
+  export type AnimeFavoriteOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    animeEntry?: AnimeEntryOrderByWithRelationInput
+  }
+
+  export type AnimeFavoriteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_animeEntryId?: AnimeFavoriteUserIdAnimeEntryIdCompoundUniqueInput
+    AND?: AnimeFavoriteWhereInput | AnimeFavoriteWhereInput[]
+    OR?: AnimeFavoriteWhereInput[]
+    NOT?: AnimeFavoriteWhereInput | AnimeFavoriteWhereInput[]
+    userId?: StringFilter<"AnimeFavorite"> | string
+    animeEntryId?: StringFilter<"AnimeFavorite"> | string
+    createdAt?: DateTimeFilter<"AnimeFavorite"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    animeEntry?: XOR<AnimeEntryScalarRelationFilter, AnimeEntryWhereInput>
+  }, "id" | "userId_animeEntryId">
+
+  export type AnimeFavoriteOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    createdAt?: SortOrder
+    _count?: AnimeFavoriteCountOrderByAggregateInput
+    _max?: AnimeFavoriteMaxOrderByAggregateInput
+    _min?: AnimeFavoriteMinOrderByAggregateInput
+  }
+
+  export type AnimeFavoriteScalarWhereWithAggregatesInput = {
+    AND?: AnimeFavoriteScalarWhereWithAggregatesInput | AnimeFavoriteScalarWhereWithAggregatesInput[]
+    OR?: AnimeFavoriteScalarWhereWithAggregatesInput[]
+    NOT?: AnimeFavoriteScalarWhereWithAggregatesInput | AnimeFavoriteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AnimeFavorite"> | string
+    userId?: StringWithAggregatesFilter<"AnimeFavorite"> | string
+    animeEntryId?: StringWithAggregatesFilter<"AnimeFavorite"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AnimeFavorite"> | Date | string
   }
 
   export type GenreWhereInput = {
@@ -17843,6 +20438,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryCreateNestedManyWithoutUserInput
     animeAuthors?: AnimeAuthorCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleCreateNestedManyWithoutUserInput
   }
 
@@ -17860,6 +20457,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutUserInput
     animeAuthors?: AnimeAuthorUncheckedCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingUncheckedCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -17877,6 +20476,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryUpdateManyWithoutUserNestedInput
     animeAuthors?: AnimeAuthorUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUpdateManyWithoutUserNestedInput
   }
 
@@ -17894,6 +20495,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryUncheckedUpdateManyWithoutUserNestedInput
     animeAuthors?: AnimeAuthorUncheckedUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUncheckedUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -18146,7 +20749,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -18159,6 +20761,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
     type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
@@ -18168,7 +20772,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -18182,6 +20785,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryUpdateInput = {
@@ -18190,7 +20795,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -18203,6 +20807,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
     type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
@@ -18212,7 +20818,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -18226,6 +20831,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryCreateManyInput = {
@@ -18234,7 +20841,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -18252,7 +20858,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -18268,7 +20873,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -18278,6 +20882,114 @@ export namespace Prisma {
     typeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnimeStatusCreateInput = {
+    id?: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeStatusesInput
+    animeEntry: AnimeEntryCreateNestedOneWithoutUserStatusesInput
+  }
+
+  export type UserAnimeStatusUncheckedCreateInput = {
+    id?: string
+    userId: string
+    animeEntryId: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAnimeStatusUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeStatusesNestedInput
+    animeEntry?: AnimeEntryUpdateOneRequiredWithoutUserStatusesNestedInput
+  }
+
+  export type UserAnimeStatusUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnimeStatusCreateManyInput = {
+    id?: string
+    userId: string
+    animeEntryId: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAnimeStatusUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnimeStatusUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeFavoritesInput
+    animeEntry: AnimeEntryCreateNestedOneWithoutFavoritesInput
+  }
+
+  export type AnimeFavoriteUncheckedCreateInput = {
+    id?: string
+    userId: string
+    animeEntryId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeFavoriteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeFavoritesNestedInput
+    animeEntry?: AnimeEntryUpdateOneRequiredWithoutFavoritesNestedInput
+  }
+
+  export type AnimeFavoriteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteCreateManyInput = {
+    id?: string
+    userId: string
+    animeEntryId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeFavoriteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GenreCreateInput = {
@@ -18772,6 +21484,18 @@ export namespace Prisma {
     none?: AnimeRatingWhereInput
   }
 
+  export type UserAnimeStatusListRelationFilter = {
+    every?: UserAnimeStatusWhereInput
+    some?: UserAnimeStatusWhereInput
+    none?: UserAnimeStatusWhereInput
+  }
+
+  export type AnimeFavoriteListRelationFilter = {
+    every?: AnimeFavoriteWhereInput
+    some?: AnimeFavoriteWhereInput
+    none?: AnimeFavoriteWhereInput
+  }
+
   export type UserRoleListRelationFilter = {
     every?: UserRoleWhereInput
     some?: UserRoleWhereInput
@@ -18792,6 +21516,14 @@ export namespace Prisma {
   }
 
   export type AnimeRatingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserAnimeStatusOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AnimeFavoriteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19031,13 +21763,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type EnumWatchStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumWatchStatusFilter<$PrismaModel> | $Enums.WatchStatus
-  }
-
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -19108,7 +21833,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
-    status?: SortOrder
     airedFrom?: SortOrder
     airedTo?: SortOrder
     airedStatus?: SortOrder
@@ -19130,7 +21854,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
-    status?: SortOrder
     airedFrom?: SortOrder
     airedTo?: SortOrder
     airedStatus?: SortOrder
@@ -19148,7 +21871,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     coverImageUrl?: SortOrder
-    status?: SortOrder
     airedFrom?: SortOrder
     airedTo?: SortOrder
     airedStatus?: SortOrder
@@ -19162,16 +21884,6 @@ export namespace Prisma {
 
   export type AnimeEntrySumOrderByAggregateInput = {
     viewCount?: SortOrder
-  }
-
-  export type EnumWatchStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.WatchStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumWatchStatusFilter<$PrismaModel>
-    _max?: NestedEnumWatchStatusFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -19214,6 +21926,86 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type EnumWatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWatchStatusFilter<$PrismaModel> | $Enums.WatchStatus
+  }
+
+  export type AnimeEntryScalarRelationFilter = {
+    is?: AnimeEntryWhereInput
+    isNot?: AnimeEntryWhereInput
+  }
+
+  export type UserAnimeStatusUserIdAnimeEntryIdCompoundUniqueInput = {
+    userId: string
+    animeEntryId: string
+  }
+
+  export type UserAnimeStatusCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAnimeStatusMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAnimeStatusMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumWatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.WatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumWatchStatusFilter<$PrismaModel>
+  }
+
+  export type AnimeFavoriteUserIdAnimeEntryIdCompoundUniqueInput = {
+    userId: string
+    animeEntryId: string
+  }
+
+  export type AnimeFavoriteCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AnimeFavoriteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AnimeFavoriteMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    animeEntryId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type GenreCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -19254,11 +22046,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type AnimeEntryScalarRelationFilter = {
-    is?: AnimeEntryWhereInput
-    isNot?: AnimeEntryWhereInput
   }
 
   export type GenreScalarRelationFilter = {
@@ -19494,6 +22281,20 @@ export namespace Prisma {
     connect?: AnimeRatingWhereUniqueInput | AnimeRatingWhereUniqueInput[]
   }
 
+  export type UserAnimeStatusCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutUserInput, UserAnimeStatusUncheckedCreateWithoutUserInput> | UserAnimeStatusCreateWithoutUserInput[] | UserAnimeStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutUserInput | UserAnimeStatusCreateOrConnectWithoutUserInput[]
+    createMany?: UserAnimeStatusCreateManyUserInputEnvelope
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+  }
+
+  export type AnimeFavoriteCreateNestedManyWithoutUserInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutUserInput, AnimeFavoriteUncheckedCreateWithoutUserInput> | AnimeFavoriteCreateWithoutUserInput[] | AnimeFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutUserInput | AnimeFavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: AnimeFavoriteCreateManyUserInputEnvelope
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -19520,6 +22321,20 @@ export namespace Prisma {
     connectOrCreate?: AnimeRatingCreateOrConnectWithoutUserInput | AnimeRatingCreateOrConnectWithoutUserInput[]
     createMany?: AnimeRatingCreateManyUserInputEnvelope
     connect?: AnimeRatingWhereUniqueInput | AnimeRatingWhereUniqueInput[]
+  }
+
+  export type UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutUserInput, UserAnimeStatusUncheckedCreateWithoutUserInput> | UserAnimeStatusCreateWithoutUserInput[] | UserAnimeStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutUserInput | UserAnimeStatusCreateOrConnectWithoutUserInput[]
+    createMany?: UserAnimeStatusCreateManyUserInputEnvelope
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+  }
+
+  export type AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutUserInput, AnimeFavoriteUncheckedCreateWithoutUserInput> | AnimeFavoriteCreateWithoutUserInput[] | AnimeFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutUserInput | AnimeFavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: AnimeFavoriteCreateManyUserInputEnvelope
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
   }
 
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
@@ -19583,6 +22398,34 @@ export namespace Prisma {
     deleteMany?: AnimeRatingScalarWhereInput | AnimeRatingScalarWhereInput[]
   }
 
+  export type UserAnimeStatusUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutUserInput, UserAnimeStatusUncheckedCreateWithoutUserInput> | UserAnimeStatusCreateWithoutUserInput[] | UserAnimeStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutUserInput | UserAnimeStatusCreateOrConnectWithoutUserInput[]
+    upsert?: UserAnimeStatusUpsertWithWhereUniqueWithoutUserInput | UserAnimeStatusUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserAnimeStatusCreateManyUserInputEnvelope
+    set?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    disconnect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    delete?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    update?: UserAnimeStatusUpdateWithWhereUniqueWithoutUserInput | UserAnimeStatusUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserAnimeStatusUpdateManyWithWhereWithoutUserInput | UserAnimeStatusUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserAnimeStatusScalarWhereInput | UserAnimeStatusScalarWhereInput[]
+  }
+
+  export type AnimeFavoriteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutUserInput, AnimeFavoriteUncheckedCreateWithoutUserInput> | AnimeFavoriteCreateWithoutUserInput[] | AnimeFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutUserInput | AnimeFavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: AnimeFavoriteUpsertWithWhereUniqueWithoutUserInput | AnimeFavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AnimeFavoriteCreateManyUserInputEnvelope
+    set?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    disconnect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    delete?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    update?: AnimeFavoriteUpdateWithWhereUniqueWithoutUserInput | AnimeFavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AnimeFavoriteUpdateManyWithWhereWithoutUserInput | AnimeFavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AnimeFavoriteScalarWhereInput | AnimeFavoriteScalarWhereInput[]
+  }
+
   export type UserRoleUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -19637,6 +22480,34 @@ export namespace Prisma {
     update?: AnimeRatingUpdateWithWhereUniqueWithoutUserInput | AnimeRatingUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AnimeRatingUpdateManyWithWhereWithoutUserInput | AnimeRatingUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AnimeRatingScalarWhereInput | AnimeRatingScalarWhereInput[]
+  }
+
+  export type UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutUserInput, UserAnimeStatusUncheckedCreateWithoutUserInput> | UserAnimeStatusCreateWithoutUserInput[] | UserAnimeStatusUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutUserInput | UserAnimeStatusCreateOrConnectWithoutUserInput[]
+    upsert?: UserAnimeStatusUpsertWithWhereUniqueWithoutUserInput | UserAnimeStatusUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserAnimeStatusCreateManyUserInputEnvelope
+    set?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    disconnect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    delete?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    update?: UserAnimeStatusUpdateWithWhereUniqueWithoutUserInput | UserAnimeStatusUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserAnimeStatusUpdateManyWithWhereWithoutUserInput | UserAnimeStatusUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserAnimeStatusScalarWhereInput | UserAnimeStatusScalarWhereInput[]
+  }
+
+  export type AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutUserInput, AnimeFavoriteUncheckedCreateWithoutUserInput> | AnimeFavoriteCreateWithoutUserInput[] | AnimeFavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutUserInput | AnimeFavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: AnimeFavoriteUpsertWithWhereUniqueWithoutUserInput | AnimeFavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AnimeFavoriteCreateManyUserInputEnvelope
+    set?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    disconnect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    delete?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    update?: AnimeFavoriteUpdateWithWhereUniqueWithoutUserInput | AnimeFavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AnimeFavoriteUpdateManyWithWhereWithoutUserInput | AnimeFavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AnimeFavoriteScalarWhereInput | AnimeFavoriteScalarWhereInput[]
   }
 
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
@@ -19869,6 +22740,20 @@ export namespace Prisma {
     connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
   }
 
+  export type UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutAnimeEntryInput, UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput> | UserAnimeStatusCreateWithoutAnimeEntryInput[] | UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput | UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput[]
+    createMany?: UserAnimeStatusCreateManyAnimeEntryInputEnvelope
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+  }
+
+  export type AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutAnimeEntryInput, AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput> | AnimeFavoriteCreateWithoutAnimeEntryInput[] | AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput | AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput[]
+    createMany?: AnimeFavoriteCreateManyAnimeEntryInputEnvelope
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+  }
+
   export type AnimeTypeCreateNestedOneWithoutAnimeEntriesInput = {
     create?: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
     connectOrCreate?: AnimeTypeCreateOrConnectWithoutAnimeEntriesInput
@@ -19903,8 +22788,18 @@ export namespace Prisma {
     connect?: AnimeEntryGenreWhereUniqueInput | AnimeEntryGenreWhereUniqueInput[]
   }
 
-  export type EnumWatchStatusFieldUpdateOperationsInput = {
-    set?: $Enums.WatchStatus
+  export type UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutAnimeEntryInput, UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput> | UserAnimeStatusCreateWithoutAnimeEntryInput[] | UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput | UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput[]
+    createMany?: UserAnimeStatusCreateManyAnimeEntryInputEnvelope
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+  }
+
+  export type AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutAnimeEntryInput, AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput> | AnimeFavoriteCreateWithoutAnimeEntryInput[] | AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput | AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput[]
+    createMany?: AnimeFavoriteCreateManyAnimeEntryInputEnvelope
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -19987,6 +22882,34 @@ export namespace Prisma {
     deleteMany?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
   }
 
+  export type UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutAnimeEntryInput, UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput> | UserAnimeStatusCreateWithoutAnimeEntryInput[] | UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput | UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput[]
+    upsert?: UserAnimeStatusUpsertWithWhereUniqueWithoutAnimeEntryInput | UserAnimeStatusUpsertWithWhereUniqueWithoutAnimeEntryInput[]
+    createMany?: UserAnimeStatusCreateManyAnimeEntryInputEnvelope
+    set?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    disconnect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    delete?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    update?: UserAnimeStatusUpdateWithWhereUniqueWithoutAnimeEntryInput | UserAnimeStatusUpdateWithWhereUniqueWithoutAnimeEntryInput[]
+    updateMany?: UserAnimeStatusUpdateManyWithWhereWithoutAnimeEntryInput | UserAnimeStatusUpdateManyWithWhereWithoutAnimeEntryInput[]
+    deleteMany?: UserAnimeStatusScalarWhereInput | UserAnimeStatusScalarWhereInput[]
+  }
+
+  export type AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutAnimeEntryInput, AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput> | AnimeFavoriteCreateWithoutAnimeEntryInput[] | AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput | AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput[]
+    upsert?: AnimeFavoriteUpsertWithWhereUniqueWithoutAnimeEntryInput | AnimeFavoriteUpsertWithWhereUniqueWithoutAnimeEntryInput[]
+    createMany?: AnimeFavoriteCreateManyAnimeEntryInputEnvelope
+    set?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    disconnect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    delete?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    update?: AnimeFavoriteUpdateWithWhereUniqueWithoutAnimeEntryInput | AnimeFavoriteUpdateWithWhereUniqueWithoutAnimeEntryInput[]
+    updateMany?: AnimeFavoriteUpdateManyWithWhereWithoutAnimeEntryInput | AnimeFavoriteUpdateManyWithWhereWithoutAnimeEntryInput[]
+    deleteMany?: AnimeFavoriteScalarWhereInput | AnimeFavoriteScalarWhereInput[]
+  }
+
   export type AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput = {
     create?: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
     connectOrCreate?: AnimeTypeCreateOrConnectWithoutAnimeEntriesInput
@@ -20051,6 +22974,94 @@ export namespace Prisma {
     update?: AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput | AnimeEntryGenreUpdateWithWhereUniqueWithoutAnimeEntryInput[]
     updateMany?: AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput | AnimeEntryGenreUpdateManyWithWhereWithoutAnimeEntryInput[]
     deleteMany?: AnimeEntryGenreScalarWhereInput | AnimeEntryGenreScalarWhereInput[]
+  }
+
+  export type UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput = {
+    create?: XOR<UserAnimeStatusCreateWithoutAnimeEntryInput, UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput> | UserAnimeStatusCreateWithoutAnimeEntryInput[] | UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput | UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput[]
+    upsert?: UserAnimeStatusUpsertWithWhereUniqueWithoutAnimeEntryInput | UserAnimeStatusUpsertWithWhereUniqueWithoutAnimeEntryInput[]
+    createMany?: UserAnimeStatusCreateManyAnimeEntryInputEnvelope
+    set?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    disconnect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    delete?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    connect?: UserAnimeStatusWhereUniqueInput | UserAnimeStatusWhereUniqueInput[]
+    update?: UserAnimeStatusUpdateWithWhereUniqueWithoutAnimeEntryInput | UserAnimeStatusUpdateWithWhereUniqueWithoutAnimeEntryInput[]
+    updateMany?: UserAnimeStatusUpdateManyWithWhereWithoutAnimeEntryInput | UserAnimeStatusUpdateManyWithWhereWithoutAnimeEntryInput[]
+    deleteMany?: UserAnimeStatusScalarWhereInput | UserAnimeStatusScalarWhereInput[]
+  }
+
+  export type AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput = {
+    create?: XOR<AnimeFavoriteCreateWithoutAnimeEntryInput, AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput> | AnimeFavoriteCreateWithoutAnimeEntryInput[] | AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput[]
+    connectOrCreate?: AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput | AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput[]
+    upsert?: AnimeFavoriteUpsertWithWhereUniqueWithoutAnimeEntryInput | AnimeFavoriteUpsertWithWhereUniqueWithoutAnimeEntryInput[]
+    createMany?: AnimeFavoriteCreateManyAnimeEntryInputEnvelope
+    set?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    disconnect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    delete?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    connect?: AnimeFavoriteWhereUniqueInput | AnimeFavoriteWhereUniqueInput[]
+    update?: AnimeFavoriteUpdateWithWhereUniqueWithoutAnimeEntryInput | AnimeFavoriteUpdateWithWhereUniqueWithoutAnimeEntryInput[]
+    updateMany?: AnimeFavoriteUpdateManyWithWhereWithoutAnimeEntryInput | AnimeFavoriteUpdateManyWithWhereWithoutAnimeEntryInput[]
+    deleteMany?: AnimeFavoriteScalarWhereInput | AnimeFavoriteScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutAnimeStatusesInput = {
+    create?: XOR<UserCreateWithoutAnimeStatusesInput, UserUncheckedCreateWithoutAnimeStatusesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnimeStatusesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AnimeEntryCreateNestedOneWithoutUserStatusesInput = {
+    create?: XOR<AnimeEntryCreateWithoutUserStatusesInput, AnimeEntryUncheckedCreateWithoutUserStatusesInput>
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutUserStatusesInput
+    connect?: AnimeEntryWhereUniqueInput
+  }
+
+  export type EnumWatchStatusFieldUpdateOperationsInput = {
+    set?: $Enums.WatchStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutAnimeStatusesNestedInput = {
+    create?: XOR<UserCreateWithoutAnimeStatusesInput, UserUncheckedCreateWithoutAnimeStatusesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnimeStatusesInput
+    upsert?: UserUpsertWithoutAnimeStatusesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAnimeStatusesInput, UserUpdateWithoutAnimeStatusesInput>, UserUncheckedUpdateWithoutAnimeStatusesInput>
+  }
+
+  export type AnimeEntryUpdateOneRequiredWithoutUserStatusesNestedInput = {
+    create?: XOR<AnimeEntryCreateWithoutUserStatusesInput, AnimeEntryUncheckedCreateWithoutUserStatusesInput>
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutUserStatusesInput
+    upsert?: AnimeEntryUpsertWithoutUserStatusesInput
+    connect?: AnimeEntryWhereUniqueInput
+    update?: XOR<XOR<AnimeEntryUpdateToOneWithWhereWithoutUserStatusesInput, AnimeEntryUpdateWithoutUserStatusesInput>, AnimeEntryUncheckedUpdateWithoutUserStatusesInput>
+  }
+
+  export type UserCreateNestedOneWithoutAnimeFavoritesInput = {
+    create?: XOR<UserCreateWithoutAnimeFavoritesInput, UserUncheckedCreateWithoutAnimeFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnimeFavoritesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AnimeEntryCreateNestedOneWithoutFavoritesInput = {
+    create?: XOR<AnimeEntryCreateWithoutFavoritesInput, AnimeEntryUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutFavoritesInput
+    connect?: AnimeEntryWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAnimeFavoritesNestedInput = {
+    create?: XOR<UserCreateWithoutAnimeFavoritesInput, UserUncheckedCreateWithoutAnimeFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAnimeFavoritesInput
+    upsert?: UserUpsertWithoutAnimeFavoritesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAnimeFavoritesInput, UserUpdateWithoutAnimeFavoritesInput>, UserUncheckedUpdateWithoutAnimeFavoritesInput>
+  }
+
+  export type AnimeEntryUpdateOneRequiredWithoutFavoritesNestedInput = {
+    create?: XOR<AnimeEntryCreateWithoutFavoritesInput, AnimeEntryUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: AnimeEntryCreateOrConnectWithoutFavoritesInput
+    upsert?: AnimeEntryUpsertWithoutFavoritesInput
+    connect?: AnimeEntryWhereUniqueInput
+    update?: XOR<XOR<AnimeEntryUpdateToOneWithWhereWithoutFavoritesInput, AnimeEntryUpdateWithoutFavoritesInput>, AnimeEntryUncheckedUpdateWithoutFavoritesInput>
   }
 
   export type AnimeEntryGenreCreateNestedManyWithoutGenreInput = {
@@ -20431,13 +23442,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumWatchStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumWatchStatusFilter<$PrismaModel> | $Enums.WatchStatus
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -20454,16 +23458,6 @@ export namespace Prisma {
     in?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.AnimeAiredStatus[] | ListEnumAnimeAiredStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumAnimeAiredStatusFilter<$PrismaModel> | $Enums.AnimeAiredStatus
-  }
-
-  export type NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.WatchStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumWatchStatusFilter<$PrismaModel>
-    _max?: NestedEnumWatchStatusFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -20517,6 +23511,23 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedEnumWatchStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWatchStatusFilter<$PrismaModel> | $Enums.WatchStatus
+  }
+
+  export type NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WatchStatus | EnumWatchStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WatchStatus[] | ListEnumWatchStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWatchStatusWithAggregatesFilter<$PrismaModel> | $Enums.WatchStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWatchStatusFilter<$PrismaModel>
+    _max?: NestedEnumWatchStatusFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -20550,7 +23561,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -20562,6 +23572,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
     type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
@@ -20571,7 +23583,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -20584,6 +23595,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutUserInput = {
@@ -20650,6 +23663,54 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserAnimeStatusCreateWithoutUserInput = {
+    id?: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntry: AnimeEntryCreateNestedOneWithoutUserStatusesInput
+  }
+
+  export type UserAnimeStatusUncheckedCreateWithoutUserInput = {
+    id?: string
+    animeEntryId: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAnimeStatusCreateOrConnectWithoutUserInput = {
+    where: UserAnimeStatusWhereUniqueInput
+    create: XOR<UserAnimeStatusCreateWithoutUserInput, UserAnimeStatusUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAnimeStatusCreateManyUserInputEnvelope = {
+    data: UserAnimeStatusCreateManyUserInput | UserAnimeStatusCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AnimeFavoriteCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    animeEntry: AnimeEntryCreateNestedOneWithoutFavoritesInput
+  }
+
+  export type AnimeFavoriteUncheckedCreateWithoutUserInput = {
+    id?: string
+    animeEntryId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeFavoriteCreateOrConnectWithoutUserInput = {
+    where: AnimeFavoriteWhereUniqueInput
+    create: XOR<AnimeFavoriteCreateWithoutUserInput, AnimeFavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type AnimeFavoriteCreateManyUserInputEnvelope = {
+    data: AnimeFavoriteCreateManyUserInput | AnimeFavoriteCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     createdAt?: Date | string
     role: RoleCreateNestedOneWithoutUserLinksInput
@@ -20695,7 +23756,6 @@ export namespace Prisma {
     title?: StringFilter<"AnimeEntry"> | string
     description?: StringFilter<"AnimeEntry"> | string
     coverImageUrl?: StringFilter<"AnimeEntry"> | string
-    status?: EnumWatchStatusFilter<"AnimeEntry"> | $Enums.WatchStatus
     airedFrom?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
     airedTo?: DateTimeNullableFilter<"AnimeEntry"> | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFilter<"AnimeEntry"> | $Enums.AnimeAiredStatus
@@ -20761,6 +23821,60 @@ export namespace Prisma {
     value?: IntFilter<"AnimeRating"> | number
     createdAt?: DateTimeFilter<"AnimeRating"> | Date | string
     updatedAt?: DateTimeFilter<"AnimeRating"> | Date | string
+  }
+
+  export type UserAnimeStatusUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserAnimeStatusWhereUniqueInput
+    update: XOR<UserAnimeStatusUpdateWithoutUserInput, UserAnimeStatusUncheckedUpdateWithoutUserInput>
+    create: XOR<UserAnimeStatusCreateWithoutUserInput, UserAnimeStatusUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAnimeStatusUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserAnimeStatusWhereUniqueInput
+    data: XOR<UserAnimeStatusUpdateWithoutUserInput, UserAnimeStatusUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserAnimeStatusUpdateManyWithWhereWithoutUserInput = {
+    where: UserAnimeStatusScalarWhereInput
+    data: XOR<UserAnimeStatusUpdateManyMutationInput, UserAnimeStatusUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserAnimeStatusScalarWhereInput = {
+    AND?: UserAnimeStatusScalarWhereInput | UserAnimeStatusScalarWhereInput[]
+    OR?: UserAnimeStatusScalarWhereInput[]
+    NOT?: UserAnimeStatusScalarWhereInput | UserAnimeStatusScalarWhereInput[]
+    id?: StringFilter<"UserAnimeStatus"> | string
+    userId?: StringFilter<"UserAnimeStatus"> | string
+    animeEntryId?: StringFilter<"UserAnimeStatus"> | string
+    status?: EnumWatchStatusFilter<"UserAnimeStatus"> | $Enums.WatchStatus
+    createdAt?: DateTimeFilter<"UserAnimeStatus"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAnimeStatus"> | Date | string
+  }
+
+  export type AnimeFavoriteUpsertWithWhereUniqueWithoutUserInput = {
+    where: AnimeFavoriteWhereUniqueInput
+    update: XOR<AnimeFavoriteUpdateWithoutUserInput, AnimeFavoriteUncheckedUpdateWithoutUserInput>
+    create: XOR<AnimeFavoriteCreateWithoutUserInput, AnimeFavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type AnimeFavoriteUpdateWithWhereUniqueWithoutUserInput = {
+    where: AnimeFavoriteWhereUniqueInput
+    data: XOR<AnimeFavoriteUpdateWithoutUserInput, AnimeFavoriteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AnimeFavoriteUpdateManyWithWhereWithoutUserInput = {
+    where: AnimeFavoriteScalarWhereInput
+    data: XOR<AnimeFavoriteUpdateManyMutationInput, AnimeFavoriteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AnimeFavoriteScalarWhereInput = {
+    AND?: AnimeFavoriteScalarWhereInput | AnimeFavoriteScalarWhereInput[]
+    OR?: AnimeFavoriteScalarWhereInput[]
+    NOT?: AnimeFavoriteScalarWhereInput | AnimeFavoriteScalarWhereInput[]
+    id?: StringFilter<"AnimeFavorite"> | string
+    userId?: StringFilter<"AnimeFavorite"> | string
+    animeEntryId?: StringFilter<"AnimeFavorite"> | string
+    createdAt?: DateTimeFilter<"AnimeFavorite"> | Date | string
   }
 
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
@@ -20919,6 +24033,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryCreateNestedManyWithoutUserInput
     animeAuthors?: AnimeAuthorCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleLinksInput = {
@@ -20935,6 +24051,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutUserInput
     animeAuthors?: AnimeAuthorUncheckedCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingUncheckedCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleLinksInput = {
@@ -20990,6 +24108,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryUpdateManyWithoutUserNestedInput
     animeAuthors?: AnimeAuthorUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleLinksInput = {
@@ -21006,6 +24126,8 @@ export namespace Prisma {
     animeEntries?: AnimeEntryUncheckedUpdateManyWithoutUserNestedInput
     animeAuthors?: AnimeAuthorUncheckedUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUncheckedUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleUpsertWithoutUserLinksInput = {
@@ -21150,6 +24272,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     animeAuthors?: AnimeAuthorCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleCreateNestedManyWithoutUserInput
   }
 
@@ -21166,6 +24290,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     animeAuthors?: AnimeAuthorUncheckedCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingUncheckedCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -21276,6 +24402,54 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserAnimeStatusCreateWithoutAnimeEntryInput = {
+    id?: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeStatusesInput
+  }
+
+  export type UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput = {
+    id?: string
+    userId: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAnimeStatusCreateOrConnectWithoutAnimeEntryInput = {
+    where: UserAnimeStatusWhereUniqueInput
+    create: XOR<UserAnimeStatusCreateWithoutAnimeEntryInput, UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput>
+  }
+
+  export type UserAnimeStatusCreateManyAnimeEntryInputEnvelope = {
+    data: UserAnimeStatusCreateManyAnimeEntryInput | UserAnimeStatusCreateManyAnimeEntryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AnimeFavoriteCreateWithoutAnimeEntryInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeFavoritesInput
+  }
+
+  export type AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type AnimeFavoriteCreateOrConnectWithoutAnimeEntryInput = {
+    where: AnimeFavoriteWhereUniqueInput
+    create: XOR<AnimeFavoriteCreateWithoutAnimeEntryInput, AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput>
+  }
+
+  export type AnimeFavoriteCreateManyAnimeEntryInputEnvelope = {
+    data: AnimeFavoriteCreateManyAnimeEntryInput | AnimeFavoriteCreateManyAnimeEntryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AnimeTypeCreateWithoutAnimeEntriesInput = {
     id?: string
     name: string
@@ -21319,6 +24493,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeAuthors?: AnimeAuthorUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUpdateManyWithoutUserNestedInput
   }
 
@@ -21335,6 +24511,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeAuthors?: AnimeAuthorUncheckedUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUncheckedUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -21437,6 +24615,38 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AnimeEntryGenre"> | Date | string
   }
 
+  export type UserAnimeStatusUpsertWithWhereUniqueWithoutAnimeEntryInput = {
+    where: UserAnimeStatusWhereUniqueInput
+    update: XOR<UserAnimeStatusUpdateWithoutAnimeEntryInput, UserAnimeStatusUncheckedUpdateWithoutAnimeEntryInput>
+    create: XOR<UserAnimeStatusCreateWithoutAnimeEntryInput, UserAnimeStatusUncheckedCreateWithoutAnimeEntryInput>
+  }
+
+  export type UserAnimeStatusUpdateWithWhereUniqueWithoutAnimeEntryInput = {
+    where: UserAnimeStatusWhereUniqueInput
+    data: XOR<UserAnimeStatusUpdateWithoutAnimeEntryInput, UserAnimeStatusUncheckedUpdateWithoutAnimeEntryInput>
+  }
+
+  export type UserAnimeStatusUpdateManyWithWhereWithoutAnimeEntryInput = {
+    where: UserAnimeStatusScalarWhereInput
+    data: XOR<UserAnimeStatusUpdateManyMutationInput, UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryInput>
+  }
+
+  export type AnimeFavoriteUpsertWithWhereUniqueWithoutAnimeEntryInput = {
+    where: AnimeFavoriteWhereUniqueInput
+    update: XOR<AnimeFavoriteUpdateWithoutAnimeEntryInput, AnimeFavoriteUncheckedUpdateWithoutAnimeEntryInput>
+    create: XOR<AnimeFavoriteCreateWithoutAnimeEntryInput, AnimeFavoriteUncheckedCreateWithoutAnimeEntryInput>
+  }
+
+  export type AnimeFavoriteUpdateWithWhereUniqueWithoutAnimeEntryInput = {
+    where: AnimeFavoriteWhereUniqueInput
+    data: XOR<AnimeFavoriteUpdateWithoutAnimeEntryInput, AnimeFavoriteUncheckedUpdateWithoutAnimeEntryInput>
+  }
+
+  export type AnimeFavoriteUpdateManyWithWhereWithoutAnimeEntryInput = {
+    where: AnimeFavoriteScalarWhereInput
+    data: XOR<AnimeFavoriteUpdateManyMutationInput, AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryInput>
+  }
+
   export type AnimeTypeUpsertWithoutAnimeEntriesInput = {
     update: XOR<AnimeTypeUpdateWithoutAnimeEntriesInput, AnimeTypeUncheckedUpdateWithoutAnimeEntriesInput>
     create: XOR<AnimeTypeCreateWithoutAnimeEntriesInput, AnimeTypeUncheckedCreateWithoutAnimeEntriesInput>
@@ -21460,6 +24670,390 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutAnimeStatusesInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    username?: string | null
+    bio?: string | null
+    avatarUrl?: string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntries?: AnimeEntryCreateNestedManyWithoutUserInput
+    animeAuthors?: AnimeAuthorCreateNestedManyWithoutUserInput
+    animeRatings?: AnimeRatingCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteCreateNestedManyWithoutUserInput
+    roleLinks?: UserRoleCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAnimeStatusesInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    username?: string | null
+    bio?: string | null
+    avatarUrl?: string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutUserInput
+    animeAuthors?: AnimeAuthorUncheckedCreateNestedManyWithoutUserInput
+    animeRatings?: AnimeRatingUncheckedCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput
+    roleLinks?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAnimeStatusesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAnimeStatusesInput, UserUncheckedCreateWithoutAnimeStatusesInput>
+  }
+
+  export type AnimeEntryCreateWithoutUserStatusesInput = {
+    id?: string
+    slug: string
+    title: string
+    description: string
+    coverImageUrl: string
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeEntriesInput
+    episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
+  }
+
+  export type AnimeEntryUncheckedCreateWithoutUserStatusesInput = {
+    id?: string
+    slug: string
+    title: string
+    description: string
+    coverImageUrl: string
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
+    notes?: string | null
+    userId: string
+    typeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
+  }
+
+  export type AnimeEntryCreateOrConnectWithoutUserStatusesInput = {
+    where: AnimeEntryWhereUniqueInput
+    create: XOR<AnimeEntryCreateWithoutUserStatusesInput, AnimeEntryUncheckedCreateWithoutUserStatusesInput>
+  }
+
+  export type UserUpsertWithoutAnimeStatusesInput = {
+    update: XOR<UserUpdateWithoutAnimeStatusesInput, UserUncheckedUpdateWithoutAnimeStatusesInput>
+    create: XOR<UserCreateWithoutAnimeStatusesInput, UserUncheckedCreateWithoutAnimeStatusesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAnimeStatusesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAnimeStatusesInput, UserUncheckedUpdateWithoutAnimeStatusesInput>
+  }
+
+  export type UserUpdateWithoutAnimeStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntries?: AnimeEntryUpdateManyWithoutUserNestedInput
+    animeAuthors?: AnimeAuthorUpdateManyWithoutUserNestedInput
+    animeRatings?: AnimeRatingUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUpdateManyWithoutUserNestedInput
+    roleLinks?: UserRoleUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAnimeStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntries?: AnimeEntryUncheckedUpdateManyWithoutUserNestedInput
+    animeAuthors?: AnimeAuthorUncheckedUpdateManyWithoutUserNestedInput
+    animeRatings?: AnimeRatingUncheckedUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput
+    roleLinks?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AnimeEntryUpsertWithoutUserStatusesInput = {
+    update: XOR<AnimeEntryUpdateWithoutUserStatusesInput, AnimeEntryUncheckedUpdateWithoutUserStatusesInput>
+    create: XOR<AnimeEntryCreateWithoutUserStatusesInput, AnimeEntryUncheckedCreateWithoutUserStatusesInput>
+    where?: AnimeEntryWhereInput
+  }
+
+  export type AnimeEntryUpdateToOneWithWhereWithoutUserStatusesInput = {
+    where?: AnimeEntryWhereInput
+    data: XOR<AnimeEntryUpdateWithoutUserStatusesInput, AnimeEntryUncheckedUpdateWithoutUserStatusesInput>
+  }
+
+  export type AnimeEntryUpdateWithoutUserStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
+    episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
+  }
+
+  export type AnimeEntryUncheckedUpdateWithoutUserStatusesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
+  }
+
+  export type UserCreateWithoutAnimeFavoritesInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    username?: string | null
+    bio?: string | null
+    avatarUrl?: string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntries?: AnimeEntryCreateNestedManyWithoutUserInput
+    animeAuthors?: AnimeAuthorCreateNestedManyWithoutUserInput
+    animeRatings?: AnimeRatingCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusCreateNestedManyWithoutUserInput
+    roleLinks?: UserRoleCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAnimeFavoritesInput = {
+    id?: string
+    email: string
+    password: string
+    name?: string | null
+    username?: string | null
+    bio?: string | null
+    avatarUrl?: string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutUserInput
+    animeAuthors?: AnimeAuthorUncheckedCreateNestedManyWithoutUserInput
+    animeRatings?: AnimeRatingUncheckedCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput
+    roleLinks?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAnimeFavoritesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAnimeFavoritesInput, UserUncheckedCreateWithoutAnimeFavoritesInput>
+  }
+
+  export type AnimeEntryCreateWithoutFavoritesInput = {
+    id?: string
+    slug: string
+    title: string
+    description: string
+    coverImageUrl: string
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAnimeEntriesInput
+    episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
+  }
+
+  export type AnimeEntryUncheckedCreateWithoutFavoritesInput = {
+    id?: string
+    slug: string
+    title: string
+    description: string
+    coverImageUrl: string
+    airedFrom?: Date | string | null
+    airedTo?: Date | string | null
+    airedStatus?: $Enums.AnimeAiredStatus
+    viewCount?: number
+    notes?: string | null
+    userId: string
+    typeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
+    authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
+    ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+  }
+
+  export type AnimeEntryCreateOrConnectWithoutFavoritesInput = {
+    where: AnimeEntryWhereUniqueInput
+    create: XOR<AnimeEntryCreateWithoutFavoritesInput, AnimeEntryUncheckedCreateWithoutFavoritesInput>
+  }
+
+  export type UserUpsertWithoutAnimeFavoritesInput = {
+    update: XOR<UserUpdateWithoutAnimeFavoritesInput, UserUncheckedUpdateWithoutAnimeFavoritesInput>
+    create: XOR<UserCreateWithoutAnimeFavoritesInput, UserUncheckedCreateWithoutAnimeFavoritesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAnimeFavoritesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAnimeFavoritesInput, UserUncheckedUpdateWithoutAnimeFavoritesInput>
+  }
+
+  export type UserUpdateWithoutAnimeFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntries?: AnimeEntryUpdateManyWithoutUserNestedInput
+    animeAuthors?: AnimeAuthorUpdateManyWithoutUserNestedInput
+    animeRatings?: AnimeRatingUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUpdateManyWithoutUserNestedInput
+    roleLinks?: UserRoleUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAnimeFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntries?: AnimeEntryUncheckedUpdateManyWithoutUserNestedInput
+    animeAuthors?: AnimeAuthorUncheckedUpdateManyWithoutUserNestedInput
+    animeRatings?: AnimeRatingUncheckedUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput
+    roleLinks?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AnimeEntryUpsertWithoutFavoritesInput = {
+    update: XOR<AnimeEntryUpdateWithoutFavoritesInput, AnimeEntryUncheckedUpdateWithoutFavoritesInput>
+    create: XOR<AnimeEntryCreateWithoutFavoritesInput, AnimeEntryUncheckedCreateWithoutFavoritesInput>
+    where?: AnimeEntryWhereInput
+  }
+
+  export type AnimeEntryUpdateToOneWithWhereWithoutFavoritesInput = {
+    where?: AnimeEntryWhereInput
+    data: XOR<AnimeEntryUpdateWithoutFavoritesInput, AnimeEntryUncheckedUpdateWithoutFavoritesInput>
+  }
+
+  export type AnimeEntryUpdateWithoutFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeEntriesNestedInput
+    episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
+  }
+
+  export type AnimeEntryUncheckedUpdateWithoutFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    coverImageUrl?: StringFieldUpdateOperationsInput | string
+    airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
+    viewCount?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    typeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryGenreCreateWithoutGenreInput = {
@@ -21504,7 +25098,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21517,6 +25110,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryUncheckedCreateWithoutTypeInput = {
@@ -21525,7 +25120,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21538,6 +25132,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutTypeInput = {
@@ -21572,7 +25168,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21584,6 +25179,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
     type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
@@ -21593,7 +25190,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21606,6 +25202,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutGenreLinksInput = {
@@ -21649,7 +25247,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -21661,6 +25258,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
     type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
@@ -21670,7 +25269,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -21683,6 +25281,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type GenreUpsertWithoutAnimeLinksInput = {
@@ -21716,7 +25316,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21728,6 +25327,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
     type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
@@ -21737,7 +25338,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21750,6 +25350,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutRatingsInput = {
@@ -21770,6 +25372,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     animeEntries?: AnimeEntryCreateNestedManyWithoutUserInput
     animeAuthors?: AnimeAuthorCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleCreateNestedManyWithoutUserInput
   }
 
@@ -21786,6 +25390,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutUserInput
     animeAuthors?: AnimeAuthorUncheckedCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -21811,7 +25417,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -21823,6 +25428,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
     type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
@@ -21832,7 +25439,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -21845,6 +25451,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type UserUpsertWithoutAnimeRatingsInput = {
@@ -21871,6 +25479,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeEntries?: AnimeEntryUpdateManyWithoutUserNestedInput
     animeAuthors?: AnimeAuthorUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUpdateManyWithoutUserNestedInput
   }
 
@@ -21887,6 +25497,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeEntries?: AnimeEntryUncheckedUpdateManyWithoutUserNestedInput
     animeAuthors?: AnimeAuthorUncheckedUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -21896,7 +25508,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21908,6 +25519,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
     type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
@@ -21917,7 +25530,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -21930,6 +25542,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutEpisodesInput = {
@@ -21954,7 +25568,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -21966,6 +25579,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
     type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
@@ -21975,7 +25590,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -21988,6 +25602,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type UserCreateWithoutAnimeAuthorsInput = {
@@ -22003,6 +25619,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     animeEntries?: AnimeEntryCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleCreateNestedManyWithoutUserInput
   }
 
@@ -22019,6 +25637,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     animeEntries?: AnimeEntryUncheckedCreateNestedManyWithoutUserInput
     animeRatings?: AnimeRatingUncheckedCreateNestedManyWithoutUserInput
+    animeStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutUserInput
+    animeFavorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutUserInput
     roleLinks?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -22073,6 +25693,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeEntries?: AnimeEntryUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUpdateManyWithoutUserNestedInput
   }
 
@@ -22089,6 +25711,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     animeEntries?: AnimeEntryUncheckedUpdateManyWithoutUserNestedInput
     animeRatings?: AnimeRatingUncheckedUpdateManyWithoutUserNestedInput
+    animeStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutUserNestedInput
+    animeFavorites?: AnimeFavoriteUncheckedUpdateManyWithoutUserNestedInput
     roleLinks?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -22114,7 +25738,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -22126,6 +25749,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteCreateNestedManyWithoutAnimeEntryInput
     type?: AnimeTypeCreateNestedOneWithoutAnimeEntriesInput
   }
 
@@ -22135,7 +25760,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -22148,6 +25772,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUncheckedCreateNestedManyWithoutAnimeEntryInput
     ratings?: AnimeRatingUncheckedCreateNestedManyWithoutAnimeEntryInput
     genreLinks?: AnimeEntryGenreUncheckedCreateNestedManyWithoutAnimeEntryInput
+    userStatuses?: UserAnimeStatusUncheckedCreateNestedManyWithoutAnimeEntryInput
+    favorites?: AnimeFavoriteUncheckedCreateNestedManyWithoutAnimeEntryInput
   }
 
   export type AnimeEntryCreateOrConnectWithoutAuthorLinksInput = {
@@ -22195,7 +25821,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22207,6 +25832,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
     type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
@@ -22216,7 +25843,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22229,6 +25855,8 @@ export namespace Prisma {
     episodes?: AnimeEpisodeUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeAuthorUpsertWithoutAnimeLinksInput = {
@@ -22266,7 +25894,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -22293,6 +25920,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UserAnimeStatusCreateManyUserInput = {
+    id?: string
+    animeEntryId: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimeFavoriteCreateManyUserInput = {
+    id?: string
+    animeEntryId: string
+    createdAt?: Date | string
+  }
+
   export type UserRoleCreateManyUserInput = {
     roleId: string
     createdAt?: Date | string
@@ -22304,7 +25945,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22316,6 +25956,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
     type?: AnimeTypeUpdateOneWithoutAnimeEntriesNestedInput
   }
 
@@ -22325,7 +25967,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22338,6 +25979,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateManyWithoutUserInput = {
@@ -22346,7 +25989,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22405,6 +26047,48 @@ export namespace Prisma {
     value?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnimeStatusUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntry?: AnimeEntryUpdateOneRequiredWithoutUserStatusesNestedInput
+  }
+
+  export type UserAnimeStatusUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnimeStatusUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    animeEntry?: AnimeEntryUpdateOneRequiredWithoutFavoritesNestedInput
+  }
+
+  export type AnimeFavoriteUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    animeEntryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleUpdateWithoutUserInput = {
@@ -22513,6 +26197,20 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type UserAnimeStatusCreateManyAnimeEntryInput = {
+    id?: string
+    userId: string
+    status?: $Enums.WatchStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AnimeFavoriteCreateManyAnimeEntryInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
   export type AnimeEpisodeUpdateWithoutAnimeEntryInput = {
     id?: StringFieldUpdateOperationsInput | string
     episodeNumber?: IntFieldUpdateOperationsInput | number
@@ -22606,6 +26304,48 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserAnimeStatusUpdateWithoutAnimeEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeStatusesNestedInput
+  }
+
+  export type UserAnimeStatusUncheckedUpdateWithoutAnimeEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteUpdateWithoutAnimeEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAnimeFavoritesNestedInput
+  }
+
+  export type AnimeFavoriteUncheckedUpdateWithoutAnimeEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AnimeEntryGenreCreateManyGenreInput = {
     animeEntryId: string
     createdAt?: Date | string
@@ -22632,7 +26372,6 @@ export namespace Prisma {
     title: string
     description: string
     coverImageUrl: string
-    status?: $Enums.WatchStatus
     airedFrom?: Date | string | null
     airedTo?: Date | string | null
     airedStatus?: $Enums.AnimeAiredStatus
@@ -22649,7 +26388,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22662,6 +26400,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateWithoutTypeInput = {
@@ -22670,7 +26410,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus
@@ -22683,6 +26422,8 @@ export namespace Prisma {
     authorLinks?: AnimeEntryAuthorUncheckedUpdateManyWithoutAnimeEntryNestedInput
     ratings?: AnimeRatingUncheckedUpdateManyWithoutAnimeEntryNestedInput
     genreLinks?: AnimeEntryGenreUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    userStatuses?: UserAnimeStatusUncheckedUpdateManyWithoutAnimeEntryNestedInput
+    favorites?: AnimeFavoriteUncheckedUpdateManyWithoutAnimeEntryNestedInput
   }
 
   export type AnimeEntryUncheckedUpdateManyWithoutTypeInput = {
@@ -22691,7 +26432,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     coverImageUrl?: StringFieldUpdateOperationsInput | string
-    status?: EnumWatchStatusFieldUpdateOperationsInput | $Enums.WatchStatus
     airedFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedTo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     airedStatus?: EnumAnimeAiredStatusFieldUpdateOperationsInput | $Enums.AnimeAiredStatus

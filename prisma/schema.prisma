@@ -24,20 +24,22 @@ enum AnimeAiredStatus {
 }
 
 model User {
-  id           String           @id @default(uuid())
-  email        String           @unique
-  password     String
-  name         String?
-  username     String?          @unique
-  bio          String?
-  avatarUrl    String?
-  socialLinks  Json?
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @updatedAt
-  animeEntries AnimeEntry[]
-  animeAuthors AnimeAuthor[]
-  animeRatings AnimeRating[]
-  roleLinks    UserRole[]
+  id            String            @id @default(uuid())
+  email         String            @unique
+  password      String
+  name          String?
+  username      String?           @unique
+  bio           String?
+  avatarUrl     String?
+  socialLinks   Json?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  animeEntries  AnimeEntry[]
+  animeAuthors  AnimeAuthor[]
+  animeRatings  AnimeRating[]
+  animeStatuses UserAnimeStatus[]
+  animeFavorites AnimeFavorite[]
+  roleLinks     UserRole[]
 
   @@map("users")
 }
@@ -68,9 +70,9 @@ model Permission {
 model UserRole {
   userId    String
   roleId    String
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  role      Role      @relation(fields: [roleId], references: [id], onDelete: Cascade)
-  createdAt DateTime  @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 
   @@id([userId, roleId])
   @@index([roleId])
@@ -90,42 +92,71 @@ model RolePermission {
 }
 
 model AnimeEntry {
-  id            String           @id @default(uuid())
-  slug          String           @unique
+  id            String             @id @default(uuid())
+  slug          String             @unique
   title         String
   description   String
   coverImageUrl String
-  status        WatchStatus      @default(PLANNED)
   airedFrom     DateTime?
   airedTo       DateTime?
-  airedStatus   AnimeAiredStatus @default(NOT_YET_RELEASED)
-  viewCount     Int              @default(0)
+  airedStatus   AnimeAiredStatus   @default(NOT_YET_RELEASED)
+  viewCount     Int                @default(0)
   notes         String?
   userId        String
-  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   episodes      AnimeEpisode[]
   authorLinks   AnimeEntryAuthor[]
   ratings       AnimeRating[]
   genreLinks    AnimeEntryGenre[]
+  userStatuses  UserAnimeStatus[]
+  favorites     AnimeFavorite[]
   typeId        String?
-  type          AnimeType?       @relation(fields: [typeId], references: [id])
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
+  type          AnimeType?         @relation(fields: [typeId], references: [id])
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
 
   @@index([userId])
-  @@index([status])
   @@index([airedStatus])
   @@index([viewCount])
   @@index([typeId])
   @@map("anime_entries")
 }
 
+model UserAnimeStatus {
+  id           String      @id @default(uuid())
+  userId       String
+  animeEntryId String
+  status       WatchStatus @default(PLANNED)
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  animeEntry   AnimeEntry  @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@unique([userId, animeEntryId])
+  @@index([animeEntryId])
+  @@index([status])
+  @@map("user_anime_statuses")
+}
+
+model AnimeFavorite {
+  id           String     @id @default(uuid())
+  userId       String
+  animeEntryId String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  animeEntry   AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+
+  @@unique([userId, animeEntryId])
+  @@index([animeEntryId])
+  @@map("anime_favorites")
+}
+
 model Genre {
-  id          String            @id @default(uuid())
-  name        String            @unique
-  animeLinks  AnimeEntryGenre[]
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  id         String            @id @default(uuid())
+  name       String            @unique
+  animeLinks AnimeEntryGenre[]
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
 
   @@map("genres")
 }
@@ -153,14 +184,14 @@ model AnimeEntryGenre {
 }
 
 model AnimeRating {
-  id          String    @id @default(uuid())
+  id           String     @id @default(uuid())
   animeEntryId String
-  userId      String
-  value       Int
-  animeEntry  AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  userId       String
+  value        Int
+  animeEntry   AnimeEntry @relation(fields: [animeEntryId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   @@unique([animeEntryId, userId])
   @@index([userId])
@@ -187,14 +218,14 @@ model AnimeEpisode {
 }
 
 model AnimeAuthor {
-  id          String           @id @default(uuid())
-  name        String
-  bio         String?
-  userId      String
-  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  animeLinks  AnimeEntryAuthor[]
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id         String             @id @default(uuid())
+  name       String
+  bio        String?
+  userId     String
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  animeLinks AnimeEntryAuthor[]
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
 
   @@unique([userId, name])
   @@index([userId])

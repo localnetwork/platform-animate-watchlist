@@ -82,6 +82,8 @@ async function seedRoles(prisma, users) {
     PERMISSIONS.AUTH_PROFILE_UPDATE,
     PERMISSIONS.ANIME_READ,
     PERMISSIONS.ANIME_RATING_MANAGE,
+    PERMISSIONS.ANIME_STATUS_MANAGE,
+    PERMISSIONS.ANIME_FAVORITE_MANAGE,
     PERMISSIONS.AUTHOR_READ,
   ];
   const memberPermissions = memberPermissionNames.map(

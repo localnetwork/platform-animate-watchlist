@@ -220,7 +220,7 @@ async function uploadRemoteCoverToR2(imageUrl, animeId, cache) {
   return url;
 }
 
-async function fetchAnimePage(page, perPage = 50) {
+async function fetchAnimePage(page, perPage = 150) {
   const response = await fetch(ANILIST_API, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -240,7 +240,7 @@ async function fetchAnimePage(page, perPage = 50) {
   return result.data.Page;
 }
 
-async function fetchActualAnime(limit = 50) {
+async function fetchActualAnime(limit = 150) {
   const anime = [];
   const seenIds = new Set();
   let page = 1;
@@ -286,8 +286,7 @@ async function seedAnimeForAdmin(
       authorCandidates,
     );
 
-    console.log("anime", )
-    const status = STATUSES[index % STATUSES.length];
+    const watchStatus = STATUSES[index % STATUSES.length];
     const airedStatus = toAiredStatus(anime.status);
     const slugBase = slugifyTitle(title) || `anime-${anime.id}`;
     const slug = `${slugBase}-${anime.id}`;
@@ -326,7 +325,6 @@ async function seedAnimeForAdmin(
           cleanDescription(anime.description) || `Imported anime: ${title}.`,
         slug,
         coverImageUrl,
-        status,
         airedStatus,
         airedFrom,
         airedTo,
@@ -368,6 +366,18 @@ async function seedAnimeForAdmin(
       }
     }
 
+    await prisma.userAnimeStatus.upsert({
+      where: {
+        userId_animeEntryId: { userId: user.id, animeEntryId: entry.id },
+      },
+      update: { status: watchStatus },
+      create: {
+        userId: user.id,
+        animeEntryId: entry.id,
+        status: watchStatus,
+      },
+    });
+
     console.log(
       `Seeded anime entry: ${entry.id} - ${title} for user: ${user.email}`,
     );
@@ -388,23 +398,15 @@ async function seedAnimeForMember(
     typesByName.TV || typesByName.Tv || Object.values(typesByName)[0];
   const genre = genresByName.Action || Object.values(genresByName)[0];
 
-  const anime = await prisma.animeEntry.create({
-    data: {
+  await prisma.userAnimeStatus.upsert({
+    where: {
+      userId_animeEntryId: { userId: user.id, animeEntryId: anime.id },
+    },
+    update: { status: WatchStatus.WATCHING },
+    create: {
       userId: user.id,
-      slug: "member-seeded-anime-001",
-      title: "Member Seeded Anime 001",
-      description: "Sample anime owned by seeded member user.",
-      coverImageUrl: cover("covers/member-seeded-anime-001.jpg"),
+      animeEntryId: anime.id,
       status: WatchStatus.WATCHING,
-      airedStatus: AnimeAiredStatus.AIRING,
-      notes: "Used for member-role testing.",
-      typeId: type?.id || null,
-      authorLinks: {
-        create: author ? [{ authorId: author.id, role: "Creator" }] : [],
-      },
-      genreLinks: {
-        create: genre ? [{ genreId: genre.id }] : [],
-      },
     },
   });
 

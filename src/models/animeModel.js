@@ -77,7 +77,6 @@ function validateCreateAnimeInput(payload) {
     title,
     description,
     coverImageUrl,
-    status,
     airedStatus,
     airedFrom,
     airedTo,
@@ -91,7 +90,6 @@ function validateCreateAnimeInput(payload) {
     throw createHttpError(400, 'title and description are required');
   }
   validateCoverImageUrl(coverImageUrl, true);
-  validateStatus(status);
   validateAiredStatus(airedStatus);
   if (airedFrom !== undefined && airedFrom !== null && Number.isNaN(new Date(airedFrom).getTime())) {
     throw createHttpError(400, 'airedFrom must be a valid date');
@@ -106,8 +104,7 @@ function validateCreateAnimeInput(payload) {
 }
 
 function validateUpdateAnimeInput(payload) {
-  const { coverImageUrl, status, airedStatus, airedFrom, airedTo, rating, authorIds, genreIds, typeId } = payload;
-  validateStatus(status);
+  const { coverImageUrl, airedStatus, airedFrom, airedTo, rating, authorIds, genreIds, typeId } = payload;
   validateAiredStatus(airedStatus);
   validateRating(rating);
 
@@ -152,7 +149,6 @@ function toAnimeResponse(entry) {
     description: entry.description,
     coverImageUrl: entry.coverImageUrl,
     slug: entry.slug,
-    status: entry.status,
     airedFrom: entry.airedFrom,
     airedTo: entry.airedTo,
     airedStatus: entry.airedStatus,
