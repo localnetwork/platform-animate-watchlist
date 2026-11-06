@@ -1,4 +1,5 @@
 const typeRepository = require('../repositories/typeRepository');
+const { remember, invalidateOnSuccess } = require('../utils/cache');
 
 const { createHttpError } = require('../utils/httpError');
 
@@ -9,7 +10,7 @@ function normalizeName(name) {
 }
 
 async function list() {
-  return typeRepository.listAll();
+  return remember('types:list', () => typeRepository.listAll());
 }
 
 async function create(name) {
@@ -24,9 +25,9 @@ async function remove(id) {
   return typeRepository.remove(id);
 }
 
-module.exports = {
+module.exports = invalidateOnSuccess({
   list,
   create,
   update,
   remove,
-};
+}, ['create', 'update', 'remove']);

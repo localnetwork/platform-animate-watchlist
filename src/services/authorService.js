@@ -1,4 +1,5 @@
 const authorRepository = require('../repositories/authorRepository');
+const { invalidateOnSuccess } = require('../utils/cache');
 const { createHttpError } = require('../utils/httpError');
 const { validateCreateAuthorInput } = require('../models/authorModel');
 
@@ -32,9 +33,9 @@ async function remove(userId, id) {
   await authorRepository.deleteById(existing.id);
 }
 
-module.exports = {
+module.exports = invalidateOnSuccess({
   list,
   create,
   update,
   remove,
-};
+}, ['create', 'update', 'remove']);

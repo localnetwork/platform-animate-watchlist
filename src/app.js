@@ -9,6 +9,7 @@ const typeRoutes = require('./routes/typeRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const { cacheStatusHeader } = require('./utils/cache');
 
 const app = express();
 
@@ -16,8 +17,10 @@ app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['X-Cache'],
 }));
 app.use(express.json());
+app.use(cacheStatusHeader);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

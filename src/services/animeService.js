@@ -1,4 +1,5 @@
 const animeRepository = require('../repositories/animeRepository');
+const { remember, invalidateOnSuccess } = require('../utils/cache');
 const { createHttpError } = require('../utils/httpError');
 const {
   validateCreateAnimeInput,
@@ -616,22 +617,29 @@ async function publicList(query) {
   };
 }
 
+async function cachedPublicList(query) {
+  const key = `animes:${JSON.stringify(Object.entries(query).sort(([a], [b]) => a.localeCompare(b)))}`;
+  return remember(key, () => publicList(query));
+}
+
+// View counts are always incremented in the database, even on cache hits.
 async function publicGetBySlug(slug) {
+  const result = await remember(`anime:${slug}`, () => loadPublicBySlug(slug));
+  await animeRepository.incrementViewCountById(result.id);
+  return { ...result, viewCount: result.viewCount + 1 };
+}
+
+async function loadPublicBySlug(slug) {
   const entry = await animeRepository.findPublicBySlug(slug);
   if (!entry) {
     throw createHttpError(404, 'Anime not found');
   }
 
-  await animeRepository.incrementViewCountById(entry.id);
-
   const values = (entry.ratings || []).map((r) => r.value);
   const ratingCount = values.length;
   const averageRating = ratingCount ? values.reduce((sum, v) => sum + v, 0) / ratingCount : 0;
 
-  return toPublicAnimeResponse(
-    { ...entry, viewCount: entry.viewCount + 1 },
-    { averageRating, ratingCount },
-  );
+  return toPublicAnimeResponse(entry, { averageRating, ratingCount });
 }
 
 async function manageList(userId, query) {
@@ -688,11 +696,11 @@ async function manageList(userId, query) {
   };
 }
 
-module.exports = {
+module.exports = invalidateOnSuccess({
   list,
   manageList,
   topViewed,
-  publicList,
+  publicList: cachedPublicList,
   publicGetBySlug,
   incrementView,
   getOne,
@@ -715,4 +723,15 @@ module.exports = {
   removeFavorite,
   listFavorites,
   listRatings,
-};
+}, [
+  'create',
+  'update',
+  'remove',
+  'addEpisode',
+  'updateEpisode',
+  'removeEpisode',
+  'attachAuthor',
+  'detachAuthor',
+  'setOwnRating',
+  'removeOwnRating',
+]);

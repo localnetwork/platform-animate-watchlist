@@ -36,6 +36,7 @@ async function main() {
   );
 
   await seedMemberActivity(prisma, users);
+  await require('../src/utils/cache').invalidateAll();
 
   console.log('Seed completed successfully.');
 }
