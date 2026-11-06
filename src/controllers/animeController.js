@@ -149,8 +149,8 @@ async function setOwnRating(req, res, next) {
 
 async function removeOwnRating(req, res, next) {
   try {
-    await animeService.removeOwnRating(req.user.id, req.params.id);
-    res.status(204).send();
+    const result = await animeService.removeOwnRating(req.user.id, req.params.id);
+    res.json(result);
   } catch (err) {
     next(err);
   }
@@ -223,6 +223,15 @@ async function listFavorites(req, res, next) {
   }
 }
 
+async function listRatings(req, res, next) {
+  try {
+    const result = await animeService.listRatings(req.user.id, req.query);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function incrementView(req, res, next) {
   try {
     const result = await animeService.incrementView(req.user.id, req.params.id);
@@ -285,4 +294,5 @@ module.exports = {
   addFavorite,
   removeFavorite,
   listFavorites,
+  listRatings,
 };

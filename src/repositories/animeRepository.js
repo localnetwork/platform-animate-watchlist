@@ -377,7 +377,51 @@ async function listFavoritesByUserPaginated(userId, skip, take) {
   };
 }
 
+async function ratingStatsForEntry(animeEntryId) {
+  const result = await prisma.animeRating.aggregate({
+    where: { animeEntryId },
+    _avg: { value: true },
+    _count: { value: true },
+  });
+  return { averageRating: result._avg.value || 0, ratingCount: result._count.value };
+}
+
+async function listRatingsByUserPaginated(userId, skip, take) {
+  const where = { userId };
+  const [rows, total] = await Promise.all([
+    prisma.animeRating.findMany({
+      where,
+      orderBy: { updatedAt: 'desc' },
+      skip,
+      take,
+      include: {
+        animeEntry: {
+          include: {
+            episodes: { orderBy: { episodeNumber: 'asc' } },
+            authorLinks: { include: { author: true } },
+            genreLinks: { include: { genre: true } },
+            type: true,
+            ratings: { select: { value: true } },
+          },
+        },
+      },
+    }),
+    prisma.animeRating.count({ where }),
+  ]);
+
+  return {
+    rows: rows.map((rating) => ({
+      ...rating.animeEntry,
+      myRating: rating.value,
+      ratedAt: rating.updatedAt,
+    })),
+    total,
+  };
+}
+
 module.exports = {
+  ratingStatsForEntry,
+  listRatingsByUserPaginated,
   listByUser,
   listByUserPaginated,
   findByIdForUser,

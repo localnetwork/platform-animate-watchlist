@@ -80,7 +80,6 @@ function validateCreateAnimeInput(payload) {
     airedStatus,
     airedFrom,
     airedTo,
-    rating,
     authorIds,
     genreIds,
     typeId,
@@ -97,16 +96,14 @@ function validateCreateAnimeInput(payload) {
   if (airedTo !== undefined && airedTo !== null && Number.isNaN(new Date(airedTo).getTime())) {
     throw createHttpError(400, 'airedTo must be a valid date');
   }
-  validateRating(rating);
   validateAuthorIds(authorIds, false);
   validateGenreIds(genreIds, false);
   validateTypeId(typeId);
 }
 
 function validateUpdateAnimeInput(payload) {
-  const { coverImageUrl, airedStatus, airedFrom, airedTo, rating, authorIds, genreIds, typeId } = payload;
+  const { coverImageUrl, airedStatus, airedFrom, airedTo, authorIds, genreIds, typeId } = payload;
   validateAiredStatus(airedStatus);
-  validateRating(rating);
 
   if (coverImageUrl !== undefined) {
     validateCoverImageUrl(coverImageUrl, false);
@@ -141,8 +138,6 @@ function validateVideoUrl(videoUrl) {
 }
 
 function toAnimeResponse(entry) {
-  const currentUserRating = entry.ratings && entry.ratings.length ? entry.ratings[0].value : null;
-
   return {
     id: entry.id,
     title: entry.title,
@@ -153,7 +148,6 @@ function toAnimeResponse(entry) {
     airedTo: entry.airedTo,
     airedStatus: entry.airedStatus,
     viewCount: entry.viewCount,
-    rating: currentUserRating,
     notes: entry.notes,
     createdAt: entry.createdAt,
     updatedAt: entry.updatedAt,

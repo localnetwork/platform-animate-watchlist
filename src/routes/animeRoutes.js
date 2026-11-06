@@ -26,6 +26,7 @@ const {
   addFavorite,
   removeFavorite,
   listFavorites,
+  listRatings,
 } = require('../controllers/animeController');
 
 router.use(auth);
@@ -33,6 +34,7 @@ router.use(auth);
 router.get('/manage/animes', requirePermission(PERMISSIONS.ANIME_READ), manageList);
 router.get('/top-viewed', requirePermission(PERMISSIONS.ANIME_READ), topViewed);
 router.get('/favorites', requirePermission(PERMISSIONS.ANIME_FAVORITE_MANAGE), listFavorites);
+router.get('/ratings', requirePermission(PERMISSIONS.ANIME_RATING_MANAGE), listRatings);
 router.get('/', requirePermission(PERMISSIONS.ANIME_READ), list);
 router.get('/:id', requirePermission(PERMISSIONS.ANIME_READ), getOne);
 router.post('/', requirePermission(PERMISSIONS.ANIME_CREATE), create);

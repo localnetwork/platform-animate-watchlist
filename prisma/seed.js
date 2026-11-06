@@ -7,6 +7,8 @@ const { seedAuthors } = require('./seeders/authorSeeder');
 const { seedGenres } = require('./seeders/genreSeeder');
 const { seedTypes } = require('./seeders/typeSeeder');
 const { fetchActualAnime, seedAnime } = require('./seeders/animeSeeder');
+const { seedMemberActivity } = require('./seeders/ratingSeeder');
+const { SEED_COUNTS } = require('./seeders/seedData');
 
 const prisma = new PrismaClient();
 
@@ -15,7 +17,7 @@ async function main() {
   await seedRoles(prisma, users);
   await clearDomainForUsers(prisma, users);
 
-  const animeList = await fetchActualAnime(500);
+  const animeList = await fetchActualAnime(SEED_COUNTS.ANIME);
   if (!animeList.length) {
     throw new Error('AniList returned no anime. Seed aborted.');
   }
@@ -32,6 +34,8 @@ async function main() {
     genresByName,
     typesByName,
   );
+
+  await seedMemberActivity(prisma, users);
 
   console.log('Seed completed successfully.');
 }

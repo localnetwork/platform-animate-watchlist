@@ -121,7 +121,6 @@ async function create(userId, payload) {
     airedStatus,
     airedFrom,
     airedTo,
-    rating,
     notes,
     typeId,
   } = payload;
@@ -148,16 +147,6 @@ async function create(userId, payload) {
     airedTo: airedTo ? new Date(airedTo) : undefined,
     notes,
     typeId: typeId || undefined,
-    ...(rating !== undefined && rating !== null
-      ? {
-          ratings: {
-            create: {
-              userId,
-              value: rating,
-            },
-          },
-        }
-      : {}),
     authorLinks: {
       create: ownedAuthors.map((author) => ({
         authorId: author.id,
@@ -212,33 +201,6 @@ async function update(userId, id, payload) {
     ...(payload.airedTo !== undefined ? { airedTo: payload.airedTo ? new Date(payload.airedTo) : null } : {}),
     notes: payload.notes ?? undefined,
     ...(payload.typeId !== undefined ? { typeId: payload.typeId || null } : {}),
-    ...(payload.rating !== undefined
-      ? payload.rating === null
-        ? {
-            ratings: {
-              deleteMany: {
-                userId,
-              },
-            },
-          }
-        : {
-            ratings: {
-              upsert: {
-                where: {
-                  animeEntryId_userId: {
-                    animeEntryId: existing.id,
-                    userId,
-                  },
-                },
-                update: { value: payload.rating },
-                create: {
-                  userId,
-                  value: payload.rating,
-                },
-              },
-            },
-          }
-      : {}),
     ...(payload.authorIds !== undefined
       ? {
           authorLinks: {
@@ -355,9 +317,9 @@ async function detachAuthor(userId, animeEntryId, authorId) {
 }
 
 async function getOwnRating(userId, animeEntryId) {
-  const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
   if (!entry) {
-    throw createHttpError(404, 'Watchlist entry not found');
+    throw createHttpError(404, 'Anime not found');
   }
 
   const rating = await animeRepository.findRatingForEntryUser(entry.id, userId);
@@ -368,30 +330,34 @@ async function getOwnRating(userId, animeEntryId) {
 }
 
 async function setOwnRating(userId, animeEntryId, payload) {
-  const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
   if (!entry) {
-    throw createHttpError(404, 'Watchlist entry not found');
+    throw createHttpError(404, 'Anime not found');
   }
 
-  validateRating(payload.rating);
-  if (payload.rating === undefined || payload.rating === null) {
-    throw createHttpError(400, 'rating is required');
+  const value = Number(payload?.rating);
+  if (!Number.isInteger(value)) {
+    throw createHttpError(400, 'rating is required and must be an integer');
   }
+  validateRating(value);
 
-  const rating = await animeRepository.upsertRatingForEntryUser(entry.id, userId, payload.rating);
+  const rating = await animeRepository.upsertRatingForEntryUser(entry.id, userId, value);
+  const stats = await animeRepository.ratingStatsForEntry(entry.id);
   return {
     id: rating.id,
     animeEntryId: rating.animeEntryId,
     rating: rating.value,
+    averageRating: Number((stats.averageRating || 0).toFixed(2)),
+    ratingCount: stats.ratingCount,
     createdAt: rating.createdAt,
     updatedAt: rating.updatedAt,
   };
 }
 
 async function removeOwnRating(userId, animeEntryId) {
-  const entry = await animeRepository.findEntryRefByIdForUser(animeEntryId, userId);
+  const entry = await animeRepository.findEntryRefById(animeEntryId);
   if (!entry) {
-    throw createHttpError(404, 'Watchlist entry not found');
+    throw createHttpError(404, 'Anime not found');
   }
 
   const existing = await animeRepository.findRatingForEntryUser(entry.id, userId);
@@ -400,6 +366,13 @@ async function removeOwnRating(userId, animeEntryId) {
   }
 
   await animeRepository.deleteRatingForEntryUser(entry.id, userId);
+  const stats = await animeRepository.ratingStatsForEntry(entry.id);
+  return {
+    animeEntryId: entry.id,
+    rating: null,
+    averageRating: Number((stats.averageRating || 0).toFixed(2)),
+    ratingCount: stats.ratingCount,
+  };
 }
 
 async function getOwnStatus(userId, animeEntryId) {
@@ -490,6 +463,32 @@ async function removeFavorite(userId, animeEntryId) {
   await animeRepository.deleteFavoriteForEntryUser(entry.id, userId);
 }
 
+async function listRatings(userId, query) {
+  const page = Math.max(1, Number(query.page) || 1);
+  const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
+  const skip = (page - 1) * limit;
+
+  const { rows, total } = await animeRepository.listRatingsByUserPaginated(userId, skip, limit);
+
+  return {
+    data: rows.map((entry) => {
+      const values = (entry.ratings || []).map((r) => r.value);
+      const ratingCount = values.length;
+      const averageRating = ratingCount ? values.reduce((sum, v) => sum + v, 0) / ratingCount : 0;
+      const response = toPublicAnimeResponse(entry, { averageRating, ratingCount });
+      response.myRating = entry.myRating;
+      response.ratedAt = entry.ratedAt;
+      return response;
+    }),
+    meta: {
+      page,
+      limit,
+      total,
+      totalPages: Math.max(1, Math.ceil(total / limit)),
+    },
+  };
+}
+
 async function listFavorites(userId, query) {
   const page = Math.max(1, Number(query.page) || 1);
   const limit = Math.max(1, Math.min(100, Number(query.limit) || 20));
@@ -536,12 +535,9 @@ async function publicList(query) {
 
   const where = {};
 
-  if (query.search) {
-    where.OR = [
-      { title: { contains: query.search, mode: 'insensitive' } },
-      { description: { contains: query.search, mode: 'insensitive' } },
-      { slug: { contains: query.search, mode: 'insensitive' } },
-    ];
+  const searchTerm = typeof query.search === 'string' ? query.search.trim() : '';
+  if (searchTerm) {
+    where.title = { contains: searchTerm, mode: 'insensitive' };
   }
 
   const normalizedAiredStatus = query.airedStatus ? validateAiredStatus(query.airedStatus) : undefined;
@@ -584,6 +580,23 @@ async function publicList(query) {
     withRating.sort((a, b) => b.averageRating - a.averageRating || b.ratingCount - a.ratingCount);
   } else {
     withRating.sort((a, b) => new Date(b.entry.createdAt) - new Date(a.entry.createdAt));
+  }
+
+  if (searchTerm) {
+    const needle = searchTerm.toLowerCase();
+    const relevance = (title) => {
+      const t = title.toLowerCase();
+      if (t === needle) return 0;
+      if (t.startsWith(needle)) return 1;
+      if (t.split(/[^a-z0-9]+/i).some((word) => word.startsWith(needle))) return 2;
+      return 3;
+    };
+    // Array.prototype.sort is stable, so the selected sort remains the tie-breaker.
+    withRating.sort(
+      (a, b) =>
+        relevance(a.entry.title) - relevance(b.entry.title) ||
+        a.entry.title.length - b.entry.title.length,
+    );
   }
 
   const total = withRating.length;
@@ -701,4 +714,5 @@ module.exports = {
   addFavorite,
   removeFavorite,
   listFavorites,
+  listRatings,
 };

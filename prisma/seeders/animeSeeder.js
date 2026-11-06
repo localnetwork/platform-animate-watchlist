@@ -13,10 +13,10 @@ const STATUSES = [
 ];
 
 const ANIME_QUERY = `
-query ($page: Int!, $perPage: Int!) {
+query ($page: Int!, $perPage: Int!, $status: MediaStatus) {
   Page(page: $page, perPage: $perPage) {
     pageInfo { currentPage lastPage hasNextPage }
-    media(type: ANIME, sort: POPULARITY_DESC) {
+    media(type: ANIME, status: $status, sort: POPULARITY_DESC) {
       id
       title { romaji english native }
       description(asHtml: false)
@@ -220,11 +220,14 @@ async function uploadRemoteCoverToR2(imageUrl, animeId, cache) {
   return url;
 }
 
-async function fetchAnimePage(page, perPage = 150) {
+async function fetchAnimePage(page, perPage = 150, status = null) {
   const response = await fetch(ANILIST_API, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ query: ANIME_QUERY, variables: { page, perPage } }),
+    body: JSON.stringify({
+      query: ANIME_QUERY,
+      variables: { page, perPage, ...(status ? { status } : {}) },
+    }),
   });
 
   if (!response.ok) {
@@ -240,23 +243,64 @@ async function fetchAnimePage(page, perPage = 150) {
   return result.data.Page;
 }
 
-async function fetchActualAnime(limit = 150) {
-  const anime = [];
-  const seenIds = new Set();
+// Share of the seeded list per AniList status; airing is intentionally the largest.
+const STATUS_MIX = [
+  ["RELEASING", 0.4],
+  ["FINISHED", 0.4],
+  ["NOT_YET_RELEASED", 0.12],
+  ["HIATUS", 0.04],
+  ["CANCELLED", 0.04],
+];
+
+async function fetchByStatus(status, count, seenIds) {
+  const collected = [];
   let page = 1;
 
-  while (anime.length < limit) {
-    const result = await fetchAnimePage(page, 20);
+  while (collected.length < count) {
+    const result = await fetchAnimePage(page, 25, status);
     for (const item of result.media) {
-      if (anime.length >= limit) break;
+      if (collected.length >= count) break;
       if (seenIds.has(item.id)) continue;
       seenIds.add(item.id);
-      anime.push(item);
+      collected.push(item);
     }
     if (!result.pageInfo.hasNextPage) break;
     page += 1;
   }
 
+  return collected;
+}
+
+function seededShuffle(items, seed = 42) {
+  const result = [...items];
+  let state = seed;
+  const random = () => {
+    state = (state * 1664525 + 1013904223) % 4294967296;
+    return state / 4294967296;
+  };
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+async function fetchActualAnime(limit = 100) {
+  const seenIds = new Set();
+  let anime = [];
+
+  for (const [status, share] of STATUS_MIX) {
+    anime.push(...(await fetchByStatus(status, Math.round(limit * share), seenIds)));
+  }
+
+  // Top up from airing, then finished, if a rare status (hiatus/cancelled) came up short.
+  for (const status of ["RELEASING", "FINISHED"]) {
+    if (anime.length >= limit) break;
+    anime.push(...(await fetchByStatus(status, limit - anime.length, seenIds)));
+  }
+
+  // Shuffle so view counts (assigned by index) aren't grouped by status.
+  anime = seededShuffle(anime.slice(0, limit));
   return anime;
 }
 
@@ -386,40 +430,6 @@ async function seedAnimeForAdmin(
   }
 }
 
-async function seedAnimeForMember(
-  prisma,
-  user,
-  authors,
-  genresByName,
-  typesByName,
-) {
-  const author = authors[0];
-  const type =
-    typesByName.TV || typesByName.Tv || Object.values(typesByName)[0];
-  const genre = genresByName.Action || Object.values(genresByName)[0];
-
-  await prisma.userAnimeStatus.upsert({
-    where: {
-      userId_animeEntryId: { userId: user.id, animeEntryId: anime.id },
-    },
-    update: { status: WatchStatus.WATCHING },
-    create: {
-      userId: user.id,
-      animeEntryId: anime.id,
-      status: WatchStatus.WATCHING,
-    },
-  });
-
-  await prisma.animeEpisode.create({
-    data: {
-      animeEntryId: anime.id,
-      episodeNumber: 1,
-      title: "Member Episode 1",
-      durationMinutes: 24,
-    },
-  });
-}
-
 async function seedAnime(
   prisma,
   users,
@@ -430,13 +440,9 @@ async function seedAnime(
   typesByName,
 ) {
   const adminUser = users.find((user) => user.email === "demo1@anime.local");
-  const memberUser = users.find((user) => user.email === "demo2@anime.local");
 
   if (!adminUser) {
     throw new Error("Admin seed user demo1@anime.local was not found.");
-  }
-  if (!memberUser) {
-    throw new Error("Member seed user demo2@anime.local was not found.");
   }
 
   await seedAnimeForAdmin(
@@ -444,14 +450,6 @@ async function seedAnime(
     adminUser,
     animeList,
     adminAuthorsByAniListId,
-    genresByName,
-    typesByName,
-  );
-
-  await seedAnimeForMember(
-    prisma,
-    memberUser,
-    authorsByUserEmail[memberUser.email],
     genresByName,
     typesByName,
   );

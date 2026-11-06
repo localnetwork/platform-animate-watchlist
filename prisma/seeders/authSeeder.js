@@ -20,7 +20,7 @@ async function seedAuth(prisma) {
         password: passwordHash,
       },
     });
-    users.push(user);
+    users.push({ ...user, taste: entry.taste });
   }
 
   return users;

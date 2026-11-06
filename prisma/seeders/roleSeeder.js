@@ -94,7 +94,6 @@ async function seedRoles(prisma, users) {
   await setRolePermissions(prisma, member, memberPermissions);
 
   const adminUser = users.find((user) => user.email === "demo1@anime.local");
-  const memberUser = users.find((user) => user.email === "demo2@anime.local");
 
   await prisma.userRole.deleteMany({
     where: {
@@ -107,8 +106,10 @@ async function seedRoles(prisma, users) {
   if (adminUser) {
     await assignRole(prisma, adminUser.id, admin.id);
   }
-  if (memberUser) {
-    await assignRole(prisma, memberUser.id, member.id);
+  for (const user of users) {
+    if (user.id !== adminUser?.id) {
+      await assignRole(prisma, user.id, member.id);
+    }
   }
 }
 
