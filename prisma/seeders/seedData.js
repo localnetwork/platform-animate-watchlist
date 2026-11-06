@@ -14,7 +14,7 @@ const SEED_USERS = [
 console.log("SEED_USERS", SEED_USERS);
 
 const COVER_BASE =
-  process.env.R2_PUBLIC_BASE_URL || "https://pub-demo-anime.r2.dev/";
+  process.env.CF_PUBLIC_ACCESS_URL || "https://pub-demo-anime.r2.dev/";
 const SEED_COUNTS = {
   AUTHORS: 500,
   ANIME: 500,
