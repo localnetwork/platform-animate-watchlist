@@ -1,5 +1,4 @@
 const genreRepository = require('../repositories/genreRepository');
-const { remember, invalidateOnSuccess } = require('../utils/cache');
 
 const { createHttpError } = require('../utils/httpError');
 
@@ -10,7 +9,7 @@ function normalizeName(name) {
 }
 
 async function list() {
-  return remember('genres:list', () => genreRepository.listAll());
+  return genreRepository.listAll();
 }
 
 async function create(name) {
@@ -25,9 +24,9 @@ async function remove(id) {
   return genreRepository.remove(id);
 }
 
-module.exports = invalidateOnSuccess({
+module.exports = {
   list,
   create,
   update,
   remove,
-}, ['create', 'update', 'remove']);
+};
